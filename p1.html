@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - GelaTec</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <header class="header">
+    <div class="logo-container">
+      <img src="logo.png" alt="GelaTec Logo" class="logo-image">
+      <h1>GelaTec</h1>
+    </div>
+    <p>Meu Perfil</p>
+  </header>
+
+  <div class="page-container">
+    <h1 class="page-title">Meu Perfil 👤</h1>
+
+    <div id="login-section">
+      <div class="login-form">
+        <h2 style="color: #ff0080; margin-bottom: 20px; text-align: center;">Faça seu Login</h2>
+        
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" class="form-control" placeholder="seu@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" class="form-control" placeholder="Sua senha">
+        </div>
+        
+        <button class="login-btn" onclick="login()">Entrar</button>
+        
+        <div class="register-link">
+          Não tem conta? <a href="#">Cadastre-se</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="profile-section" class="hidden">
+      <div class="user-info">
+        <div class="user-avatar">👤</div>
+        <h2 class="user-name" id="user-name">Maria Silva</h2>
+        <p class="user-email" id="user-email">maria.silva@email.com</p>
+        
+        <div class="page-content" style="margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 600;">Meus Pedidos</span>
+            <span style="color: #ff0080;">›</span>
+          </div>
+        </div>
+
+        <div class="page-content" style="margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 600;">Endereços</span>
+            <span style="color: #ff0080;">›</span>
+          </div>
+        </div>
+
+        <div class="page-content" style="margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 600;">Cashback: R$ 15,50</span>
+            <span style="color: #ff0080;">›</span>
+          </div>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">Sair</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <span class="nav-icon">🏠</span>
+      <span>Início</span>
+    </a>
+    <a href="pagina2.html" class="nav-item">
+      <span class="nav-icon">📋</span>
+      <span>Cardápio</span>
+    </a>
+    <a href="pagina3.html" class="nav-item active">
+      <span class="nav-icon">👤</span>
+      <span>Perfil</span>
+    </a>
+  </nav>
+
+  <script>
+    function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      if (email && password) {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('profile-section').classList.remove('hidden');
+        document.getElementById('user-email').textContent = email;
+      } else {
+        alert('Por favor, preencha todos os campos!');
+      }
+    }
+
+    function logout() {
+      document.getElementById('login-section').classList.remove('hidden');
+      document.getElementById('profile-section').classList.add('hidden');
+      document.getElementById('email').value = '';
+      document.getElementById('password').value = '';
+    }
+  </script>
+
+</body>
+</html>
