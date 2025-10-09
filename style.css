@@ -35,7 +35,7 @@ body {
 }
 
 .logo-image {
-  max-height: 25%;
+  max-height: 25px;
   margin-right: 10px;
   filter: brightness(0) invert(1);
 }
