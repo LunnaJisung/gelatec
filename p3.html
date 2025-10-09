@@ -35,46 +35,40 @@
         <button class="login-btn" onclick="login()">Entrar</button>
         
         <div class="register-link">
-          Não tem conta? <a href="#">Cadastre-se</a>
+          Não tem conta? <a href="cadastro.html">Cadastre-se</a>
         </div>
       </div>
     </div>
     
-<div id="profile-section" class="hidden">
-  <div class="user-info">
-    <div class="user-avatar">👤</div>
-    <h2 class="user-name" id="user-name">Nome do Cliente</h2>
-    <p class="user-email" id="user-email">email@cliente.com</p>
-  </div>
-</div>
-    
- 
-
-
-        
-        <div class="page-content" style="margin-bottom: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-weight: 600;">Meus Pedidos</span>
-            <span style="color: #ff0080;">›</span>
-          </div>
-        </div>
-
-        <div class="page-content" style="margin-bottom: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-weight: 600;">Endereços</span>
-            <span style="color: #ff0080;">›</span>
-          </div>
-        </div>
-
-        <div class="page-content" style="margin-bottom: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-weight: 600;">Cashback: R$ 10,00</span>
-            <span style="color: #ff0080;">›</span>
-          </div>
-        </div>
-
-        <button class="logout-btn" onclick="logout()">Sair</button>
+    <div id="profile-section" class="hidden">
+      <div class="user-info">
+        <div class="user-avatar">👤</div>
+        <h2 class="user-name" id="user-name">Nome do Cliente</h2>
+        <p class="user-email" id="user-email">email@cliente.com</p>
       </div>
+      
+      <div class="page-content" style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-weight: 600;">Meus Pedidos</span>
+          <span style="color: #ff0080;">›</span>
+        </div>
+      </div>
+
+      <div class="page-content" style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-weight: 600;">Endereços</span>
+          <span style="color: #ff0080;">›</span>
+        </div>
+      </div>
+
+      <div class="page-content" style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-weight: 600;">Cashback: R$ 10,00</span>
+          <span style="color: #ff0080;">›</span>
+        </div>
+      </div>
+
+      <button class="logout-btn" onclick="logout()">Sair</button>
     </div>
   </div>
 
@@ -99,6 +93,13 @@
       const password = document.getElementById('password').value;
       
       if (email && password) {
+        // Verifica se há dados de cadastro no localStorage
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+          const user = JSON.parse(userData);
+          document.getElementById('user-name').textContent = user.nome;
+        }
+        
         document.getElementById('login-section').classList.add('hidden');
         document.getElementById('profile-section').classList.remove('hidden');
         document.getElementById('user-email').textContent = email;
@@ -112,6 +113,16 @@
       document.getElementById('profile-section').classList.add('hidden');
       document.getElementById('email').value = '';
       document.getElementById('password').value = '';
+    }
+
+    // Verificar se há usuário cadastrado ao carregar a página
+    window.onload = function() {
+      const userData = localStorage.getItem('userData');
+      if (userData) {
+        const user = JSON.parse(userData);
+        document.getElementById('user-name').textContent = user.nome;
+        document.getElementById('user-email').textContent = user.email;
+      }
     }
   </script>
 
