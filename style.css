@@ -635,26 +635,3 @@ body {
   from { transform: translate(-50%, 0); opacity: 1; }
   to { transform: translate(-50%, -100%); opacity: 0; }
 }
-.input-field {
-  padding: 10px;
-  margin: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 200px;
-}
-
-.btn-cadastrar {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.cadastro-section {
-  margin: 20px 0;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
