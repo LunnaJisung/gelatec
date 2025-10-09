@@ -48,13 +48,7 @@
   </div>
 </div>
     
-    <!-- FORMULÁRIO DE CADASTRO - coloque onde quiser -->
-<div class="cadastro-section">
-  <h3>Cadastrar Novo Cliente</h3>
-  <input type="text" id="inputNome" placeholder="Nome completo" class="input-field">
-  <input type="email" id="inputEmail" placeholder="E-mail" class="input-field">
-  <button onclick="cadastrarCliente()" class="btn-cadastrar">Cadastrar Cliente</button>
-</div>
+ 
 
 
         
@@ -120,29 +114,6 @@
       document.getElementById('password').value = '';
     }
   </script>
-<script>
-// Função para cadastrar cliente
-function cadastrarCliente() {
-  // Pega os valores dos inputs
-  const nome = document.getElementById('inputNome').value;
-  const email = document.getElementById('inputEmail').value;
-  
-  // Atualiza o perfil com os novos dados
-  document.getElementById('user-name').textContent = nome;
-  document.getElementById('user-email').textContent = email;
-  
-  // Limpa os campos do formulário
-  document.getElementById('inputNome').value = '';
-  document.getElementById('inputEmail').value = '';
-  
-  alert('Cliente cadastrado com sucesso!');
-}
 
-// Opcional: Carregar um cliente exemplo ao iniciar
-window.onload = function() {
-  document.getElementById('user-name').textContent = 'Cliente Exemplo';
-  document.getElementById('user-email').textContent = 'cliente@exemplo.com';
-}
-</script>
 </body>
 </html>
