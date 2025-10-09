@@ -29,6 +29,22 @@
       padding: 20px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(255, 0, 128, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .logo-image {
+      max-height: 60px;
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
     }
 
     .header h1 {
@@ -95,7 +111,8 @@
       padding: 8px 16px;
       border-radius: 20px;
     }
-  .login-prompt {
+
+    .login-prompt {
       margin: 20px;
       background: linear-gradient(135deg, #e6d5ff 0%, #d5e6ff 100%);
       border: 2px solid #ff0080;
@@ -200,7 +217,8 @@
       position: relative;
       cursor: pointer;
     }
-.product-card:hover {
+
+    .product-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
@@ -289,7 +307,8 @@
       gap: 16px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
-  .cart-item-image {
+
+    .cart-item-image {
       width: 80px;
       height: 80px;
       background: linear-gradient(135deg, #ffd6e8 0%, #ffe6f0 100%);
@@ -383,7 +402,8 @@
       padding-top: 12px;
       margin-top: 12px;
     }
-  .checkout-btn {
+
+    .checkout-btn {
       width: 100%;
       background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
       color: white;
@@ -421,6 +441,101 @@
       justify-content: center;
       font-size: 11px;
       font-weight: 700;
+    }
+
+    /* Login form styles */
+    .login-form {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: #ff0080;
+      outline: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .login-btn:hover {
+      transform: scale(1.02);
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 16px;
+      color: #666;
+    }
+
+    .register-link a {
+      color: #ff0080;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .user-info {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .user-avatar {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    .user-name {
+      color: #ff0080;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .user-email {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .logout-btn {
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
     }
 
     .bottom-nav {
@@ -489,7 +604,8 @@
       background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
       color: white;
     }
-  @media (max-width: 768px) {
+
+    @media (max-width: 768px) {
       .coupon-grid {
         grid-template-columns: 1fr;
       }
@@ -503,446 +619,5 @@
 <body>
 
   <header class="header">
-    <h1>GelaTec <span style="font-size: 14px;">▼</span></h1>
-    <p>Loja aberta - Entrega rápida</p>
-  </header>
-
-    
-  <div id="home-view">
-
-    <section class="hero-banner">
-      <div class="hero-content">
-        <h2>NOVIDADES</h2>
-        <p>🎁 Ofertas </p>
-      </div>
-    </section>
-
-
-    <div class="login-prompt">
-      Faça login e descubra seu saldo de cashback! 💰
-    </div>
-
-    <div class="section-title">
-      <h3>Cupons para consumir 🎫</h3>
-      <a href="#" onclick="showMenu(); return false;">Ver todos ›</a>
-    </div>
-
-    <div class="coupon-grid">
-      <div class="coupon-card">
-        <span class="coupon-badge">OFERTA ESPECIAL</span>
-        <div class="coupon-price">R$ 13,00</div>
-        <p class="coupon-description">Kit completo com 3 geladinhos</p>
-      </div>
-
-      <div class="coupon-card" style="background: linear-gradient(135deg, #a8d5ff 0%, #ff8ec7 100%);">
-        <span class="coupon-badge">SUPER DESCONTO</span>
-        <div class="coupon-price">R$ 27,00</div>
-        <p class="coupon-description">Leve 10 e pague 8</p>
-      </div>
-
-      <div class="coupon-card" style="background: linear-gradient(135deg, #ffd6a8 0%, #ff6eb4 100%);">
-        <span class="coupon-badge">COMBO</span>
-        <div class="coupon-price">R$ 30,00</div>
-        <p class="coupon-description">Aproveite 5 gourmet e 5 tradicionais</p>
-      </div>
-    </div>
-
-
-    <div class="section-title">
-      <h3>Produtos mais vendidos 🔥</h3>
-      <a href="#" onclick="showMenu(); return false;">Ver todos ›</a>
-    </div>
-
-    <div class="product-grid" id="home-products">
-   
-    </div>
-  </div>
-
-  
-  <div id="menu-view" class="hidden">
-    <div class="section-title">
-      <h3>Cardápio Completo 📋</h3>
-    </div>
-
-    <div class="category-filter">
-      <button class="category-btn active" onclick="filterCategory('all')">Todos</button>
-      <button class="category-btn" onclick="filterCategory('kits')">Kits</button>
-      <button class="category-btn" onclick="filterCategory('especiais')">Especiais</button>
-      <button class="category-btn" onclick="filterCategory('combos')">Combos</button>
-    </div>
-
-    <div class="product-grid" id="menu-products">
-       
-    </div>
-  </div>
-
- 
-  <div id="cart-view" class="hidden">
-    <div class="section-title">
-      <h3>Minha Cesta 🛒</h3>
-    </div>
-
-    <div class="cart-container">
-      <div id="cart-items">
-       
-      </div>
-
-      <div id="cart-summary" class="hidden">
-        <div class="cart-summary">
-          <div class="cart-summary-row">
-            <span>Subtotal:</span>
-            <span id="subtotal">R$ 0,00</span>
-          </div>
-          <div class="cart-summary-row">
-            <span>Entrega:</span>
-            <span>R$ 5,00</span>
-          </div>
-          <div class="cart-summary-row cart-summary-total">
-            <span>Total:</span>
-            <span id="total">R$ 0,00</span>
-          </div>
-          <button class="checkout-btn" onclick="checkout()">Finalizar Pedido</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="profile-view" class="hidden">
-    <div class="section-title">
-      <h3>Meu Perfil 👤</h3>
-    </div>
-
-    <div style="padding: 20px; text-align: center;">
-      <div style="font-size: 80px; margin-bottom: 20px;">👤</div>
-      <h2 style="color: #ff0080; margin-bottom: 10px;">Bem-vindo!</h2>
-      <p style="color: #666; margin-bottom: 30px;">Faça login para acessar seu perfil</p>
-      
-      <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-weight: 600;">Meus Pedidos</span>
-          <span style="color: #ff0080;">›</span>
-        </div>
-      </div>
-
-      <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-weight: 600;">Endereços</span>
-          <span style="color: #ff0080;">›</span>
-        </div>
-      </div>
-
-      <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-weight: 600;">Cashback: R$ 0,00</span>
-          <span style="color: #ff0080;">›</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-  <nav class="bottom-nav">
-    <a href="#" class="nav-item active" onclick="showHome(); return false;" id="nav-home">
-      <span class="nav-icon">🏠</span>
-      <span>Início</span>
-    </a>
-    <a href="#" class="nav-item" onclick="showMenu(); return false;" id="nav-menu">
-      <span class="nav-icon">📋</span>
-      <span>Cardápio</span>
-    </a>
-    <a href="#" class="nav-item" onclick="showCart(); return false;" id="nav-cart">
-      <span class="nav-icon">🛒</span>
-      <span>Cesta</span>
-      <span class="cart-badge hidden" id="cart-badge">0</span>
-    </a>
-    <a href="#" class="nav-item" onclick="showProfile(); return false;" id="nav-profile">
-      <span class="nav-icon">👤</span>
-      <span>Perfil</span>
-    </a>
-  </nav>
- 
-  <script>
-    // Product data
-    const products = [
-      { id: 1, name: 'Kit Premium', price: 89.90, emoji: '🎨', category: 'kits', cashback: 5 },
-      { id: 2, name: 'Coleção Especial', price: 79.90, emoji: '✨', category: 'especiais', cashback: 5 },
-      { id: 3, name: 'Pack Sortido', price: 69.90, emoji: '🎁', category: 'kits', cashback: 5 },
-      { id: 4, name: 'Box Presente', price: 99.90, emoji: '💝', category: 'especiais', cashback: 5 },
-      { id: 5, name: 'Combo Família', price: 129.90, emoji: '🎪', category: 'combos', cashback: 5 },
-      { id: 6, name: 'Kit Deluxe', price: 149.90, emoji: '💎', category: 'kits', cashback: 5 },
-      { id: 7, name: 'Edição Limitada', price: 119.90, emoji: '🌟', category: 'especiais', cashback: 5 },
-      { id: 8, name: 'Combo Duplo', price: 89.90, emoji: '🎯', category: 'combos', cashback: 5 },
-      { id: 9, name: 'Pack Básico', price: 49.90, emoji: '📦', category: 'kits', cashback: 5 },
-      { id: 10, name: 'Super Combo', price: 159.90, emoji: '🚀', category: 'combos', cashback: 5 },
-    ];
-
-    // Cart state
-    let cart = [];
-    let currentCategory = 'all';
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
-      renderHomeProducts();
-      renderMenuProducts();
-      loadCart();
-    });
-
-    // Load cart from localStorage
-    function loadCart() {
-      const savedCart = localStorage.getItem('glaE-cart');
-      if (savedCart) {
-        cart = JSON.parse(savedCart);
-        updateCartBadge();
-      }
-    }
-
-    // Save cart to localStorage
-    function saveCart() {
-      localStorage.setItem('glaE-cart', JSON.stringify(cart));
-      updateCartBadge();
-    }
-
-    // Render products on home page (first 4)
-    function renderHomeProducts() {
-      const container = document.getElementById('home-products');
-      container.innerHTML = products.slice(0, 4).map(product => `
-        <div class="product-card" onclick="addToCart(${product.id})">
-          <span class="cashback-badge">${product.cashback}% Cashback</span>
-          <div class="product-image">${product.emoji}</div>
-          <div class="product-name">${product.name}</div>
-          <div class="product-price">R$ ${product.price.toFixed(2).replace('.', ',')}</div>
-          <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${product.id})">
-            Adicionar
-          </button>
-        </div>
-      `).join('');
-    }
-
-    // Render products on menu page
-    function renderMenuProducts() {
-      const container = document.getElementById('menu-products');
-      const filteredProducts = currentCategory === 'all' 
-        ? products 
-        : products.filter(p => p.category === currentCategory);
-
-      container.innerHTML = filteredProducts.map(product => `
-        <div class="product-card" onclick="addToCart(${product.id})">
-          <span class="cashback-badge">${product.cashback}% Cashback</span>
-          <div class="product-image">${product.emoji}</div>
-          <div class="product-name">${product.name}</div>
-          <div class="product-price">R$ ${product.price.toFixed(2).replace('.', ',')}</div>
-          <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${product.id})">
-            Adicionar
-          </button>
-        </div>
-      `).join('');
-    }
-
-    // Filter by category
-    function filterCategory(category) {
-      currentCategory = category;
-      
-      // Update active button
-      document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      event.target.classList.add('active');
-      
-      renderMenuProducts();
-    }
-
-    // Add to cart
-    function addToCart(productId) {
-      const product = products.find(p => p.id === productId);
-      const existingItem = cart.find(item => item.id === productId);
-      
-      if (existingItem) {
-        existingItem.quantity++;
-      } else {
-        cart.push({ ...product, quantity: 1 });
-      }
-      
-      saveCart();
-      showCartNotification(product.name);
-    }
-
-    // Show notification
-    function showCartNotification(productName) {
-      const notification = document.createElement('div');
-      notification.style.cssText = `
-        position: fixed;
-        top: 80px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
-        color: white;
-        padding: 16px 24px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        z-index: 1000;
-        animation: slideDown 0.3s ease;
-      `;
-      notification.textContent = ${productName} adicionado ao carrinho!;
-      document.body.appendChild(notification);
-      
-      setTimeout(() => {
-        notification.style.animation = 'slideUp 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-      }, 2000);
-    }
-
-    // Update cart badge
-    function updateCartBadge() {
-      const badge = document.getElementById('cart-badge');
-      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-      
-      if (totalItems > 0) {
-        badge.textContent = totalItems;
-        badge.classList.remove('hidden');
-      } else {
-        badge.classList.add('hidden');
-      }
-    }
-
-    // Render cart
-    function renderCart() {
-      const container = document.getElementById('cart-items');
-      const summary = document.getElementById('cart-summary');
-      
-      if (cart.length === 0) {
-        container.innerHTML = `
-          <div class="cart-empty">
-            <div class="cart-empty-icon">🛒</div>
-            <h3 style="color: #333; margin-bottom: 8px;">Sua cesta está vazia</h3>
-            <p>Adicione produtos do cardápio</p>
-          </div>
-        `;
-        summary.classList.add('hidden');
-        return;
-      }
-      
-      container.innerHTML = cart.map(item => `
-        <div class="cart-item">
-          <div class="cart-item-image">${item.emoji}</div>
-          <div class="cart-item-details">
-            <div class="cart-item-name">${item.name}</div>
-            <div class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
-            <div class="cart-item-controls">
-              <button class="quantity-btn" onclick="decreaseQuantity(${item.id})">−</button>
-              <span class="quantity-display">${item.quantity}</span>
-              <button class="quantity-btn" onclick="increaseQuantity(${item.id})">+</button>
-              <button class="remove-btn" onclick="removeFromCart(${item.id})">Remover</button>
-            </div>
-          </div>
-        </div>
-      `).join('');
-      
-      updateCartSummary();
-      summary.classList.remove('hidden');
-    }
-
-    // Update cart summary
-    function updateCartSummary() {
-      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      const delivery = 5.00;
-      const total = subtotal + delivery;
-      
-      document.getElementById('subtotal').textContent = R$ ${subtotal.toFixed(2).replace('.', ',')};
-      document.getElementById('total').textContent = R$ ${total.toFixed(2).replace('.', ',')};
-    }
-
-    // Increase quantity
-    function increaseQuantity(productId) {
-      const item = cart.find(item => item.id === productId);
-      if (item) {
-        item.quantity++;
-        saveCart();
-        renderCart();
-      }
-    }
-
-    // Decrease quantity
-    function decreaseQuantity(productId) {
-      const item = cart.find(item => item.id === productId);
-      if (item && item.quantity > 1) {
-        item.quantity--;
-        saveCart();
-        renderCart();
-      }
-    }
-
-    // Remove from cart
-    function removeFromCart(productId) {
-      cart = cart.filter(item => item.id !== productId);
-      saveCart();
-      renderCart();
-    }
-
-    // Checkout
-    function checkout() {
-      if (cart.length === 0) return;
-      
-      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 5;
-      alert(Pedido finalizado!\n\nTotal: R$ ${total.toFixed(2).replace('.', ',')}\n\nObrigado por comprar na glaE!);
-      
-      cart = [];
-      saveCart();
-      renderCart();
-      showHome();
-    }
-
-    // Navigation functions
-    function showHome() {
-      hideAllViews();
-      document.getElementById('home-view').classList.remove('hidden');
-      updateActiveNav('nav-home');
-    }
-
-    function showMenu() {
-      hideAllViews();
-      document.getElementById('menu-view').classList.remove('hidden');
-      updateActiveNav('nav-menu');
-    }
-
-    function showCart() {
-      hideAllViews();
-      document.getElementById('cart-view').classList.remove('hidden');
-      renderCart();
-      updateActiveNav('nav-cart');
-    }
-
-    function showProfile() {
-      hideAllViews();
-      document.getElementById('profile-view').classList.remove('hidden');
-      updateActiveNav('nav-profile');
-    }
-
-    function hideAllViews() {
-      document.getElementById('home-view').classList.add('hidden');
-      document.getElementById('menu-view').classList.add('hidden');
-      document.getElementById('cart-view').classList.add('hidden');
-      document.getElementById('profile-view').classList.add('hidden');
-    }
-
-    function updateActiveNav(activeId) {
-      document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-      });
-      document.getElementById(activeId).classList.add('active');
-    }
-
-    // Add animation styles
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideDown {
-        from { transform: translate(-50%, -100%); opacity: 0; }
-        to { transform: translate(-50%, 0); opacity: 1; }
-      }
-      @keyframes slideUp {
-        from { transform: translate(-50%, 0); opacity: 1; }
-        to { transform: translate(-50%, -100%); opacity: 0; }
-      }
-    `;
-    document.head.appendChild(style);
-  </script>
-</body>
-</html>
+    <div class="logo-container">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAABFGSURBVHic7d1/bFX1Hcfx9+fe9rYFChQoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2QoP2
