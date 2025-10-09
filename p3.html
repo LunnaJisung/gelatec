@@ -39,12 +39,24 @@
         </div>
       </div>
     </div>
+    
+<div id="profile-section" class="hidden">
+  <div class="user-info">
+    <div class="user-avatar">👤</div>
+    <h2 class="user-name" id="user-name">Nome do Cliente</h2>
+    <p class="user-email" id="user-email">email@cliente.com</p>
+  </div>
+</div>
+    
+    <!-- FORMULÁRIO DE CADASTRO - coloque onde quiser -->
+<div class="cadastro-section">
+  <h3>Cadastrar Novo Cliente</h3>
+  <input type="text" id="inputNome" placeholder="Nome completo" class="input-field">
+  <input type="email" id="inputEmail" placeholder="E-mail" class="input-field">
+  <button onclick="cadastrarCliente()" class="btn-cadastrar">Cadastrar Cliente</button>
+</div>
 
-    <div id="profile-section" class="hidden">
-      <div class="user-info">
-        <div class="user-avatar">👤</div>
-        <h2 class="user-name" id="user-name">Maria Silva</h2>
-        <p class="user-email" id="user-email">maria.silva@email.com</p>
+
         
         <div class="page-content" style="margin-bottom: 16px;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -108,6 +120,29 @@
       document.getElementById('password').value = '';
     }
   </script>
+<script>
+// Função para cadastrar cliente
+function cadastrarCliente() {
+  // Pega os valores dos inputs
+  const nome = document.getElementById('inputNome').value;
+  const email = document.getElementById('inputEmail').value;
+  
+  // Atualiza o perfil com os novos dados
+  document.getElementById('user-name').textContent = nome;
+  document.getElementById('user-email').textContent = email;
+  
+  // Limpa os campos do formulário
+  document.getElementById('inputNome').value = '';
+  document.getElementById('inputEmail').value = '';
+  
+  alert('Cliente cadastrado com sucesso!');
+}
 
+// Opcional: Carregar um cliente exemplo ao iniciar
+window.onload = function() {
+  document.getElementById('user-name').textContent = 'Cliente Exemplo';
+  document.getElementById('user-email').textContent = 'cliente@exemplo.com';
+}
+</script>
 </body>
 </html>
