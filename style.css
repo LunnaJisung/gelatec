@@ -34,7 +34,7 @@ body {
   margin-bottom: 8px;
 }
 
-.logo-image {
+.logo.png {
   max-height: 35px; 
   margin-right: 10px;
   filter: brightness(0) invert(1);
