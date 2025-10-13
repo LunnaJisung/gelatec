@@ -32,6 +32,7 @@ body {
   align-items: center;     /* Centraliza verticalmente */
   justify-content: center; /* Centraliza horizontalmente */
   margin-bottom: 8px;      /* Espaço abaixo do container */
+  height: 12px;           /* ALTURA: define tamanho super pequeno */
 }
 
 
