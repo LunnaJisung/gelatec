@@ -13,50 +13,8 @@
     <p>Gerencie sua conta</p>
   </header>
 
-  <div style="padding: 20px; text-align: center;">
-    <div style="font-size: 80px; margin-bottom: 20px;">👤</div>
-    <h2 style="color: #ff0080; margin-bottom: 10px;">Bem-vindo!</h2>
-    <p style="color: #666; margin-bottom: 30px;">Faça login para acessar seu perfil completo</p>
-  </div>
-
-  <div class="profile-section">
-    <h3>📋 Meus Pedidos</h3>
-    <div class="profile-item">
-      <span>Nenhum pedido recente</span>
-      <span style="color: #ff0080;">›</span>
-    </div>
-  </div>
-
-  <div class="profile-section">
-    <h3>🏠 Endereços</h3>
-    <div class="profile-item">
-      <span>Cadastrar endereço</span>
-      <span style="color: #ff0080;">›</span>
-    </div>
-  </div>
-
-  <div class="profile-section">
-    <h3>💰 Cashback</h3>
-    <div class="profile-item">
-      <span>Saldo disponível: R$ 0,00</span>
-      <span style="color: #ff0080;">›</span>
-    </div>
-  </div>
-
-  <div class="profile-section">
-    <h3>⚙️ Configurações</h3>
-    <div class="profile-item">
-      <span>Notificações</span>
-      <span style="color: #ff0080;">›</span>
-    </div>
-    <div class="profile-item">
-      <span>Privacidade</span>
-      <span style="color: #ff0080;">›</span>
-    </div>
-    <div class="profile-item">
-      <span>Ajuda e Suporte</span>
-      <span style="color: #ff0080;">›</span>
-    </div>
+  <div id="perfil-container">
+    <!-- Conteúdo será carregado via JavaScript -->
   </div>
 
   <nav class="bottom-nav">
@@ -78,5 +36,148 @@
     </a>
   </nav>
 
+  <script>
+    // Verificar se o usuário está logado
+    function checkLogin() {
+      const userData = localStorage.getItem('userData');
+      const container = document.getElementById('perfil-container');
+      
+      if (userData) {
+        const user = JSON.parse(userData);
+        
+        if (user.logado) {
+          // Usuário logado - mostrar perfil
+          container.innerHTML = `
+            <div class="user-welcome">
+              <div class="user-avatar">👤</div>
+              <h2 class="user-name">Olá, ${user.nome}!</h2>
+              <p class="user-email">${user.email}</p>
+              <p>Idade: ${user.idade} anos</p>
+              <button class="logout-btn" onclick="logout()">Sair da Conta</button>
+            </div>
+
+            <div class="profile-section">
+              <h3>📋 Meus Pedidos</h3>
+              <div class="profile-item">
+                <span>Nenhum pedido recente</span>
+                <span style="color: #ff0080;">›</span>
+              </div>
+            </div>
+
+            <div class="profile-section">
+              <h3>🏠 Meu Endereço</h3>
+              <div class="profile-item">
+                <span>${user.endereco}</span>
+                <span style="color: #ff0080;">›</span>
+              </div>
+            </div>
+
+            <div class="profile-section">
+              <h3>💰 Cashback</h3>
+              <div class="profile-item">
+                <span>Saldo disponível: R$ 0,00</span>
+                <span style="color: #ff0080;">›</span>
+              </div>
+            </div>
+
+            <div class="profile-section">
+              <h3>⚙️ Configurações</h3>
+              <div class="profile-item">
+                <span>Editar Perfil</span>
+                <span style="color: #ff0080;">›</span>
+              </div>
+              <div class="profile-item">
+                <span>Notificações</span>
+                <span style="color: #ff0080;">›</span>
+              </div>
+              <div class="profile-item">
+                <span>Privacidade</span>
+                <span style="color: #ff0080;">›</span>
+              </div>
+              <div class="profile-item">
+                <span>Ajuda e Suporte</span>
+                <span style="color: #ff0080;">›</span>
+              </div>
+            </div>
+          `;
+          return;
+        }
+      }
+      
+      // Usuário não logado - mostrar formulário de login
+      container.innerHTML = `
+        <div class="login-container">
+          <div class="login-form">
+            <h2 class="form-title">Fazer Login</h2>
+            
+            <div class="form-group">
+              <label for="login-email">E-mail</label>
+              <input type="email" id="login-email" class="form-control" placeholder="seu@email.com">
+            </div>
+            
+            <div class="form-group">
+              <label for="login-senha">Senha</label>
+              <input type="password" id="login-senha" class="form-control" placeholder="Sua senha">
+            </div>
+            
+            <button class="login-btn" onclick="login()">Entrar</button>
+            
+            <div class="back-link">
+              <a href="cadastro.html">Não tem conta? Cadastre-se</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function login() {
+      const email = document.getElementById('login-email').value;
+      const senha = document.getElementById('login-senha').value;
+      
+      if (!email || !senha) {
+        alert('Por favor, preencha todos os campos!');
+        return;
+      }
+      
+      // Verificar se o usuário existe
+      const userData = localStorage.getItem('userData');
+      
+      if (userData) {
+        const user = JSON.parse(userData);
+        
+        if (user.email === email && user.senha === senha) {
+          // Atualizar status de login
+          user.logado = true;
+          localStorage.setItem('userData', JSON.stringify(user));
+          
+          alert('Login realizado com sucesso!');
+          window.location.reload();
+        } else {
+          alert('E-mail ou senha incorretos!');
+        }
+      } else {
+        alert('Nenhuma conta encontrada. Por favor, cadastre-se.');
+        window.location.href = 'cadastro.html';
+      }
+    }
+
+    function logout() {
+      const userData = localStorage.getItem('userData');
+      
+      if (userData) {
+        const user = JSON.parse(userData);
+        user.logado = false;
+        localStorage.setItem('userData', JSON.stringify(user));
+      }
+      
+      alert('Você saiu da conta!');
+      window.location.reload();
+    }
+
+    // Carregar perfil quando a página abrir
+    document.addEventListener('DOMContentLoaded', checkLogin);
+  </script>
+
 </body>
+</html>
 </html>
