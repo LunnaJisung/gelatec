@@ -3,15 +3,315 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil - GelaTec</title>
+  <title>Login - GelaTec</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .login-hero {
+      background: linear-gradient(135deg, #ff0080 0%, #ff8ec7 100%);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+      margin-bottom: 30px;
+    }
+
+    .login-hero h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .login-hero p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .login-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .login-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(255, 0, 128, 0.1);
+      border: 1px solid #ffe6f0;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-icon {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+
+    .login-title {
+      color: #ff0080;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .login-subtitle {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #f0f0f0;
+      border-radius: 12px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: #fafafa;
+    }
+
+    .form-input:focus {
+      border-color: #ff0080;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(255, 0, 128, 0.1);
+      outline: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 0, 128, 0.3);
+    }
+
+    .login-divider {
+      text-align: center;
+      margin: 25px 0;
+      position: relative;
+    }
+
+    .login-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #f0f0f0;
+    }
+
+    .login-divider span {
+      background: white;
+      padding: 0 15px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .social-login {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .social-btn {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #f0f0f0;
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 18px;
+    }
+
+    .social-btn:hover {
+      border-color: #ff0080;
+      transform: translateY(-1px);
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .register-link p {
+      color: #666;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .register-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #ff0080;
+      border-radius: 12px;
+      background: white;
+      color: #ff0080;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .register-btn:hover {
+      background: #ff0080;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .forgot-password {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .forgot-password a {
+      color: #ff0080;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .feature-item {
+      text-align: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 12px;
+    }
+
+    .feature-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .feature-text {
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+    }
+
+    /* Animações */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-card {
+      animation: fadeInUp 0.6s ease;
+    }
+
+    /* Perfil quando logado */
+    .profile-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 20px;
+      box-shadow: 0 10px 30px rgba(255, 0, 128, 0.1);
+      border: 1px solid #ffe6f0;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .user-avatar-large {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #ff0080 0%, #ff8ec7 100%);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: white;
+    }
+
+    .user-info {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .user-name {
+      color: #ff0080;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .user-email {
+      color: #666;
+      font-size: 16px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 12px;
+    }
+
+    .stat-number {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ff0080;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body>
-
-  <header class="header">
-    <h1>Meu Perfil</h1>
-    <p>Gerencie sua conta</p>
-  </header>
 
   <div id="perfil-container">
     <!-- Conteúdo será carregado via JavaScript -->
@@ -46,84 +346,139 @@
         const user = JSON.parse(userData);
         
         if (user.logado) {
-          // Usuário logado - mostrar perfil
+          // Usuário logado - mostrar perfil bonito
           container.innerHTML = `
-            <div class="user-welcome">
-              <div class="user-avatar">👤</div>
-              <h2 class="user-name">Olá, ${user.nome}!</h2>
-              <p class="user-email">${user.email}</p>
-              <p>Idade: ${user.idade} anos</p>
-              <button class="logout-btn" onclick="logout()">Sair da Conta</button>
+            <div class="login-hero">
+              <h1>Bem-vindo de volta! 👋</h1>
+              <p>Gerencie sua conta e aproveite suas vantagens</p>
             </div>
 
-            <div class="profile-section">
-              <h3>📋 Meus Pedidos</h3>
-              <div class="profile-item">
-                <span>Nenhum pedido recente</span>
-                <span style="color: #ff0080;">›</span>
+            <div class="profile-card">
+              <div class="user-avatar-large">👤</div>
+              
+              <div class="user-info">
+                <h2 class="user-name">${user.nome}</h2>
+                <p class="user-email">${user.email}</p>
+                <p style="color: #666; margin-top: 5px;">${user.idade} anos</p>
               </div>
-            </div>
 
-            <div class="profile-section">
-              <h3>🏠 Meu Endereço</h3>
-              <div class="profile-item">
-                <span>${user.endereco}</span>
-                <span style="color: #ff0080;">›</span>
+              <div class="stats-grid">
+                <div class="stat-item">
+                  <div class="stat-number">0</div>
+                  <div class="stat-label">Pedidos</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">R$ 0</div>
+                  <div class="stat-label">Cashback</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">⭐</div>
+                  <div class="stat-label">Membro</div>
+                </div>
               </div>
-            </div>
 
-            <div class="profile-section">
-              <h3>💰 Cashback</h3>
-              <div class="profile-item">
-                <span>Saldo disponível: R$ 0,00</span>
-                <span style="color: #ff0080;">›</span>
+              <div class="profile-section">
+                <h3 style="color: #ff0080; margin-bottom: 15px;">🏠 Meu Endereço</h3>
+                <div class="profile-item">
+                  <span style="color: #666;">${user.endereco}</span>
+                  <span style="color: #ff0080;">›</span>
+                </div>
               </div>
-            </div>
 
-            <div class="profile-section">
-              <h3>⚙️ Configurações</h3>
-              <div class="profile-item">
-                <span>Editar Perfil</span>
-                <span style="color: #ff0080;">›</span>
+              <div class="profile-section">
+                <h3 style="color: #ff0080; margin-bottom: 15px;">⚡ Ações Rápidas</h3>
+                <div class="profile-item">
+                  <span>📋 Meus Pedidos</span>
+                  <span style="color: #ff0080;">›</span>
+                </div>
+                <div class="profile-item">
+                  <span>💰 Meu Cashback</span>
+                  <span style="color: #ff0080;">›</span>
+                </div>
+                <div class="profile-item">
+                  <span>🎁 Cupons</span>
+                  <span style="color: #ff0080;">›</span>
+                </div>
+                <div class="profile-item">
+                  <span>⚙️ Configurações</span>
+                  <span style="color: #ff0080;">›</span>
+                </div>
               </div>
-              <div class="profile-item">
-                <span>Notificações</span>
-                <span style="color: #ff0080;">›</span>
-              </div>
-              <div class="profile-item">
-                <span>Privacidade</span>
-                <span style="color: #ff0080;">›</span>
-              </div>
-              <div class="profile-item">
-                <span>Ajuda e Suporte</span>
-                <span style="color: #ff0080;">›</span>
-              </div>
+
+              <button class="logout-btn" onclick="logout()" style="width: 100%; margin-top: 25px;">
+                Sair da Conta
+              </button>
             </div>
           `;
           return;
         }
       }
       
-      // Usuário não logado - mostrar formulário de login
+      // Usuário não logado - mostrar formulário de login bonito
       container.innerHTML = `
+        <div class="login-hero">
+          <h1>Bem-vindo! 🎉</h1>
+          <p>Faça login para aproveitar todas as vantagens</p>
+        </div>
+
         <div class="login-container">
-          <div class="login-form">
-            <h2 class="form-title">Fazer Login</h2>
-            
-            <div class="form-group">
-              <label for="login-email">E-mail</label>
-              <input type="email" id="login-email" class="form-control" placeholder="seu@email.com">
+          <div class="login-card">
+            <div class="login-header">
+              <div class="login-icon">🔐</div>
+              <h2 class="login-title">Acesse sua conta</h2>
+              <p class="login-subtitle">Entre com seus dados para continuar</p>
             </div>
-            
-            <div class="form-group">
-              <label for="login-senha">Senha</label>
-              <input type="password" id="login-senha" class="form-control" placeholder="Sua senha">
+
+            <form onsubmit="login(); return false;">
+              <div class="form-group">
+                <label class="form-label">E-mail</label>
+                <input type="email" id="login-email" class="form-input" placeholder="seu@email.com" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Senha</label>
+                <input type="password" id="login-senha" class="form-input" placeholder="Sua senha" required>
+              </div>
+
+              <button type="submit" class="login-btn">
+                Entrar na Conta
+              </button>
+            </form>
+
+            <div class="forgot-password">
+              <a href="#">Esqueci minha senha</a>
             </div>
-            
-            <button class="login-btn" onclick="login()">Entrar</button>
-            
-            <div class="back-link">
-              <a href="cadastro.html">Não tem conta? Cadastre-se</a>
+
+            <div class="login-divider">
+              <span>ou entre com</span>
+            </div>
+
+            <div class="social-login">
+              <button class="social-btn" type="button">📱</button>
+              <button class="social-btn" type="button">📧</button>
+              <button class="social-btn" type="button">🔵</button>
+            </div>
+
+            <div class="features-grid">
+              <div class="feature-item">
+                <div class="feature-icon">🚚</div>
+                <div class="feature-text">Entrega Grátis</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">💰</div>
+                <div class="feature-text">Cashback</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">🎁</div>
+                <div class="feature-text">Ofertas</div>
+              </div>
+            </div>
+
+            <div class="register-link">
+              <p>Não tem uma conta?</p>
+              <a href="cadastro.html" class="register-btn">
+                Criar Conta Gratuita
+              </a>
             </div>
           </div>
         </div>
@@ -179,5 +534,4 @@
   </script>
 
 </body>
-</html>
 </html>
