@@ -35,8 +35,9 @@ body {
 }
 
 .logo.png {
-  max-height: 35px; 
+  max-height: 15px; 
   margin-right: 5px;
+  width: auto;   /* Mantém a proporção */
   filter: brightness(0) invert(1);
 }
 
