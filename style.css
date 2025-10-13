@@ -28,17 +28,18 @@ body {
 }
 
 .logo-container {
- display: flex;           /* Usa flexbox para alinhamento */
+  display: flex;           /* Usa flexbox para alinhamento */
   align-items: center;     /* Centraliza verticalmente */
   justify-content: center; /* Centraliza horizontalmente */
   margin-bottom: 8px;      /* Espaço abaixo do container */
 }
 
+
 .logo.png {
- height: 12px; /*Altura: define o tamanho*/
-right: 5px; /* MARGEM: espaço entre logo e texto */
-  width: auto;   /* Mantém a proporção */
-  filter: brightness(0) invert(1);
+  height: 12px;           /* ALTURA: define tamanho super pequeno */
+  width: auto;            /* LARGURA: mantém proporção automática */
+  margin-right: 3px;      /* MARGEM: espaço entre logo e texto */
+  
 }
 
 .header h1 {
