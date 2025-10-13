@@ -9,19 +9,176 @@
 <body>
 
   <header class="header">
-    <h1>Cardápio Completo 📋</h1>
+    <h1>Cardápio Completo</h1>
     <p>Escolha seus produtos favoritos</p>
   </header>
 
   <div class="category-filter">
-    <button class="category-btn active" onclick="filterCategory('all')">Todos</button>
+    <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
+    <button class="category-btn" onclick="filterCategory('tradicionais')">Tradicionais</button>
+    <button class="category-btn" onclick="filterCategory('gourmet')">Gourmet</button>
     <button class="category-btn" onclick="filterCategory('kits')">Kits</button>
-    <button class="category-btn" onclick="filterCategory('especiais')">Especiais</button>
     <button class="category-btn" onclick="filterCategory('combos')">Combos</button>
   </div>
 
-  <div class="product-grid" id="menu-products">
-    <!-- Produtos serão carregados via JavaScript -->
+  <div class="product-grid" id="product-grid">
+    
+    <!-- Produtos Tradicionais -->
+    <div class="product-card" data-category="tradicionais">
+      <span class="cashback-badge">3% Cashback</span>
+      <div class="product-image">🍓</div>
+      <div class="product-name">Geladinho de Morango</div>
+      <div class="product-price">R$ 2,50</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="tradicionais">
+      <span class="cashback-badge">3% Cashback</span>
+      <div class="product-image">🍇</div>
+      <div class="product-name">Geladinho de Uva</div>
+      <div class="product-price">R$ 2,50</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="tradicionais">
+      <span class="cashback-badge">3% Cashback</span>
+      <div class="product-image">🍌</div>
+      <div class="product-name">Geladinho de Banana</div>
+      <div class="product-price">R$ 2,50</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="tradicionais">
+      <span class="cashback-badge">3% Cashback</span>
+      <div class="product-image">🥥</div>
+      <div class="product-name">Geladinho de Coco</div>
+      <div class="product-price">R$ 2,50</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="tradicionais">
+      <span class="cashback-badge">3% Cashback</span>
+      <div class="product-image">🍈</div>
+      <div class="product-name">Geladinho de Limão</div>
+      <div class="product-price">R$ 2,50</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="tradicionais">
+      <span class="cashback-badge">3% Cashback</span>
+      <div class="product-image">🍒</div>
+      <div class="product-name">Geladinho de Cereja</div>
+      <div class="product-price">R$ 2,50</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <!-- Produtos Gourmet -->
+    <div class="product-card" data-category="gourmet">
+      <span class="cashback-badge">5% Cashback</span>
+      <div class="product-image">🍫</div>
+      <div class="product-name">Gourmet Chocolate Belga</div>
+      <div class="product-price">R$ 4,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="gourmet">
+      <span class="cashback-badge">5% Cashback</span>
+      <div class="product-image">🍯</div>
+      <div class="product-name">Gourmet Morango com Leite</div>
+      <div class="product-price">R$ 4,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="gourmet">
+      <span class="cashback-badge">5% Cashback</span>
+      <div class="product-image">🥭</div>
+      <div class="product-name">Gourmet Manga Tropical</div>
+      <div class="product-price">R$ 4,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="gourmet">
+      <span class="cashback-badge">5% Cashback</span>
+      <div class="product-image">🍵</div>
+      <div class="product-name">Gourmet Matcha</div>
+      <div class="product-price">R$ 4,50</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="gourmet">
+      <span class="cashback-badge">5% Cashback</span>
+      <div class="product-image">🌰</div>
+      <div class="product-name">Gourmet Avelã</div>
+      <div class="product-price">R$ 4,50</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <!-- Kits -->
+    <div class="product-card" data-category="kits">
+      <span class="cashback-badge">7% Cashback</span>
+      <div class="product-image">🎨</div>
+      <div class="product-name">Kit Premium 15 unidades</div>
+      <div class="product-price">R$ 35,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="kits">
+      <span class="cashback-badge">7% Cashback</span>
+      <div class="product-image">📦</div>
+      <div class="product-name">Kit Família 25 unidades</div>
+      <div class="product-price">R$ 55,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="kits">
+      <span class="cashback-badge">7% Cashback</span>
+      <div class="product-image">💎</div>
+      <div class="product-name">Kit Deluxe 30 unidades</div>
+      <div class="product-price">R$ 75,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="kits">
+      <span class="cashback-badge">7% Cashback</span>
+      <div class="product-image">🌟</div>
+      <div class="product-name">Kit Sortido 20 unidades</div>
+      <div class="product-price">R$ 45,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <!-- Combos -->
+    <div class="product-card" data-category="combos">
+      <span class="cashback-badge">10% Cashback</span>
+      <div class="product-image">🎪</div>
+      <div class="product-name">Combo Festa 50 unidades</div>
+      <div class="product-price">R$ 110,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="combos">
+      <span class="cashback-badge">10% Cashback</span>
+      <div class="product-image">🎯</div>
+      <div class="product-name">Combo Duplo 40 unidades</div>
+      <div class="product-price">R$ 85,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="combos">
+      <span class="cashback-badge">10% Cashback</span>
+      <div class="product-image">🚀</div>
+      <div class="product-name">Combo Mega 100 unidades</div>
+      <div class="product-price">R$ 200,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="combos">
+      <span class="cashback-badge">10% Cashback</span>
+      <div class="product-image">💝</div>
+      <div class="product-name">Combo Presente 60 unidades</div>
+      <div class="product-price">R$ 130,00</div>
+      <button class="add-to-cart-btn">Adicionar</button>
+    </div>
+
   </div>
 
   <nav class="bottom-nav">
@@ -40,10 +197,35 @@
     <a href="carrinho.html" class="nav-item">
       <span class="nav-icon">🛒</span>
       <span>Carrinho</span>
-      <span id="cart-badge" class="cart-badge hidden">0</span>
     </a>
   </nav>
 
-  <script src="script.js"></script>
+  <script>
+    function filterCategory(category) {
+      // Remove a classe active de todos os botões
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Adiciona a classe active ao botão clicado
+      event.target.classList.add('active');
+      
+      // Filtra os produtos
+      const products = document.querySelectorAll('.product-card');
+      
+      products.forEach(product => {
+        if (category === 'todos') {
+          product.style.display = 'block';
+        } else {
+          if (product.getAttribute('data-category') === category) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
