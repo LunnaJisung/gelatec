@@ -28,19 +28,14 @@ body {
 }
 
 .logo-container {
-  display: flex;           /* Usa flexbox para alinhamento */
-  align-items: center;     /* Centraliza verticalmente */
-  justify-content: center; /* Centraliza horizontalmente */
-  height: 12px;           /* ALTURA: define tamanho super pequeno */
+  width: 100px; /* Largura desejada */
+  height: 60px; /* Altura desejada */
 }
 
-
-/* CORREÇÃO AQUI: Mudei .logo.png para .logo-img */
 .logo-img {
-  height: 100%; /* Ocupa 100% da altura do container */
-  width: auto;
-  max-width: 100%;
-  object-fit: contain; /* Mantém a proporção */
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Mantém a proporção sem distorcer */
 }
 
 .header h1 {
