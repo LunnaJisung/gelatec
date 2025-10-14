@@ -56,12 +56,13 @@
       align-items: center;
       gap: 15px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      border: 1px solid #e9ecef;
-      transition: transform 0.3s ease;
+      border: 2px solid #ff0080;
+      transition: all 0.3s ease;
     }
 
     .cart-item:hover {
       transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 0, 128, 0.2);
     }
 
     .cart-item-emoji {
@@ -71,8 +72,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f8f9fa;
+      background: #fff0f7;
       border-radius: 12px;
+      border: 2px solid #ff0080;
     }
 
     .cart-item-details {
@@ -121,7 +123,7 @@
     }
 
     .remove-btn {
-      background: #dc3545;
+      background: #ff0080;
       color: white;
       border: none;
       padding: 8px 15px;
@@ -133,7 +135,7 @@
     }
 
     .remove-btn:hover {
-      background: #c82333;
+      background: #e00070;
       transform: scale(1.05);
     }
 
@@ -145,12 +147,15 @@
       box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
       text-align: center;
       border-top: 3px solid #ff0080;
+      border-left: 3px solid #ff0080;
+      border-right: 3px solid #ff0080;
     }
 
     .cart-total h3 {
-      color: #333;
+      color: #ff0080;
       margin-bottom: 15px;
       font-size: 20px;
+      font-weight: 700;
     }
 
     .total-price {
@@ -252,27 +257,38 @@
       background: #ff0080;
       color: white;
       border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 10px;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
+      border: 2px solid white;
+    }
+
+    .item-total {
+      color: #ff0080;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 5px;
     }
 
     @media (max-width: 480px) {
       .cart-item {
         padding: 15px;
+        flex-direction: column;
+        text-align: center;
       }
       
       .cart-item-emoji {
-        font-size: 30px;
+        font-size: 35px;
         width: 50px;
         height: 50px;
       }
       
       .quantity-controls {
+        justify-content: center;
         flex-wrap: wrap;
         gap: 8px;
       }
@@ -381,9 +397,10 @@
                     <div class="cart-item-details">
                         <div class="cart-item-name">${item.name}</div>
                         <div class="cart-item-price">R$ ${item.price.toFixed(2)} cada</div>
+                        <div class="item-total">Subtotal: R$ ${itemTotal.toFixed(2)}</div>
                         <div class="quantity-controls">
                             <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
-                            <span style="font-weight: 600; margin: 0 10px;">${item.quantity} un</span>
+                            <span style="font-weight: 600; margin: 0 10px; color: #ff0080;">${item.quantity} un</span>
                             <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
                             <button class="remove-btn" onclick="removeFromCart(${index})">
                                 <i class="fas fa-trash"></i> Remover
@@ -406,8 +423,18 @@
         }
         
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        alert(`Pedido finalizado!\nTotal: R$ ${total.toFixed(2)}\nObrigado pela compra!`);
         
+        // Verificar se usuário está logado
+        const userData = localStorage.getItem('userData');
+        if (!userData) {
+            alert('Para finalizar o pedido, faça login ou cadastre-se primeiro!');
+            window.location.href = 'p3.html';
+            return;
+        }
+        
+        alert(`🎉 Pedido finalizado!\n💰 Total: R$ ${total.toFixed(2)}\n📦 Seus produtos chegarão em breve!\n\nObrigado pela compra!`);
+        
+        // Limpar carrinho após compra
         localStorage.removeItem('cart');
         loadCartItems();
         updateCartBadge();
