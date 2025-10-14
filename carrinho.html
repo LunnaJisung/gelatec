@@ -14,7 +14,7 @@
     }
 
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #ff0080 0%, #ff8c00 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -28,7 +28,7 @@
     }
 
     .header h1 {
-      color: #333;
+      color: #ff0080;
       font-size: 32px;
       margin-bottom: 8px;
       font-weight: 700;
@@ -54,7 +54,7 @@
       padding: 30px;
       margin-bottom: 20px;
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 32px rgba(255, 0, 128, 0.2);
     }
 
     .empty-cart {
@@ -63,7 +63,7 @@
     }
 
     .empty-cart h2 {
-      color: #333;
+      color: #ff0080;
       font-size: 24px;
       margin-bottom: 10px;
       font-weight: 600;
@@ -76,7 +76,7 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #ff0080 0%, #ff8c00 100%);
       color: white;
       border: none;
       padding: 16px 32px;
@@ -90,7 +90,7 @@
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 0, 128, 0.4);
     }
 
     .cart-item {
@@ -107,7 +107,7 @@
     .item-emoji {
       font-size: 32px;
       margin-right: 15px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #ff0080 0%, #ff8c00 100%);
       border-radius: 10px;
       width: 50px;
       height: 50px;
@@ -128,7 +128,7 @@
     }
 
     .item-price {
-      color: #667eea;
+      color: #ff0080;
       font-weight: 600;
       font-size: 14px;
     }
@@ -141,7 +141,7 @@
     }
 
     .quantity-btn {
-      background: #667eea;
+      background: #ff0080;
       color: white;
       border: none;
       width: 30px;
@@ -152,14 +152,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.3s ease;
     }
 
     .quantity-btn:hover {
-      background: #5a6fd8;
+      background: #e00070;
+      transform: scale(1.1);
     }
 
     .remove-btn {
-      background: #ff6b6b;
+      background: #ff0080;
       color: white;
       border: none;
       padding: 6px 12px;
@@ -167,10 +169,12 @@
       font-size: 12px;
       cursor: pointer;
       margin-left: 10px;
+      transition: all 0.3s ease;
     }
 
     .remove-btn:hover {
-      background: #ff5252;
+      background: #e00070;
+      transform: scale(1.05);
     }
 
     .total-section {
@@ -178,11 +182,11 @@
       border-radius: 20px;
       padding: 25px;
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 32px rgba(255, 0, 128, 0.2);
     }
 
     .total-section h3 {
-      color: #333;
+      color: #ff0080;
       margin-bottom: 15px;
       font-size: 18px;
       font-weight: 600;
@@ -191,13 +195,13 @@
     .total-price {
       font-size: 28px;
       font-weight: 700;
-      color: #667eea;
+      color: #ff0080;
       margin-bottom: 20px;
       text-align: center;
     }
 
     .checkout-btn {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #ff0080 0%, #ff8c00 100%);
       color: white;
       border: none;
       padding: 18px;
@@ -211,7 +215,7 @@
 
     .checkout-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 0, 128, 0.4);
     }
 
     .bottom-nav {
@@ -234,7 +238,7 @@
     }
 
     .nav-item.active {
-      color: #667eea;
+      color: #ff0080;
     }
 
     .nav-icon {
@@ -246,7 +250,7 @@
       position: absolute;
       top: -5px;
       right: 10px;
-      background: #ff6b6b;
+      background: #ff0080;
       color: white;
       border-radius: 50%;
       width: 18px;
@@ -259,9 +263,16 @@
     }
 
     .item-quantity {
-      color: #667eea;
+      color: #ff0080;
       font-weight: 600;
       margin: 0 8px;
+    }
+
+    .item-total {
+      color: #ff0080;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 5px;
     }
 
     @media (max-width: 480px) {
@@ -382,12 +393,13 @@
                     <div class="item-details">
                         <div class="item-name">${item.name}</div>
                         <div class="item-price">R$ ${item.price.toFixed(2)} cada</div>
+                        <div class="item-total">Subtotal: R$ ${itemTotal.toFixed(2)}</div>
                         <div class="quantity-controls">
                             <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
                             <span class="item-quantity">${item.quantity} un</span>
                             <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
                             <button class="remove-btn" onclick="removeFromCart(${index})">
-                                <i class="fas fa-trash"></i>
+                                <i class="fas fa-trash"></i> Remover
                             </button>
                         </div>
                     </div>
