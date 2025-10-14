@@ -22,24 +22,21 @@
 
     .header {
       background: white;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 20px;
+      text-align: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       border-bottom: 3px solid #ff0080;
     }
 
-    .logo-container h1 {
+    .header h1 {
       color: #ff0080;
-      font-size: 24px;
-      font-weight: 700;
+      font-size: 28px;
+      margin-bottom: 5px;
     }
 
     .header p {
-      color: #333;
-      font-weight: 600;
-      font-size: 18px;
+      color: #666;
+      font-size: 16px;
     }
 
     .page-container {
@@ -48,7 +45,6 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: #f8f9fa;
     }
 
     .cadastro-container {
@@ -168,9 +164,10 @@
       color: #666;
       font-size: 12px;
       transition: all 0.3s ease;
+      position: relative;
     }
 
-    .nav-item:hover {
+    .nav-item:hover, .nav-item.active {
       color: #ff0080;
     }
 
@@ -179,7 +176,6 @@
       margin-bottom: 4px;
     }
 
-    /* Estilo consistente com a primeira parte */
     .input-with-icon {
       position: relative;
     }
@@ -192,7 +188,6 @@
       font-size: 16px;
     }
 
-    /* Mensagem de sucesso */
     .success-message {
       background: #d4edda;
       color: #155724;
@@ -204,7 +199,17 @@
       display: none;
     }
 
-    /* Responsividade */
+    .error-message {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 15px;
+      border: 1px solid #f5c6cb;
+      display: none;
+    }
+
     @media (max-width: 480px) {
       .cadastro-form {
         padding: 30px 20px;
@@ -213,19 +218,13 @@
       .form-title {
         font-size: 24px;
       }
-      
-      .header {
-        padding: 12px 15px;
-      }
     }
   </style>
 </head>
 <body>
 
   <header class="header">
-    <div class="logo-container">
-      <h1>GelaTec</h1>
-    </div>
+    <h1>GelaTec</h1>
     <p>Cadastro</p>
   </header>
 
@@ -237,13 +236,22 @@
         <div id="success-message" class="success-message">
           <i class="fas fa-check-circle"></i> Cadastro realizado com sucesso!
         </div>
+
+        <div id="error-message" class="error-message">
+          <i class="fas fa-exclamation-circle"></i> <span id="error-text"></span>
+        </div>
         
         <div class="form-group input-with-icon">
           <label for="cadastro-nome">Nome Completo</label>
           <input type="text" id="cadastro-nome" class="form-control" placeholder="Seu nome completo">
           <i class="fas fa-user input-icon"></i>
         </div>
-   
+        
+        <div class="form-group input-with-icon">
+          <label for="cadastro-idade">Idade</label>
+          <input type="number" id="cadastro-idade" class="form-control" placeholder="Sua idade" min="1" max="120">
+          <i class="fas fa-birthday-cake input-icon"></i>
+        </div>
         
         <div class="form-group input-with-icon">
           <label for="cadastro-email">E-mail</label>
@@ -253,11 +261,16 @@
         
         <div class="form-group input-with-icon">
           <label for="cadastro-senha">Senha</label>
-          <input type="password" id="cadastro-senha" class="form-control" placeholder="Crie uma senha">
+          <input type="password" id="cadastro-senha" class="form-control" placeholder="Crie uma senha (mínimo 6 caracteres)">
           <i class="fas fa-lock input-icon"></i>
         </div>
         
-
+        <div class="form-group input-with-icon">
+          <label for="cadastro-endereco">Endereço Completo</label>
+          <textarea id="cadastro-endereco" class="form-control" placeholder="Rua, número, bairro, cidade..." rows="3"></textarea>
+          <i class="fas fa-map-marker-alt input-icon"></i>
+        </div>
+        
         <button class="cadastro-btn" onclick="finalizarCadastro()" id="btn-finalizar">
           <i class="fas fa-user-plus"></i> Finalizar Cadastro
         </button>
@@ -287,30 +300,48 @@
   </nav>
 
   <script>
+    function showError(message) {
+      const errorDiv = document.getElementById('error-message');
+      const errorText = document.getElementById('error-text');
+      errorText.textContent = message;
+      errorDiv.style.display = 'block';
+      
+      // Esconder após 5 segundos
+      setTimeout(() => {
+        errorDiv.style.display = 'none';
+      }, 5000);
+    }
+
     function finalizarCadastro() {
       // Pegar valores dos campos
-      const nome = document.getElementById('cadastro-nome').value;
+      const nome = document.getElementById('cadastro-nome').value.trim();
       const idade = document.getElementById('cadastro-idade').value;
-      const email = document.getElementById('cadastro-email').value;
+      const email = document.getElementById('cadastro-email').value.trim();
       const senha = document.getElementById('cadastro-senha').value;
-      const endereco = document.getElementById('cadastro-endereco').value;
+      const endereco = document.getElementById('cadastro-endereco').value.trim();
       
       // Validar campos
       if (!nome || !idade || !email || !senha || !endereco) {
-        alert('Por favor, preencha todos os campos!');
+        showError('Por favor, preencha todos os campos!');
         return;
       }
 
       // Validar idade
       if (idade < 1 || idade > 120) {
-        alert('Por favor, insira uma idade válida!');
+        showError('Por favor, insira uma idade válida (entre 1 e 120 anos)!');
         return;
       }
 
       // Validar email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        alert('Por favor, insira um e-mail válido!');
+        showError('Por favor, insira um e-mail válido!');
+        return;
+      }
+
+      // Validar senha
+      if (senha.length < 6) {
+        showError('A senha deve ter pelo menos 6 caracteres!');
         return;
       }
 
@@ -319,29 +350,48 @@
       btn.disabled = true;
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
       
-      // Simular processamento (em um sistema real, aqui seria a API)
+      // Simular processamento
       setTimeout(() => {
-        // Salvar dados no localStorage
-        const userData = {
-          nome: nome,
-          idade: idade,
-          email: email,
-          senha: senha,
-          endereco: endereco,
-          dataCadastro: new Date().toISOString()
-        };
-        
-        localStorage.setItem('userData', JSON.stringify(userData));
-        
-        // Mostrar mensagem de sucesso
-        const successMessage = document.getElementById('success-message');
-        successMessage.style.display = 'block';
-        
-        // Redirecionar para a página de perfil após 2 segundos
-        setTimeout(() => {
-          window.location.href = 'p3.html';
-        }, 2000);
-        
+        try {
+          // Salvar dados no localStorage
+          const userData = {
+            nome: nome,
+            idade: parseInt(idade),
+            email: email,
+            senha: senha,
+            endereco: endereco,
+            dataCadastro: new Date().toLocaleString('pt-BR'),
+            pedidos: []
+          };
+          
+          console.log('Salvando dados:', userData);
+          localStorage.setItem('userData', JSON.stringify(userData));
+          
+          // Verificar se salvou corretamente
+          const savedData = localStorage.getItem('userData');
+          if (!savedData) {
+            throw new Error('Erro ao salvar dados');
+          }
+          
+          // Mostrar mensagem de sucesso
+          const successMessage = document.getElementById('success-message');
+          const errorMessage = document.getElementById('error-message');
+          successMessage.style.display = 'block';
+          errorMessage.style.display = 'none';
+          
+          console.log('Cadastro realizado com sucesso!');
+          
+          // Redirecionar para a página de perfil após 2 segundos
+          setTimeout(() => {
+            window.location.href = 'p3.html';
+          }, 2000);
+          
+        } catch (error) {
+          console.error('Erro no cadastro:', error);
+          showError('Erro ao realizar cadastro. Tente novamente.');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-user-plus"></i> Finalizar Cadastro';
+        }
       }, 1500);
     }
 
@@ -349,6 +399,8 @@
     document.querySelectorAll('.form-control').forEach(input => {
       input.addEventListener('focus', function() {
         this.style.borderColor = '#ff0080';
+        // Esconder mensagem de erro ao focar
+        document.getElementById('error-message').style.display = 'none';
       });
       
       input.addEventListener('blur', function() {
@@ -365,10 +417,11 @@
       });
     });
 
-    // Verificar se já existe cadastro
+    // Verificar se já existe cadastro ao carregar a página
     document.addEventListener('DOMContentLoaded', function() {
       const userData = localStorage.getItem('userData');
       if (userData) {
+        console.log('Usuário já cadastrado, redirecionando...');
         // Se já tem cadastro, redireciona para o perfil
         window.location.href = 'p3.html';
       }
