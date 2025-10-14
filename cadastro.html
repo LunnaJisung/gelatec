@@ -125,6 +125,13 @@
       box-shadow: 0 4px 12px rgba(255, 0, 128, 0.3);
     }
 
+    .cadastro-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
     .back-link {
       text-align: center;
       margin-top: 25px;
@@ -185,6 +192,18 @@
       font-size: 16px;
     }
 
+    /* Mensagem de sucesso */
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 1px solid #c3e6cb;
+      display: none;
+    }
+
     /* Responsividade */
     @media (max-width: 480px) {
       .cadastro-form {
@@ -215,6 +234,10 @@
       <div class="cadastro-form">
         <h2 class="form-title">Criar Conta</h2>
         
+        <div id="success-message" class="success-message">
+          <i class="fas fa-check-circle"></i> Cadastro realizado com sucesso!
+        </div>
+        
         <div class="form-group input-with-icon">
           <label for="cadastro-nome">Nome Completo</label>
           <input type="text" id="cadastro-nome" class="form-control" placeholder="Seu nome completo">
@@ -239,8 +262,14 @@
           <i class="fas fa-lock input-icon"></i>
         </div>
         
-        <button class="cadastro-btn" onclick="cadastrar()">
-          <i class="fas fa-user-plus"></i> Criar minha conta
+        <div class="form-group input-with-icon">
+          <label for="cadastro-endereco">Endereço Completo</label>
+          <textarea id="cadastro-endereco" class="form-control" placeholder="Rua, número, bairro, cidade..." rows="3"></textarea>
+          <i class="fas fa-map-marker-alt input-icon"></i>
+        </div>
+        
+        <button class="cadastro-btn" onclick="finalizarCadastro()" id="btn-finalizar">
+          <i class="fas fa-user-plus"></i> Finalizar Cadastro
         </button>
         
         <div class="back-link">
@@ -268,7 +297,7 @@
   </nav>
 
   <script>
-    function cadastrar() {
+    function finalizarCadastro() {
       // Pegar valores dos campos
       const nome = document.getElementById('cadastro-nome').value;
       const idade = document.getElementById('cadastro-idade').value;
@@ -281,21 +310,49 @@
         alert('Por favor, preencha todos os campos!');
         return;
       }
+
+      // Validar idade
+      if (idade < 1 || idade > 120) {
+        alert('Por favor, insira uma idade válida!');
+        return;
+      }
+
+      // Validar email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Por favor, insira um e-mail válido!');
+        return;
+      }
+
+      // Desabilitar botão para evitar múltiplos cliques
+      const btn = document.getElementById('btn-finalizar');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
       
-      // Salvar dados no localStorage
-      const userData = {
-        nome: nome,
-        idade: idade,
-        email: email,
-        senha: senha,
-        endereco: endereco
-      };
-      
-      localStorage.setItem('userData', JSON.stringify(userData));
-      
-      // Redirecionar para a página de perfil
-      alert('Cadastro realizado com sucesso!');
-      window.location.href = 'p3.html';
+      // Simular processamento (em um sistema real, aqui seria a API)
+      setTimeout(() => {
+        // Salvar dados no localStorage
+        const userData = {
+          nome: nome,
+          idade: idade,
+          email: email,
+          senha: senha,
+          endereco: endereco,
+          dataCadastro: new Date().toISOString()
+        };
+        
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        // Mostrar mensagem de sucesso
+        const successMessage = document.getElementById('success-message');
+        successMessage.style.display = 'block';
+        
+        // Redirecionar para a página de perfil após 2 segundos
+        setTimeout(() => {
+          window.location.href = 'p3.html';
+        }, 2000);
+        
+      }, 1500);
     }
 
     // Adicionar interações nos inputs
@@ -309,6 +366,22 @@
           this.style.borderColor = '#e9ecef';
         }
       });
+
+      // Permitir finalizar cadastro pressionando Enter
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          finalizarCadastro();
+        }
+      });
+    });
+
+    // Verificar se já existe cadastro
+    document.addEventListener('DOMContentLoaded', function() {
+      const userData = localStorage.getItem('userData');
+      if (userData) {
+        // Se já tem cadastro, redireciona para o perfil
+        window.location.href = 'p3.html';
+      }
     });
   </script>
 
