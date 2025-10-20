@@ -96,11 +96,6 @@
       outline: none;
     }
 
-    textarea.form-control {
-      resize: vertical;
-      min-height: 80px;
-    }
-
     .cadastro-btn {
       background: #ff0080;
       color: white;
@@ -111,7 +106,7 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 20px;
       transition: all 0.3s ease;
     }
 
@@ -164,10 +159,9 @@
       color: #666;
       font-size: 12px;
       transition: all 0.3s ease;
-      position: relative;
     }
 
-    .nav-item:hover, .nav-item.active {
+    .nav-item:hover {
       color: #ff0080;
     }
 
@@ -247,7 +241,6 @@
           <i class="fas fa-user input-icon"></i>
         </div>
         
-        
         <div class="form-group input-with-icon">
           <label for="cadastro-email">E-mail</label>
           <input type="email" id="cadastro-email" class="form-control" placeholder="seu@email.com">
@@ -259,7 +252,7 @@
           <input type="password" id="cadastro-senha" class="form-control" placeholder="Crie uma senha (mínimo 6 caracteres)">
           <i class="fas fa-lock input-icon"></i>
         </div>
-    
+        
         <button class="cadastro-btn" onclick="finalizarCadastro()" id="btn-finalizar">
           <i class="fas fa-user-plus"></i> Finalizar Cadastro
         </button>
@@ -295,29 +288,22 @@
       errorText.textContent = message;
       errorDiv.style.display = 'block';
       
-      // Esconder após 5 segundos
       setTimeout(() => {
         errorDiv.style.display = 'none';
       }, 5000);
     }
 
     function finalizarCadastro() {
-      // Pegar valores dos campos
+      // Pegar valores dos campos (APENAS 3 CAMPOS AGORA)
       const nome = document.getElementById('cadastro-nome').value.trim();
-      const idade = document.getElementById('cadastro-idade').value;
       const email = document.getElementById('cadastro-email').value.trim();
       const senha = document.getElementById('cadastro-senha').value;
-      const endereco = document.getElementById('cadastro-endereco').value.trim();
       
-      // Validar campos
-      if (!nome || !idade || !email || !senha || !endereco) {
+      console.log('Tentando cadastrar:', { nome, email, senha });
+      
+      // Validar campos (APENAS 3 CAMPOS)
+      if (!nome || !email || !senha) {
         showError('Por favor, preencha todos os campos!');
-        return;
-      }
-
-      // Validar idade
-      if (idade < 1 || idade > 120) {
-        showError('Por favor, insira uma idade válida (entre 1 e 120 anos)!');
         return;
       }
 
@@ -334,7 +320,7 @@
         return;
       }
 
-      // Desabilitar botão para evitar múltiplos cliques
+      // Desabilitar botão
       const btn = document.getElementById('btn-finalizar');
       btn.disabled = true;
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
@@ -342,13 +328,11 @@
       // Simular processamento
       setTimeout(() => {
         try {
-          // Salvar dados no localStorage
+          // Salvar dados no localStorage (APENAS 3 CAMPOS)
           const userData = {
             nome: nome,
-            idade: parseInt(idade),
             email: email,
             senha: senha,
-            endereco: endereco,
             dataCadastro: new Date().toLocaleString('pt-BR'),
             pedidos: []
           };
@@ -362,13 +346,13 @@
             throw new Error('Erro ao salvar dados');
           }
           
+          console.log('Dados salvos com sucesso!');
+          
           // Mostrar mensagem de sucesso
           const successMessage = document.getElementById('success-message');
           const errorMessage = document.getElementById('error-message');
           successMessage.style.display = 'block';
           errorMessage.style.display = 'none';
-          
-          console.log('Cadastro realizado com sucesso!');
           
           // Redirecionar para a página de perfil após 2 segundos
           setTimeout(() => {
@@ -388,7 +372,6 @@
     document.querySelectorAll('.form-control').forEach(input => {
       input.addEventListener('focus', function() {
         this.style.borderColor = '#ff0080';
-        // Esconder mensagem de erro ao focar
         document.getElementById('error-message').style.display = 'none';
       });
       
@@ -406,12 +389,11 @@
       });
     });
 
-    // Verificar se já existe cadastro ao carregar a página
+    // Verificar se já existe cadastro
     document.addEventListener('DOMContentLoaded', function() {
       const userData = localStorage.getItem('userData');
       if (userData) {
         console.log('Usuário já cadastrado, redirecionando...');
-        // Se já tem cadastro, redireciona para o perfil
         window.location.href = 'p3.html';
       }
     });
