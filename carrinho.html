@@ -1,378 +1,376 @@
-<!DOCTYPE html> <!-- Declaração do tipo de documento HTML5 -->
-<html lang="pt-BR"> <!-- Abertura do documento HTML com idioma português brasileiro -->
-<head> <!-- Início da seção de cabeçalho do documento -->
-  <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura viewport para responsividade -->
-  <title>Carrinho - GelaTec</title> <!-- Título da página que aparece na aba do navegador -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Importa biblioteca de ícones Font Awesome -->
-  <style> <!-- Início do CSS interno para estilização -->
-    * { /* Seletor universal para todos os elementos */
-      margin: 0; /* Remove margens padrão */
-      padding: 0; /* Remove paddings padrão */
-      box-sizing: border-box; /* Inclui padding e border no cálculo de width/height */
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define fonte padrão */
-    } /* Fim do seletor universal */
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho - GelaTec</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    body { /* Estilização do corpo do documento */
-      background: #f8f9fa; /* Cor de fundo cinza claro */
-      min-height: 100vh; /* Altura mínima de 100% da viewport */
-      display: flex; /* Ativa flexbox */
-      flex-direction: column; /* Direção da flexbox em coluna */
-    } /* Fim da estilização do body */
+    body {
+      background: #f8f9fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-    .header { /* Estilização do cabeçalho principal */
-      background: white; /* Cor de fundo branca */
-      padding: 20px; /* Espaçamento interno de 20px */
-      text-align: center; /* Alinhamento do texto ao centro */
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Sombra suave */
-      border-bottom: 3px solid #ff0080; /* Borda inferior rosa */
-    } /* Fim do cabeçalho */
+    .header {
+      background: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 3px solid #ff0080;
+    }
 
-    .header h1 { /* Estilo do título principal */
-      color: #ff0080; /* Cor do texto rosa */
-      font-size: 28px; /* Tamanho da fonte 28px */
-      margin-bottom: 5px; /* Margem inferior de 5px */
-    } /* Fim do título */
+    .header h1 {
+      color: #ff0080;
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
 
-    .header p { /* Estilo do parágrafo do cabeçalho */
-      color: #666; /* Cor do texto cinza */
-      font-size: 16px; /* Tamanho da fonte 16px */
-    } /* Fim do parágrafo */
+    .header p {
+      color: #666;
+      font-size: 16px;
+    }
 
-    #cart-items { /* Container principal dos itens do carrinho */
-      flex: 1; /* Ocupa o espaço restante disponível */
-      padding: 20px; /* Espaçamento interno de 20px */
-      max-width: 600px; /* Largura máxima de 600px */
-      margin: 0 auto; /* Centraliza horizontalmente */
-      width: 100%; /* Largura de 100% do container pai */
-    } /* Fim do container de itens */
+    #cart-items {
+      flex: 1;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
 
-    .cart-item { /* Estilização de cada item individual do carrinho */
-      background: white; /* Cor de fundo branca */
-      border-radius: 15px; /* Bordas arredondadas */
-      padding: 20px; /* Espaçamento interno de 20px */
-      margin-bottom: 15px; /* Margem inferior de 15px */
-      display: flex; /* Ativa flexbox */
-      align-items: center; /* Alinha itens verticalmente ao centro */
-      gap: 15px; /* Espaço entre elementos filhos */
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* Sombra suave */
-      border: 2px solid #ff0080; /* Borda rosa de 2px */
-      transition: all 0.3s ease; /* Transição suave para todas as propriedades */
-    } /* Fim do item do carrinho */
+    .cart-item {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      border: 2px solid #ff0080;
+      transition: all 0.3s ease;
+    }
 
-    .cart-item:hover { /* Efeito quando mouse passa sobre o item */
-      transform: translateY(-2px); /* Move o item 2px para cima */
-      box-shadow: 0 4px 15px rgba(255, 0, 128, 0.2); /* Aumenta a sombra */
-    } /* Fim do efeito hover */
+    .cart-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 0, 128, 0.2);
+    }
 
-    .cart-item-emoji { /* Container do emoji do produto */
-      font-size: 40px; /* Tamanho do emoji 40px */
-      width: 60px; /* Largura fixa de 60px */
-      height: 60px; /* Altura fixa de 60px */
-      display: flex; /* Ativa flexbox */
-      align-items: center; /* Centraliza verticalmente */
-      justify-content: center; /* Centraliza horizontalmente */
-      background: #fff0f7; /* Cor de fundo rosa claro */
-      border-radius: 12px; /* Bordas arredondadas */
-      border: 2px solid #ff0080; /* Borda rosa */
-    } /* Fim do container do emoji */
+    .cart-item-emoji {
+      font-size: 40px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff0f7;
+      border-radius: 12px;
+      border: 2px solid #ff0080;
+    }
 
-    .cart-item-details { /* Container dos detalhes do produto */
-      flex: 1; /* Ocupa todo o espaço disponível restante */
-    } /* Fim dos detalhes */
+    .cart-item-details {
+      flex: 1;
+    }
 
-    .cart-item-name { /* Nome do produto */
-      font-size: 18px; /* Tamanho da fonte 18px */
-      font-weight: 600; /* Peso da fonte semi-negrito */
-      color: #333; /* Cor do texto cinza escuro */
-      margin-bottom: 5px; /* Margem inferior de 5px */
-    } /* Fim do nome */
+    .cart-item-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
 
-    .cart-item-price { /* Preço unitário do produto */
-      color: #ff0080; /* Cor do texto rosa */
-      font-weight: 600; /* Peso da fonte semi-negrito */
-      font-size: 16px; /* Tamanho da fonte 16px */
-      margin-bottom: 10px; /* Margem inferior de 10px */
-    } /* Fim do preço */
+    .cart-item-price {
+      color: #ff0080;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
 
-    .quantity-controls { /* Container dos controles de quantidade */
-      display: flex; /* Ativa flexbox */
-      align-items: center; /* Alinha itens verticalmente */
-      gap: 10px; /* Espaço entre elementos de 10px */
-    } /* Fim dos controles */
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-    .quantity-btn { /* Botões de aumentar/diminuir quantidade */
-      background: #ff0080; /* Cor de fundo rosa */
-      color: white; /* Cor do texto branco */
-      border: none; /* Remove borda padrão */
-      width: 35px; /* Largura fixa de 35px */
-      height: 35px; /* Altura fixa de 35px */
-      border-radius: 8px; /* Bordas arredondadas */
-      font-size: 16px; /* Tamanho da fonte 16px */
-      font-weight: bold; /* Peso da fonte negrito */
-      cursor: pointer; /* Cursor de ponteiro ao passar mouse */
-      display: flex; /* Ativa flexbox */
-      align-items: center; /* Centraliza verticalmente */
-      justify-content: center; /* Centraliza horizontalmente */
-      transition: all 0.3s ease; /* Transição suave */
-    } /* Fim do botão de quantidade */
+    .quantity-btn {
+      background: #ff0080;
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
 
-    .quantity-btn:hover { /* Efeito hover nos botões de quantidade */
-      background: #e00070; /* Cor de fundo rosa mais escuro */
-      transform: scale(1.1); /* Aumenta o botão em 10% */
-    } /* Fim do efeito hover */
+    .quantity-btn:hover {
+      background: #e00070;
+      transform: scale(1.1);
+    }
 
-    .remove-btn { /* Botão para remover item do carrinho */
-      background: #ff0080; /* Cor de fundo rosa */
-      color: white; /* Cor do texto branco */
-      border: none; /* Remove borda padrão */
-      padding: 8px 15px; /* Espaçamento interno vertical e horizontal */
-      border-radius: 8px; /* Bordas arredondadas */
-      font-size: 14px; /* Tamanho da fonte 14px */
-      cursor: pointer; /* Cursor de ponteiro */
-      margin-left: 10px; /* Margem à esquerda de 10px */
-      transition: all 0.3s ease; /* Transição suave */
-    } /* Fim do botão remover */
+    .remove-btn {
+      background: #ff0080;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+    }
 
-    .remove-btn:hover { /* Efeito hover no botão remover */
-      background: #e00070; /* Cor de fundo rosa mais escuro */
-      transform: scale(1.05); /* Aumenta o botão em 5% */
-    } /* Fim do efeito hover */
+    .remove-btn:hover {
+      background: #e00070;
+      transform: scale(1.05);
+    }
 
-    .cart-total { /* Seção do total do pedido */
-      background: white; /* Cor de fundo branca */
-      padding: 25px 20px; /* Espaçamento interno */
-      margin: 20px; /* Margem externa de 20px */
-      border-radius: 15px; /* Bordas arredondadas */
-      box-shadow: 0 -2px 20px rgba(0,0,0,0.1); /* Sombra superior */
-      text-align: center; /* Alinhamento do texto ao centro */
-      border-top: 3px solid #ff0080; /* Borda superior rosa */
-      border-left: 3px solid #ff0080; /* Borda esquerda rosa */
-      border-right: 3px solid #ff0080; /* Borda direita rosa */
-    } /* Fim da seção total */
+    .cart-total {
+      background: white;
+      padding: 25px 20px;
+      margin: 20px;
+      border-radius: 15px;
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      border-top: 3px solid #ff0080;
+      border-left: 3px solid #ff0080;
+      border-right: 3px solid #ff0080;
+    }
 
-    .cart-total h3 { /* Título da seção total */
-      color: #ff0080; /* Cor do texto rosa */
-      margin-bottom: 15px; /* Margem inferior de 15px */
-      font-size: 20px; /* Tamanho da fonte 20px */
-      font-weight: 700; /* Peso da fonte negrito */
-    } /* Fim do título */
+    .cart-total h3 {
+      color: #ff0080;
+      margin-bottom: 15px;
+      font-size: 20px;
+      font-weight: 700;
+    }
 
-    .total-price { /* Preço total destacado */
-      font-size: 32px; /* Tamanho da fonte grande */
-      font-weight: 700; /* Peso da fonte negrito */
-      color: #ff0080; /* Cor do texto rosa */
-      margin-bottom: 20px; /* Margem inferior de 20px */
-    } /* Fim do preço total */
+    .total-price {
+      font-size: 32px;
+      font-weight: 700;
+      color: #ff0080;
+      margin-bottom: 20px;
+    }
 
-    .checkout-btn { /* Botão para finalizar pedido */
-      background: #ff0080; /* Cor de fundo rosa */
-      color: white; /* Cor do texto branco */
-      border: none; /* Remove borda padrão */
-      padding: 18px 30px; /* Espaçamento interno generoso */
-      border-radius: 12px; /* Bordas arredondadas */
-      font-size: 18px; /* Tamanho da fonte 18px */
-      font-weight: 600; /* Peso da fonte semi-negrito */
-      cursor: pointer; /* Cursor de ponteiro */
-      width: 100%; /* Largura de 100% do container */
-      max-width: 300px; /* Largura máxima de 300px */
-      transition: all 0.3s ease; /* Transição suave */
-      box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3); /* Sombra rosa */
-    } /* Fim do botão checkout */
+    .checkout-btn {
+      background: #ff0080;
+      color: white;
+      border: none;
+      padding: 18px 30px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
+    }
 
-    .checkout-btn:hover { /* Efeito hover no botão de finalizar */
-      background: #e00070; /* Cor de fundo rosa mais escuro */
-      transform: translateY(-2px); /* Move o botão 2px para cima */
-      box-shadow: 0 6px 20px rgba(255, 0, 128, 0.4); /* Aumenta a sombra */
-    } /* Fim do efeito hover */
+    .checkout-btn:hover {
+      background: #e00070;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 0, 128, 0.4);
+    }
 
-    .empty-cart { /* Mensagem quando carrinho está vazio */
-      text-align: center; /* Alinhamento do texto ao centro */
-      padding: 60px 20px; /* Espaçamento interno generoso */
-      color: #666; /* Cor do texto cinza */
-    } /* Fim da mensagem vazia */
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
 
-    .empty-cart-emoji { /* Emoji do carrinho vazio */
-      font-size: 80px; /* Tamanho grande do emoji */
-      margin-bottom: 20px; /* Margem inferior de 20px */
-    } /* Fim do emoji */
+    .empty-cart-emoji {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
 
-    .empty-cart h2 { /* Título do carrinho vazio */
-      color: #ff0080; /* Cor do texto rosa */
-      margin-bottom: 10px; /* Margem inferior de 10px */
-      font-size: 24px; /* Tamanho da fonte 24px */
-    } /* Fim do título */
+    .empty-cart h2 {
+      color: #ff0080;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
 
-    .add-to-cart-btn { /* Botão para ir ao cardápio quando carrinho vazio */
-      background: #ff0080; /* Cor de fundo rosa */
-      color: white; /* Cor do texto branco */
-      border: none; /* Remove borda padrão */
-      padding: 15px 30px; /* Espaçamento interno */
-      border-radius: 10px; /* Bordas arredondadas */
-      font-size: 16px; /* Tamanho da fonte 16px */
-      font-weight: 600; /* Peso da fonte semi-negrito */
-      cursor: pointer; /* Cursor de ponteiro */
-      margin-top: 20px; /* Margem superior de 20px */
-      transition: all 0.3s ease; /* Transição suave */
-    } /* Fim do botão */
+    .add-to-cart-btn {
+      background: #ff0080;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
 
-    .add-to-cart-btn:hover { /* Efeito hover no botão do cardápio */
-      background: #e00070; /* Cor de fundo rosa mais escuro */
-      transform: translateY(-2px); /* Move o botão 2px para cima */
-    } /* Fim do efeito hover */
+    .add-to-cart-btn:hover {
+      background: #e00070;
+      transform: translateY(-2px);
+    }
 
-    .bottom-nav { /* Navegação inferior fixa */
-      background: white; /* Cor de fundo branca */
-      display: flex; /* Ativa flexbox */
-      justify-content: space-around; /* Espaça os itens igualmente */
-      padding: 15px 0; /* Espaçamento interno vertical */
-      box-shadow: 0 -2px 20px rgba(0,0,0,0.1); /* Sombra superior */
-      border-top: 1px solid #e9ecef; /* Borda superior sutil */
-    } /* Fim da navegação */
+    .bottom-nav {
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 0;
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+      border-top: 1px solid #e9ecef;
+    }
 
-    .nav-item { /* Item individual da navegação */
-      display: flex; /* Ativa flexbox */
-      flex-direction: column; /* Direção em coluna */
-      align-items: center; /* Centraliza horizontalmente */
-      text-decoration: none; /* Remove sublinhado padrão */
-      color: #666; /* Cor do texto cinza */
-      font-size: 12px; /* Tamanho da fonte pequeno */
-      transition: all 0.3s ease; /* Transição suave */
-      position: relative; /* Permite posicionamento absoluto dos filhos */
-    } /* Fim do item de navegação */
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #666;
+      font-size: 12px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
 
-    .nav-item:hover, .nav-item.active { /* Estados hover e ativo */
-      color: #ff0080; /* Cor do texto rosa */
-    } /* Fim dos estados */
+    .nav-item:hover, .nav-item.active {
+      color: #ff0080;
+    }
 
-    .nav-icon { /* Ícone dos itens de navegação */
-      font-size: 20px; /* Tamanho do ícone */
-      margin-bottom: 4px; /* Margem inferior pequena */
-    } /* Fim do ícone */
+    .nav-icon {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
 
-    .cart-badge { /* Badge com contador de itens no carrinho */
-      position: absolute; /* Posicionamento absoluto em relação ao pai */
-      top: -5px; /* Posiciona acima do elemento pai */
-      right: 10px; /* Posiciona à direita do elemento pai */
-      background: #ff0080; /* Cor de fundo rosa */
-      color: white; /* Cor do texto branco */
-      border-radius: 50%; /* Forma circular */
-      width: 20px; /* Largura fixa */
-      height: 20px; /* Altura fixa */
-      font-size: 12px; /* Tamanho da fonte pequeno */
-      display: flex; /* Ativa flexbox */
-      align-items: center; /* Centraliza verticalmente */
-      justify-content: center; /* Centraliza horizontalmente */
-      font-weight: bold; /* Peso da fonte negrito */
-      border: 2px solid white; /* Borda branca para contraste */
-    } /* Fim da badge */
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: 10px;
+      background: #ff0080;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      border: 2px solid white;
+    }
 
-    .item-total { /* Subtotal de cada item */
-      color: #ff0080; /* Cor do texto rosa */
-      font-weight: 600; /* Peso da fonte semi-negrito */
-      font-size: 14px; /* Tamanho da fonte 14px */
-      margin-top: 5px; /* Margem superior de 5px */
-    } /* Fim do subtotal */
+    .item-total {
+      color: #ff0080;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 5px;
+    }
 
-    @media (max-width: 480px) { /* Media query para telas pequenas */
-      .cart-item { /* Ajustes para itens em mobile */
-        padding: 15px; /* Reduz padding */
-        flex-direction: column; /* Muda para coluna */
-        text-align: center; /* Centraliza texto */
-      } /* Fim do ajuste */
+    @media (max-width: 480px) {
+      .cart-item {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+      }
       
-      .cart-item-emoji { /* Ajustes para emoji em mobile */
-        font-size: 35px; /* Reduz tamanho */
-        width: 50px; /* Reduz largura */
-        height: 50px; /* Reduz altura */
-      } /* Fim do ajuste */
+      .cart-item-emoji {
+        font-size: 35px;
+        width: 50px;
+        height: 50px;
+      }
       
-      .quantity-controls { /* Ajustes para controles em mobile */
-        justify-content: center; /* Centraliza controles */
-        flex-wrap: wrap; /* Permite quebra de linha */
-        gap: 8px; /* Reduz espaço entre elementos */
-      } /* Fim do ajuste */
-    } /* Fim da media query */
-  </style> <!-- Fim do CSS -->
-</head> <!-- Fim do cabeçalho -->
-<body> <!-- Início do corpo do documento -->
+      .quantity-controls {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
 
-  <header class="header"> <!-- Cabeçalho da página -->
-    <h1>Meu Carrinho</h1> <!-- Título principal da página -->
-    <p>Revise seus produtos</p> <!-- Subtítulo descritivo -->
-  </header> <!-- Fim do cabeçalho -->
+  <header class="header">
+    <h1>Meu Carrinho</h1>
+    <p>Revise seus produtos</p>
+  </header>
 
-  <div id="cart-items"> <!-- Container onde os itens do carrinho serão carregados dinamicamente -->
-    <!-- Itens do carrinho serão inseridos aqui via JavaScript -->
-  </div> <!-- Fim do container -->
+  <div id="cart-items">
+    <!-- Itens do carrinho serão carregados aqui -->
+  </div>
 
-  <div class="cart-total"> <!-- Seção do total do pedido -->
-    <h3>Total do Pedido</h3> <!-- Título da seção -->
-    <div class="total-price" id="total-price">R$ 0,00</div> <!-- Elemento onde o preço total será exibido -->
-    <button class="checkout-btn" onclick="checkout()"> <!-- Botão para finalizar compra -->
-      <i class="fas fa-shopping-bag"></i> Finalizar Pedido <!-- Ícone e texto do botão -->
-    </button> <!-- Fim do botão -->
-  </div> <!-- Fim da seção total -->
+  <div class="cart-total">
+    <h3>Total do Pedido</h3>
+    <div class="total-price" id="total-price">R$ 0,00</div>
+    <button class="checkout-btn" onclick="checkout()">
+      <i class="fas fa-shopping-bag"></i> Finalizar Pedido
+    </button>
+  </div>
 
-  <nav class="bottom-nav"> <!-- Navegação inferior -->
-    <a href="index.html" class="nav-item"> <!-- Link para página inicial -->
-      <span class="nav-icon">🏠</span> <!-- Ícone da página inicial -->
-      <span>Início</span> <!-- Texto do link -->
-    </a> <!-- Fim do link -->
-    <a href="p2.html" class="nav-item"> <!-- Link para cardápio -->
-      <span class="nav-icon">📋</span> <!-- Ícone do cardápio -->
-      <span>Cardápio</span> <!-- Texto do link -->
-    </a> <!-- Fim do link -->
-    <a href="p3.html" class="nav-item"> <!-- Link para perfil -->
-      <span class="nav-icon">👤</span> <!-- Ícone do perfil -->
-      <span>Perfil</span> <!-- Texto do link -->
-    </a> <!-- Fim do link -->
-    <a href="carrinho.html" class="nav-item active"> <!-- Link ativo para carrinho -->
-      <span class="nav-icon">🛒</span> <!-- Ícone do carrinho -->
-      <span>Carrinho</span> <!-- Texto do link -->
-      <span class="cart-badge" id="cart-count">0</span> <!-- Badge com contador de itens -->
-    </a> <!-- Fim do link -->
-  </nav> <!-- Fim da navegação -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <span class="nav-icon">🏠</span>
+      <span>Início</span>
+    </a>
+    <a href="p2.html" class="nav-item">
+      <span class="nav-icon">📋</span>
+      <span>Cardápio</span>
+    </a>
+    <a href="p3.html" class="nav-item">
+      <span class="nav-icon">👤</span>
+      <span>Perfil</span>
+    </a>
+    <a href="carrinho.html" class="nav-item active">
+      <span class="nav-icon">🛒</span>
+      <span>Carrinho</span>
+      <span class="cart-badge" id="cart-count">0</span>
+    </a>
+  </nav>
 
-  <script> // Início do JavaScript
-    // Função para atualizar a quantidade de um item no carrinho
-    function updateQuantity(index, change) { // Recebe índice do item e valor da mudança
-        const cart = JSON.parse(localStorage.getItem('cart')) || []; // Obtém carrinho do localStorage ou array vazio
-        cart[index].quantity += change; // Altera a quantidade do item específico
+  <script>
+    // Funções para manipular o carrinho
+    function updateQuantity(index, change) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart[index].quantity += change;
         
-        if (cart[index].quantity <= 0) { // Verifica se quantidade chegou a zero ou menos
-            cart.splice(index, 1); // Remove o item do array
-        } // Fim da verificação
+        if (cart[index].quantity <= 0) {
+            cart.splice(index, 1);
+        }
         
-        localStorage.setItem('cart', JSON.stringify(cart)); // Salva carrinho atualizado no localStorage
-        loadCartItems(); // Recarrega a exibição dos itens
-        updateCartBadge(); // Atualiza o contador da badge
-    } // Fim da função
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCartItems();
+        updateCartBadge();
+    }
 
-    // Função para remover um item do carrinho
-    function removeFromCart(index) { // Recebe índice do item a ser removido
-        const cart = JSON.parse(localStorage.getItem('cart')) || []; // Obtém carrinho do localStorage
-        cart.splice(index, 1); // Remove o item no índice especificado
-        localStorage.setItem('cart', JSON.stringify(cart)); // Salva carrinho atualizado
-        loadCartItems(); // Recarrega a exibição
-        updateCartBadge(); // Atualiza o contador
-    } // Fim da função
+    function removeFromCart(index) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCartItems();
+        updateCartBadge();
+    }
 
-    // Função para atualizar o contador do carrinho na badge
-    function updateCartBadge() { // Não recebe parâmetros
-        const cart = JSON.parse(localStorage.getItem('cart')) || []; // Obtém carrinho atual
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // Soma todas as quantidades
-        document.getElementById('cart-count').textContent = totalItems; // Atualiza o texto da badge
-    } // Fim da função
+    function updateCartBadge() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        document.getElementById('cart-count').textContent = totalItems;
+    }
 
-    // Função principal para carregar e exibir os itens do carrinho
-    function loadCartItems() { // Não recebe parâmetros
-        const cart = JSON.parse(localStorage.getItem('cart')) || []; // Obtém carrinho do localStorage
-        const container = document.getElementById('cart-items'); // Referência ao container HTML
-        const totalPrice = document.getElementById('total-price'); // Referência ao elemento do preço total
+    // Carregar itens do carrinho
+    function loadCartItems() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const container = document.getElementById('cart-items');
+        const totalPrice = document.getElementById('total-price');
         
-        if (cart.length === 0) { // Verifica se carrinho está vazio
-            container.innerHTML = ` // Insere HTML para carrinho vazio
+        if (cart.length === 0) {
+            container.innerHTML = `
                 <div class="empty-cart">
                     <div class="empty-cart-emoji">🛒</div>
                     <h2>Carrinho Vazio</h2>
@@ -381,19 +379,19 @@
                         <i class="fas fa-utensils"></i> Ver Cardápio
                     </button>
                 </div>
-            `; // Fim do HTML
-            totalPrice.textContent = 'R$ 0,00'; // Zera o preço total
-            return; // Sai da função
-        } // Fim da verificação
+            `;
+            totalPrice.textContent = 'R$ 0,00';
+            return;
+        }
         
-        let total = 0; // Inicializa variável para cálculo do total
-        let itemsHTML = ''; // Inicializa string para acumular HTML dos itens
+        let total = 0;
+        let itemsHTML = '';
         
-        cart.forEach((item, index) => { // Itera sobre cada item do carrinho
-            const itemTotal = item.price * item.quantity; // Calcula subtotal do item
-            total += itemTotal; // Adiciona ao total geral
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
             
-            itemsHTML += ` // Acumula HTML para o item atual
+            itemsHTML += `
                 <div class="cart-item">
                     <div class="cart-item-emoji">${item.emoji}</div>
                     <div class="cart-item-details">
@@ -410,42 +408,44 @@
                         </div>
                     </div>
                 </div>
-            `; // Fim do HTML do item
-        }); // Fim do forEach
+            `;
+        });
         
-        container.innerHTML = itemsHTML; // Insere todos os itens no container
-        totalPrice.textContent = `R$ ${total.toFixed(2)}`; // Atualiza o preço total formatado
-    } // Fim da função
+        container.innerHTML = itemsHTML;
+        totalPrice.textContent = `R$ ${total.toFixed(2)}`;
+    }
     
-    // Função para finalizar o pedido (checkout)
-    function checkout() { // Não recebe parâmetros
-        const cart = JSON.parse(localStorage.getItem('cart')) || []; // Obtém carrinho atual
-        if (cart.length === 0) { // Verifica se há itens no carrinho
-            alert('Carrinho vazio!'); // Alerta usuário
-            return; // Sai da função
-        } // Fim da verificação
+    function checkout() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length === 0) {
+            alert('Carrinho vazio!');
+            return;
+        }
         
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); // Calcula total do pedido
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         
-        const userData = localStorage.getItem('userData'); // Verifica se usuário está logado
-        if (!userData) { // Se não estiver logado
-            alert('Para finalizar o pedido, faça login ou cadastre-se primeiro!'); // Alerta usuário
-            window.location.href = 'p3.html'; // Redireciona para login
-            return; // Sai da função
-        } // Fim da verificação
+        // Verificar se usuário está logado
+        const userData = localStorage.getItem('userData');
+        if (!userData) {
+            alert('Para finalizar o pedido, faça login ou cadastre-se primeiro!');
+            window.location.href = 'p3.html';
+            return;
+        }
         
-        alert(`🎉 Pedido finalizado!\n💰 Total: R$ ${total.toFixed(2)}\n📦 Seus produtos chegarão em breve!\n\nObrigado pela compra!`); // Mensagem de sucesso
+        alert(`🎉 Pedido finalizado!\n💰 Total: R$ ${total.toFixed(2)}\n📦 Seus produtos chegarão em breve!\n\nObrigado pela compra!`);
         
-        localStorage.removeItem('cart'); // Limpa o carrinho após compra
-        loadCartItems(); // Recarrega a interface
-        updateCartBadge(); // Atualiza o contador
-    } // Fim da função
+        // Limpar carrinho após compra
+        localStorage.removeItem('cart');
+        loadCartItems();
+        updateCartBadge();
+    }
     
-    // Evento que executa quando o DOM está completamente carregado
-    document.addEventListener('DOMContentLoaded', function() { // Callback do evento
-        loadCartItems(); // Carrega os itens do carrinho
-        updateCartBadge(); // Atualiza o badge do carrinho
-    }); // Fim do evento
-  </script> <!-- Fim do JavaScript -->
-</body> <!-- Fim do corpo do documento -->
-</html> <!-- Fim do documento HTML -->
+    // Carregar itens quando a página abrir
+    document.addEventListener('DOMContentLoaded', function() {
+        loadCartItems();
+        updateCartBadge();
+    });
+  </script>
+
+</body>
+</html>
