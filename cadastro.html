@@ -355,132 +355,85 @@
   </nav>
 
   <script>
-    // Função para mostrar mensagens de erro
-    function showError(message) {
-      const errorDiv = document.getElementById('error-message');
-      const errorText = document.getElementById('error-text');
-      errorText.textContent = message;
-      errorDiv.style.display = 'block';
-      
-      setTimeout(() => {
-        errorDiv.style.display = 'none';
-      }, 5000);
-    }
-
-    // Função principal para finalizar o cadastro
+    // ========== FUNÇÃO PRINCIPAL CORRIGIDA ==========
     function finalizarCadastro() {
-      const nome = document.getElementById('cadastro-nome').value.trim();
-      const email = document.getElementById('cadastro-email').value.trim();
+      console.log('=== INICIANDO CADASTRO ===');
+      
+      // 1. PEGAR VALORES DOS CAMPOS
+      const nome = document.getElementById('cadastro-nome').value;
+      const email = document.getElementById('cadastro-email').value;
       const senha = document.getElementById('cadastro-senha').value;
       
-      console.log('Tentando cadastrar:', { nome, email, senha: '***' });
+      console.log('Valores capturados:', { nome, email, senha });
       
-      if (!nome || !email || !senha) {
-        showError('Por favor, preencha todos os campos!');
-        return;
+      // 2. VALIDAR CAMPOS (forma simples)
+      if (nome === '' || email === '' || senha === '') {
+        alert('❌ Por favor, preencha TODOS os campos!');
+        return; // Para aqui se tiver campo vazio
       }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        showError('Por favor, insira um e-mail válido!');
-        return;
-      }
-
+      
+      // 3. VALIDAR SENHA
       if (senha.length < 6) {
-        showError('A senha deve ter pelo menos 6 caracteres!');
+        alert('❌ A senha deve ter pelo menos 6 caracteres!');
         return;
       }
-
-      const btn = document.getElementById('btn-finalizar');
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
       
-      setTimeout(() => {
-        try {
-          // Salva dados básicos do usuário
-          const userBasicInfo = {
-            nome: nome,
-            email: email.substring(0, 3) + '***@' + email.split('@')[1],
-            iniciais: nome.split(' ').map(n => n[0]).join('').toUpperCase(),
-            dataCadastro: new Date().toLocaleString('pt-BR')
-          };
-          
-          // Salva dados completos (apenas para recuperação de senha)
-          const userFullData = {
-            nome: nome,
-            email: email,
-            senha: senha, // Em app real, isso seria criptografado
-            dataCadastro: new Date().toLocaleString('pt-BR')
-          };
-          
-          localStorage.setItem('userBasicInfo', JSON.stringify(userBasicInfo));
-          localStorage.setItem('userFullData', JSON.stringify(userFullData));
-          sessionStorage.setItem('userAuthenticated', 'true');
-          sessionStorage.setItem('userName', nome);
-          
-          const savedData = localStorage.getItem('userBasicInfo');
-          if (!savedData) {
-            throw new Error('Erro ao salvar dados');
-          }
-          
-          console.log('Dados salvos com segurança:', userBasicInfo);
-          
-          const successMessage = document.getElementById('success-message');
-          const errorMessage = document.getElementById('error-message');
-          successMessage.style.display = 'block';
-          errorMessage.style.display = 'none';
-          
-          setTimeout(() => {
-            window.location.href = 'p3.html';
-          }, 2000);
-          
-        } catch (error) {
-          console.error('Erro no cadastro:', error);
-          showError('Erro ao realizar cadastro. Tente novamente.');
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fas fa-user-plus"></i> Finalizar Cadastro';
-        }
-      }, 1500);
+      // 4. SALVAR NO LOCALSTORAGE (forma simples que FUNCIONA)
+      const userData = {
+        nome: nome,
+        email: email,
+        senha: senha,
+        dataCadastro: new Date().toLocaleString('pt-BR')
+      };
+      
+      console.log('Salvando dados:', userData);
+      
+      // Tentar salvar
+      try {
+        localStorage.setItem('userData', JSON.stringify(userData));
+        console.log('Dados salvos no localStorage!');
+        
+        // 5. MOSTRAR MENSAGEM DE SUCESSO
+        alert('✅ Cadastro realizado com sucesso!\n\nRedirecionando para o perfil...');
+        
+        // 6. REDIRECIONAR PARA O PERFIL
+        window.location.href = 'p3.html';
+        
+      } catch (error) {
+        console.error('Erro ao salvar:', error);
+        alert('❌ Erro ao salvar cadastro. Tente novamente.');
+      }
     }
 
     // ========== FUNÇÕES DE RECUPERAÇÃO DE SENHA ==========
-
-    // Abre o modal de recuperação de senha
     function abrirRecuperacaoSenha() {
       document.getElementById('modalRecuperacao').style.display = 'flex';
     }
 
-    // Fecha o modal
     function fecharModal() {
       document.getElementById('modalRecuperacao').style.display = 'none';
     }
 
-    // Função para recuperar senha
     function recuperarSenha() {
-      const email = document.getElementById('email-recuperacao').value.trim();
+      const email = document.getElementById('email-recuperacao').value;
       
       if (!email) {
         alert('Por favor, digite seu e-mail!');
         return;
       }
 
-      // Verifica se o e-mail existe no cadastro
-      const userFullData = JSON.parse(localStorage.getItem('userFullData') || '{}');
+      // Verificar se existe usuário com este email
+      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
       
-      if (userFullData.email === email) {
-        // Em app real, aqui enviaria um e-mail de recuperação
-        alert('✅ Link de recuperação enviado para: ' + email + '\n\nEm um app real, você receberia um e-mail com instruções para redefinir sua senha.');
-        
-        // Mostra a senha atual (APENAS PARA DEMONSTRAÇÃO)
-        alert('🔐 Sua senha atual é: ' + userFullData.senha + '\n\n⚠️ Em um app real, NUNCA mostraríamos a senha! Enviaríamos um link seguro para redefinição.');
-        
+      if (userData.email === email) {
+        alert('✅ Link de recuperação enviado para: ' + email);
         fecharModal();
       } else {
-        alert('❌ E-mail não encontrado!\nVerifique se digitou o e-mail corretamente.');
+        alert('❌ E-mail não encontrado! Verifique o e-mail digitado.');
       }
     }
 
-    // Fecha modal clicando fora dele
+    // Fechar modal clicando fora
     window.onclick = function(event) {
       const modal = document.getElementById('modalRecuperacao');
       if (event.target === modal) {
@@ -488,34 +441,24 @@
       }
     }
 
-    // Adiciona interações nos inputs
-    document.querySelectorAll('.form-control').forEach(input => {
-      input.addEventListener('focus', function() {
-        this.style.borderColor = '#ff0080';
-        document.getElementById('error-message').style.display = 'none';
-      });
-      
-      input.addEventListener('blur', function() {
-        if (!this.value) {
-          this.style.borderColor = '#e9ecef';
-        }
-      });
-
-      input.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          finalizarCadastro();
-        }
-      });
-    });
-
-    // Verifica se já existe cadastro
+    // ========== VERIFICAÇÃO AO CARREGAR A PÁGINA ==========
     document.addEventListener('DOMContentLoaded', function() {
-      const userData = localStorage.getItem('userBasicInfo');
+      console.log('Página de cadastro carregada!');
+      
+      // Verificar se já está logado
+      const userData = localStorage.getItem('userData');
       if (userData) {
-        console.log('Usuário já cadastrado, redirecionando...');
-        window.location.href = 'p3.html';
+        console.log('Usuário já cadastrado:', JSON.parse(userData));
+        // Se quiser redirecionar automaticamente:
+        // window.location.href = 'p3.html';
       }
     });
+
+    // ========== DEBUG NO CONSOLE ==========
+    // Para testar no console, digite:
+    // finalizarCadastro() - testa a função
+    // localStorage.getItem('userData') - vê se salvou
+    // localStorage.clear() - limpa tudo
   </script>
 
 </body>
