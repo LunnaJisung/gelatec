@@ -1,55 +1,83 @@
 <!DOCTYPE html>
+<!-- Declaração do tipo de documento como HTML5 -->
 <html lang="pt-BR">
+<!-- Elemento raiz do documento com idioma português brasileiro -->
 <head>
+  <!-- Cabeçalho do documento com metadados -->
   <meta charset="UTF-8">
+  <!-- Define a codificação de caracteres como UTF-8 para suportar acentos e caracteres especiais -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Configura a viewport para responsividade em dispositivos móveis -->
   <title>GelaTec - Sua Loja Online</title>
+  <!-- Título da página que aparece na aba do navegador -->
   <link rel="stylesheet" href="style.css">
+  <!-- Importa o arquivo CSS externo para estilização -->
 </head>
 <body>
+  <!-- Início do corpo do documento -->
 
 <header class="header">
+  <!-- Cabeçalho principal da página -->
   <div class="logo-container">
+    <!-- Container para as logos da empresa -->
     <!-- Mude class="Logo.png" para class="logo-img" -->
     <img src="Logo.png" alt="GelaTec Logo" class="logo-img">
-  </div>
-  <div>
+    <!-- Primeira logo da empresa -->
     <img src="logoset.png" alt="GelaTec Logo" class="logo-img">
+    <!-- Segunda logo da empresa -->
   </div>
       <h1 style="font-size: 3rem;">Gelatec</h1>
+      <!-- Título principal da página com estilo inline -->
   <p>Loja aberta - Entrega rápida</p>
+  <!-- Subtítulo informativo -->
 </header>
 
    <section class="hero-banner">
+    <!-- Seção de banner hero (destaque) -->
     <div class="hero-content">
+      <!-- Container do conteúdo do banner -->
       <h2>SETEC 2025</h2>
+      <!-- Título do evento -->
       <p>🎁 Com ofertas Especiais</p>
+      <!-- Descrição do evento com emoji -->
     </div>
   </section>
 
   <div class="login-prompt" onclick="window.location.href='p3.html'">
+    <!-- Banner de prompt para login com redirecionamento -->
     Faça login e descubra seu saldo de cashback! 💰
+    <!-- Texto convidativo para login -->
   </div>
 
   <div class="section-title">
+    <!-- Container do título da seção de cupons -->
     <h3>Cupons para consumir 🎫</h3>
+    <!-- Título da seção com emoji -->
     <a href="p2.html">Ver todos ›</a>
+    <!-- Link para ver todos os cupons -->
   </div>
 
   <div class="coupon-grid">
+    <!-- Grid/container dos cartões de cupons -->
     <div class="coupon-card">
+      <!-- Cartão individual de cupom -->
       <span class="coupon-badge">OFERTA ESPECIAL</span>
+      <!-- Badge/etiqueta do tipo de oferta -->
       <div class="coupon-price">R$ 13,00</div>
+      <!-- Preço do cupom -->
       <p class="coupon-description">Kit completo com 3 geladinhos</p>
+      <!-- Descrição do que o cupom oferece -->
     </div>
 
     <div class="coupon-card" style="background: linear-gradient(135deg, #a8d5ff 0%, #ff8ec7 100%);">
+      <!-- Segundo cartão com estilo de gradiente inline -->
       <span class="coupon-badge">SUPER DESCONTO</span>
       <div class="coupon-price">R$ 27,00</div>
       <p class="coupon-description">Leve 10 e pague 8</p>
     </div>
 
     <div class="coupon-card" style="background: linear-gradient(135deg, #ffd6a8 0%, #ff6eb4 100%);">
+      <!-- Terceiro cartão com outro gradiente -->
       <span class="coupon-badge">COMBO</span>
       <div class="coupon-price">R$ 30,00</div>
       <p class="coupon-description">Aproveite 5 gourmet e 5 tradicionais</p>
@@ -58,20 +86,30 @@
 
 
   <div class="section-title">
+  <!-- Container do título da seção de produtos -->
   <h3>Produtos mais vendidos 🔥</h3>
+  <!-- Título da seção com emoji de fogo -->
   <a href="p2.html">Ver todos ›</a>
+  <!-- Link para ver todos os produtos -->
 </div>
 
 <div class="product-grid">
+  <!-- Grid/container dos cartões de produtos -->
   <div class="product-card">
+    <!-- Cartão individual de produto -->
     <span class="cashback-badge">3% Cashback</span>
+    <!-- Badge mostrando porcentagem de cashback -->
   <div class="product-image">🍓</div>
+    <!-- Imagem do produto representada por emoji -->
     <div class="product-name">Geladinho de Morango</div>
+    <!-- Nome do produto -->
     <div class="product-price">R$ 2,50</div>
+    <!-- Preço do produto -->
    
   </div>
 
   <div class="product-card">
+    <!-- Segundo produto -->
     <span class="cashback-badge">5% Cashback</span>
   <div class="product-image">🍫</div>
     <div class="product-name">Gourmet Chocolate</div>
@@ -80,33 +118,53 @@
   </div>
 
   <div class="product-card">
+    <!-- Terceiro produto -->
     <span class="cashback-badge">7% Cashback</span>
+    <!-- Maior porcentagem de cashback -->
     <div class="product-image">🟡</div>
+    <!-- Emoji representando maracujá (amarelo) -->
     <div class="product-name">Gorumet de maracuja</div>
+    <!-- Nome do produto (observação: "Gourmet" está escrito como "Gorumet") -->
     <div class="product-price">R$ 4,00</div>
+    <!-- Preço do produto -->
   </div>
 
 
 
 
   <nav class="bottom-nav">
+    <!-- Navegação inferior fixa -->
     <a href="index.html" class="nav-item active">
+      <!-- Link para página inicial (ativo) -->
       <span class="nav-icon">🏠</span>
+      <!-- Ícone da página inicial -->
       <span>Início</span>
+      <!-- Texto do link -->
     </a>
     <a href="p2.html" class="nav-item">
+      <!-- Link para cardápio -->
       <span class="nav-icon">📋</span>
+      <!-- Ícone do cardápio -->
       <span>Cardápio</span>
+      <!-- Texto do link -->
     </a>
     <a href="p3.html" class="nav-item">
+      <!-- Link para perfil -->
       <span class="nav-icon">👤</span>
+      <!-- Ícone do perfil -->
       <span>Perfil</span>
+      <!-- Texto do link -->
     </a>
     <a href="carrinho.html" class="nav-item">
+      <!-- Link para carrinho -->
       <span class="nav-icon">🛒</span>
+      <!-- Ícone do carrinho -->
       <span>Carrinho</span>
+      <!-- Texto do link -->
     </a>
   </nav>
 
 </body>
+<!-- Fim do corpo do documento -->
 </html>
+<!-- Fim do documento HTML -->
