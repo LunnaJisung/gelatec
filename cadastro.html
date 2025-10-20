@@ -1,46 +1,68 @@
 <!DOCTYPE html>
+<!-- Declaração do tipo de documento como HTML5 -->
 <html lang="pt-BR">
+<!-- Elemento raiz do documento com idioma português brasileiro -->
 <head>
+  <!-- Cabeçalho do documento com metadados e recursos -->
   <meta charset="UTF-8">
+  <!-- Define a codificação de caracteres como UTF-8 para suportar acentos e caracteres especiais -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Configura a viewport para responsividade em dispositivos móveis -->
   <title>Cadastro - GelaTec</title>
+  <!-- Título da página que aparece na aba do navegador -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Importa a biblioteca Font Awesome para ícones -->
   <style>
+    /* Início do CSS interno para estilização da página de cadastro */
     * {
+      /* Reset global para todos os elementos */
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      /* Inclui padding e border no cálculo do width/height */
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* Define a fonte padrão */
     }
 
     body {
+      /* Estilização do corpo do documento */
       background: #f8f9fa;
+      /* Cor de fundo cinza claro */
       min-height: 100vh;
+      /* Altura mínima de 100% da viewport */
       display: flex;
       flex-direction: column;
+      /* Layout flexível em coluna */
     }
 
     .header {
+      /* Estilização do cabeçalho principal */
       background: white;
       padding: 20px;
       text-align: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      /* Sombra suave */
       border-bottom: 3px solid #ff0080;
+      /* Borda inferior rosa */
     }
 
     .header h1 {
+      /* Estilo do título principal */
       color: #ff0080;
       font-size: 28px;
       margin-bottom: 5px;
     }
 
     .header p {
+      /* Estilo do parágrafo do cabeçalho */
       color: #666;
       font-size: 16px;
     }
 
     .page-container {
+      /* Container principal da página */
       flex: 1;
+      /* Ocupa o espaço restante */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -48,11 +70,14 @@
     }
 
     .cadastro-container {
+      /* Container do formulário de cadastro */
       width: 100%;
       max-width: 450px;
+      /* Largura máxima do formulário */
     }
 
     .cadastro-form {
+      /* Estilização do formulário de cadastro */
       background: white;
       padding: 40px 30px;
       border-radius: 15px;
@@ -61,6 +86,7 @@
     }
 
     .form-title {
+      /* Título do formulário */
       color: #ff0080;
       text-align: center;
       margin-bottom: 30px;
@@ -69,10 +95,12 @@
     }
 
     .form-group {
+      /* Grupo de campos do formulário */
       margin-bottom: 20px;
     }
 
     .form-group label {
+      /* Estilo dos labels dos campos */
       display: block;
       margin-bottom: 8px;
       font-weight: 600;
@@ -81,6 +109,7 @@
     }
 
     .form-control {
+      /* Estilo dos campos de input */
       width: 100%;
       padding: 15px;
       border: 2px solid #e9ecef;
@@ -91,12 +120,14 @@
     }
 
     .form-control:focus {
+      /* Estilo quando o campo está em foco */
       border-color: #ff0080;
       box-shadow: 0 0 0 3px rgba(255, 0, 128, 0.1);
       outline: none;
     }
 
     .cadastro-btn {
+      /* Botão de cadastro */
       background: #ff0080;
       color: white;
       border: none;
@@ -111,17 +142,20 @@
     }
 
     .cadastro-btn:hover {
+      /* Efeito hover no botão de cadastro */
       background: #e00070;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(255, 0, 128, 0.3);
     }
 
     .forgot-password {
+      /* Link de esqueci a senha */
       text-align: center;
       margin: 15px 0;
     }
 
     .forgot-password a {
+      /* Estilo do link de esqueci a senha */
       color: #ff0080;
       text-decoration: none;
       font-size: 14px;
@@ -129,15 +163,18 @@
     }
 
     .forgot-password a:hover {
+      /* Efeito hover no link */
       text-decoration: underline;
     }
 
     .back-link {
+      /* Link para voltar ao login */
       text-align: center;
       margin-top: 20px;
     }
 
     .back-link a {
+      /* Estilo do link de voltar */
       color: #ff0080;
       text-decoration: none;
       font-weight: 600;
@@ -148,10 +185,12 @@
     }
 
     .back-link a:hover {
+      /* Efeito hover no link de voltar */
       color: #e00070;
     }
 
     .bottom-nav {
+      /* Navegação inferior fixa */
       background: white;
       display: flex;
       justify-content: space-around;
@@ -161,6 +200,7 @@
     }
 
     .nav-item {
+      /* Item individual da navegação */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -171,19 +211,23 @@
     }
 
     .nav-item:hover {
+      /* Efeito hover nos itens de navegação */
       color: #ff0080;
     }
 
     .nav-icon {
+      /* Ícone dos itens de navegação */
       font-size: 20px;
       margin-bottom: 4px;
     }
 
     .input-with-icon {
+      /* Container para inputs com ícone */
       position: relative;
     }
 
     .input-icon {
+      /* Estilo dos ícones dentro dos inputs */
       position: absolute;
       right: 15px;
       top: 40px;
@@ -192,6 +236,7 @@
     }
 
     .success-message {
+      /* Mensagem de sucesso */
       background: #d4edda;
       color: #155724;
       padding: 15px;
@@ -200,9 +245,11 @@
       margin-bottom: 20px;
       border: 1px solid #c3e6cb;
       display: none;
+      /* Inicialmente oculta */
     }
 
     .error-message {
+      /* Mensagem de erro */
       background: #f8d7da;
       color: #721c24;
       padding: 10px;
@@ -211,10 +258,12 @@
       margin-bottom: 15px;
       border: 1px solid #f5c6cb;
       display: none;
+      /* Inicialmente oculta */
     }
 
     /* Modal de recuperação de senha */
     .modal {
+      /* Modal overlay */
       display: none;
       position: fixed;
       top: 0;
@@ -228,6 +277,7 @@
     }
 
     .modal-content {
+      /* Conteúdo do modal */
       background: white;
       padding: 30px;
       border-radius: 15px;
@@ -237,6 +287,7 @@
     }
 
     .modal-title {
+      /* Título do modal */
       color: #ff0080;
       text-align: center;
       margin-bottom: 20px;
@@ -244,6 +295,7 @@
     }
 
     .close-modal {
+      /* Botão para fechar o modal */
       background: #ff0080;
       color: white;
       border: none;
@@ -257,6 +309,7 @@
     }
 
     @media (max-width: 480px) {
+      /* Media query para dispositivos móveis pequenos */
       .cadastro-form {
         padding: 30px 20px;
       }
@@ -266,54 +319,74 @@
       }
     }
   </style>
+  <!-- Fim do CSS -->
 </head>
 <body>
+  <!-- Início do corpo do documento -->
 
   <header class="header">
+    <!-- Cabeçalho da página -->
     <h1>GelaTec</h1>
+    <!-- Nome da empresa -->
     <p>Cadastro</p>
+    <!-- Subtítulo da página -->
   </header>
 
   <div class="page-container">
+    <!-- Container principal da página -->
     <div class="cadastro-container">
+      <!-- Container do formulário de cadastro -->
       <div class="cadastro-form">
+        <!-- Formulário de cadastro -->
         <h2 class="form-title">Criar Conta</h2>
+        <!-- Título do formulário -->
         
         <div id="success-message" class="success-message">
+          <!-- Mensagem de sucesso (inicialmente oculta) -->
           <i class="fas fa-check-circle"></i> Cadastro realizado com sucesso!
         </div>
 
         <div id="error-message" class="error-message">
+          <!-- Mensagem de erro (inicialmente oculta) -->
           <i class="fas fa-exclamation-circle"></i> <span id="error-text"></span>
         </div>
         
         <div class="form-group input-with-icon">
+          <!-- Grupo do campo nome -->
           <label for="cadastro-nome">Nome Completo</label>
+          <!-- Label do campo -->
           <input type="text" id="cadastro-nome" class="form-control" placeholder="Seu nome completo">
+          <!-- Campo de input para nome -->
           <i class="fas fa-user input-icon"></i>
+          <!-- Ícone do campo -->
         </div>
         
         <div class="form-group input-with-icon">
+          <!-- Grupo do campo email -->
           <label for="cadastro-email">E-mail</label>
           <input type="email" id="cadastro-email" class="form-control" placeholder="seu@email.com">
           <i class="fas fa-envelope input-icon"></i>
         </div>
         
         <div class="form-group input-with-icon">
+          <!-- Grupo do campo senha -->
           <label for="cadastro-senha">Senha</label>
           <input type="password" id="cadastro-senha" class="form-control" placeholder="Crie uma senha (mínimo 6 caracteres)">
           <i class="fas fa-lock input-icon"></i>
         </div>
         
         <button class="cadastro-btn" onclick="finalizarCadastro()" id="btn-finalizar">
+          <!-- Botão para finalizar cadastro -->
           <i class="fas fa-user-plus"></i> Finalizar Cadastro
         </button>
 
         <div class="forgot-password">
+          <!-- Link para recuperação de senha -->
           <a href="#" onclick="abrirRecuperacaoSenha()">Esqueci minha senha</a>
         </div>
         
         <div class="back-link">
+          <!-- Link para voltar à página de login -->
           <a href="p3.html">
             <i class="fas fa-arrow-left"></i> Voltar para o Login
           </a>
@@ -324,31 +397,41 @@
 
   <!-- Modal de Recuperação de Senha -->
   <div id="modalRecuperacao" class="modal">
+    <!-- Modal overlay -->
     <div class="modal-content">
+      <!-- Conteúdo do modal -->
       <h3 class="modal-title">Recuperar Senha</h3>
+      <!-- Título do modal -->
       <div class="form-group">
+        <!-- Grupo do campo email no modal -->
         <label for="email-recuperacao">Digite seu e-mail</label>
         <input type="email" id="email-recuperacao" class="form-control" placeholder="seu@email.com">
       </div>
       <button class="cadastro-btn" onclick="recuperarSenha()">
+        <!-- Botão para enviar recuperação -->
         <i class="fas fa-key"></i> Enviar Link de Recuperação
       </button>
       <button class="close-modal" onclick="fecharModal()">
+        <!-- Botão para fechar modal -->
         <i class="fas fa-times"></i> Fechar
       </button>
     </div>
   </div>
 
   <nav class="bottom-nav">
+    <!-- Navegação inferior -->
     <a href="index.html" class="nav-item">
+      <!-- Link para página inicial -->
       <span class="nav-icon">🏠</span>
       <span>Início</span>
     </a>
     <a href="p2.html" class="nav-item">
+      <!-- Link para cardápio -->
       <span class="nav-icon">📋</span>
       <span>Cardápio</span>
     </a>
     <a href="p3.html" class="nav-item">
+      <!-- Link para perfil/login -->
       <span class="nav-icon">👤</span>
       <span>Perfil</span>
     </a>
@@ -357,6 +440,7 @@
   <script>
     // ========== FUNÇÃO PRINCIPAL CORRIGIDA ==========
     function finalizarCadastro() {
+      // Função principal que processa o cadastro do usuário
       console.log('=== INICIANDO CADASTRO ===');
       
       // 1. PEGAR VALORES DOS CAMPOS
@@ -407,14 +491,17 @@
 
     // ========== FUNÇÕES DE RECUPERAÇÃO DE SENHA ==========
     function abrirRecuperacaoSenha() {
+      // Abre o modal de recuperação de senha
       document.getElementById('modalRecuperacao').style.display = 'flex';
     }
 
     function fecharModal() {
+      // Fecha o modal de recuperação de senha
       document.getElementById('modalRecuperacao').style.display = 'none';
     }
 
     function recuperarSenha() {
+      // Processa a solicitação de recuperação de senha
       const email = document.getElementById('email-recuperacao').value;
       
       if (!email) {
@@ -435,6 +522,7 @@
 
     // Fechar modal clicando fora
     window.onclick = function(event) {
+      // Fecha o modal se o usuário clicar fora dele
       const modal = document.getElementById('modalRecuperacao');
       if (event.target === modal) {
         fecharModal();
@@ -443,6 +531,7 @@
 
     // ========== VERIFICAÇÃO AO CARREGAR A PÁGINA ==========
     document.addEventListener('DOMContentLoaded', function() {
+      // Executa quando a página termina de carregar
       console.log('Página de cadastro carregada!');
       
       // Verificar se já está logado
@@ -460,6 +549,9 @@
     // localStorage.getItem('userData') - vê se salvou
     // localStorage.clear() - limpa tudo
   </script>
+  <!-- Fim do JavaScript -->
 
 </body>
+<!-- Fim do corpo do documento -->
 </html>
+<!-- Fim do documento HTML -->
