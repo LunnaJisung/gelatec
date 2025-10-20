@@ -1,59 +1,98 @@
 <!DOCTYPE html>
+<!-- Declaração do tipo de documento como HTML5 -->
 <html lang="pt-BR">
+<!-- Elemento raiz do documento com idioma português brasileiro -->
 <head>
+  <!-- Cabeçalho do documento com metadados -->
   <meta charset="UTF-8">
+  <!-- Define a codificação de caracteres como UTF-8 para suportar acentos e caracteres especiais -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Configura a viewport para responsividade em dispositivos móveis -->
   <title>Perfil - GelaTec</title>
+  <!-- Título da página que aparece na aba do navegador -->
   <link rel="stylesheet" href="style.css">
+  <!-- Importa o arquivo CSS externo para estilização -->
 </head>
 <body>
+  <!-- Início do corpo do documento -->
 
   <header class="header">
+    <!-- Cabeçalho principal da página -->
     <div class="logo-container">
+      <!-- Container para a logo e nome da empresa -->
       <img src="logo.png" alt="GelaTec Logo" class="logo-image">
+      <!-- Imagem da logo da empresa -->
       <h1>GelaTec</h1>
+      <!-- Nome da empresa -->
     </div>
     <p>Meu Perfil</p>
+    <!-- Subtítulo indicando a seção atual -->
   </header>
 
   <div class="page-container">
+    <!-- Container principal do conteúdo da página -->
     <h1 class="page-title">Meu Perfil 👤</h1>
+    <!-- Título da página com emoji -->
 
+    <!-- SEÇÃO DE LOGIN (visível quando usuário não está logado) -->
     <div id="login-section">
+      <!-- Container da seção de login -->
       <div class="login-form">
+        <!-- Formulário de login -->
         <h2 style="color: #ff0080; margin-bottom: 20px; text-align: center;">Faça seu Login</h2>
-        
+        <!-- Título do formulário com estilo inline -->
+
         <div class="form-group">
+          <!-- Grupo do campo email -->
           <label for="email">E-mail</label>
+          <!-- Label do campo email -->
           <input type="email" id="email" class="form-control" placeholder="seu@email.com">
+          <!-- Campo de input para email -->
         </div>
         
         <div class="form-group">
+          <!-- Grupo do campo senha -->
           <label for="password">Senha</label>
           <input type="password" id="password" class="form-control" placeholder="Sua senha">
+          <!-- Campo de input para senha (tipo password oculta os caracteres) -->
         </div>
         
         <button class="login-btn" onclick="login()">Entrar</button>
-        
+        <!-- Botão para submeter o login -->
+
         <div class="register-link">
+          <!-- Link para cadastro -->
           Não tem conta? <a href="#">Cadastre-se</a>
+          <!-- Texto e link para página de cadastro -->
         </div>
       </div>
     </div>
 
+    <!-- SEÇÃO DE PERFIL (visível quando usuário está logado) -->
     <div id="profile-section" class="hidden">
+      <!-- Container da seção de perfil (inicialmente oculta) -->
       <div class="user-info">
+        <!-- Container das informações do usuário -->
         <div class="user-avatar">👤</div>
+        <!-- Avatar do usuário representado por emoji -->
         <h2 class="user-name" id="user-name">Maria Silva</h2>
+        <!-- Nome do usuário (valor padrão) -->
         <p class="user-email" id="user-email">maria.silva@email.com</p>
-        
+        <!-- Email do usuário (será atualizado dinamicamente) -->
+
+        <!-- ITEM: MEUS PEDIDOS -->
         <div class="page-content" style="margin-bottom: 16px;">
+          <!-- Container do item "Meus Pedidos" -->
           <div style="display: flex; justify-content: space-between; align-items: center;">
+            <!-- Layout flex para título e ícone lado a lado -->
             <span style="font-weight: 600;">Meus Pedidos</span>
+            <!-- Título do item -->
             <span style="color: #ff0080;">›</span>
+            <!-- Ícone de seta para direita -->
           </div>
         </div>
 
+        <!-- ITEM: ENDEREÇOS -->
         <div class="page-content" style="margin-bottom: 16px;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <span style="font-weight: 600;">Endereços</span>
@@ -61,60 +100,93 @@
           </div>
         </div>
 
+        <!-- ITEM: CASHBACK -->
         <div class="page-content" style="margin-bottom: 16px;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <span style="font-weight: 600;">Cashback: R$ 10,00</span>
+            <!-- Mostra o saldo de cashback do usuário -->
             <span style="color: #ff0080;">›</span>
           </div>
         </div>
 
         <button class="logout-btn" onclick="logout()">Sair</button>
+        <!-- Botão para fazer logout -->
       </div>
     </div>
   </div>
-<nav class="bottom-nav">
-  <a href="index.html" class="nav-item">
-    <span class="nav-icon">🏠</span>
-    <span>Início</span>
-  </a>
-  <a href="p2.html" class="nav-item active">
-    <span class="nav-icon">📋</span>
-    <span>Cardápio</span>
-  </a>
-  <a href="p3.html" class="nav-item">
-    <span class="nav-icon">👤</span>
-    <span>Perfil</span>
-  </a>
-  <a href="carrinho.html" class="nav-item">
-    <span class="nav-icon">🛒</span>
-    <span>Carrinho</span>
-    <span id="contador-carrinho" class="carrinho-contador" style="display: none;">0</span>
-  </a>
-</nav>
 
+  <!-- NAVEGAÇÃO INFERIOR -->
+  <nav class="bottom-nav">
+    <!-- Barra de navegação fixa na parte inferior -->
+    <a href="index.html" class="nav-item">
+      <!-- Link para página inicial -->
+      <span class="nav-icon">🏠</span>
+      <!-- Ícone da página inicial -->
+      <span>Início</span>
+      <!-- Texto do link -->
+    </a>
+    <a href="p2.html" class="nav-item active">
+      <!-- Link para cardápio (ativo) -->
+      <span class="nav-icon">📋</span>
+      <!-- Ícone do cardápio -->
+      <span>Cardápio</span>
+    </a>
+    <a href="p3.html" class="nav-item">
+      <!-- Link para perfil -->
+      <span class="nav-icon">👤</span>
+      <!-- Ícone do perfil -->
+      <span>Perfil</span>
+    </a>
+    <a href="carrinho.html" class="nav-item">
+      <!-- Link para carrinho -->
+      <span class="nav-icon">🛒</span>
+      <!-- Ícone do carrinho -->
+      <span>Carrinho</span>
+      <span id="contador-carrinho" class="carrinho-contador" style="display: none;">0</span>
+      <!-- Contador de itens no carrinho (inicialmente oculto) -->
+    </a>
+  </nav>
 
-  </a>
   <script>
+    // ========== FUNÇÃO DE LOGIN ==========
     function login() {
+      // Função chamada quando usuário clica no botão "Entrar"
+      
+      // Obtém os valores dos campos de email e senha
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       
+      // Verifica se ambos os campos foram preenchidos
       if (email && password) {
+        // Esconde a seção de login
         document.getElementById('login-section').classList.add('hidden');
+        // Mostra a seção de perfil
         document.getElementById('profile-section').classList.remove('hidden');
+        // Atualiza o email exibido no perfil com o email digitado
         document.getElementById('user-email').textContent = email;
       } else {
+        // Alerta se algum campo estiver vazio
         alert('Por favor, preencha todos os campos!');
       }
     }
 
+    // ========== FUNÇÃO DE LOGOUT ==========
     function logout() {
+      // Função chamada quando usuário clica no botão "Sair"
+      
+      // Mostra a seção de login novamente
       document.getElementById('login-section').classList.remove('hidden');
+      // Esconde a seção de perfil
       document.getElementById('profile-section').classList.add('hidden');
+      // Limpa o campo de email
       document.getElementById('email').value = '';
+      // Limpa o campo de senha
       document.getElementById('password').value = '';
     }
   </script>
+  <!-- Fim do JavaScript -->
 
 </body>
+<!-- Fim do corpo do documento -->
 </html>
+<!-- Fim do documento HTML -->
