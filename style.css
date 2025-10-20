@@ -1,55 +1,86 @@
+/* ===== RESET E CONFIGURAÇÕES GLOBAIS ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* Reseta todas as margens e paddings e define box-sizing para border-box 
+     para que padding e border sejam incluídos no cálculo de width/height */
 }
 
+/* ===== CONFIGURAÇÕES DO CORPO DA PÁGINA ===== */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  /* Define uma stack de fontes modernas para melhor compatibilidade entre dispositivos */
   background: linear-gradient(to bottom, #f0e6ff 0%, #ffffff 100%);
+  /* Gradiente de fundo que vai do lilás claro no topo para branco na parte inferior */
   min-height: 100vh;
+  /* Garante que o body ocupe pelo menos 100% da altura da viewport */
   padding-bottom: 80px;
+  /* Espaço na parte inferior para acomodar a navegação fixa */
 }
 
+/* ===== CABEÇALHO PRINCIPAL ===== */
 .header {
   background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
+  /* Gradiente diagonal em tons de rosa/vermelho */
   color: white;
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(255, 0, 128, 0.3);
+  /* Sombra com cor temática */
 }
 
+/* Container específico para o cabeçalho com flexbox */
+.header {
+  background-color: #ff69b4;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== CONTAINER DAS LOGOS ===== */
 .logo-container {
   width: 100px; /* Largura desejada */
   height: 80px; /* Altura desejada */
+  /* Container com dimensões fixas para as logos */
 }
 
 .logo-img {
   width: 68px;
   height: 68px;
   object-fit: contain; /* Mantém a proporção sem distorcer */
+  /* Garante que a imagem mantenha suas proporções sem distorção */
 }
 
+/* ===== ESTILOS DO TEXTO DO CABEÇALHO ===== */
 .header h1 {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 8px;
+  /* Título principal em negrito com espaçamento inferior */
 }
 
 .header p {
   font-size: 14px;
   opacity: 0.95;
+  /* Texto secundário com opacidade levemente reduzida para contraste */
 }
 
+/* ===== BANNER HERO (DESTAQUE PRINCIPAL) ===== */
 .hero-banner {
   margin: 20px;
   background: linear-gradient(135deg, #a8d5ba 0%, #d4e157 100%);
+  /* Gradiente em tons verdes/amarelos */
   border-radius: 16px;
   padding: 40px 20px;
   text-align: center;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  /* Sombra mais pronunciada para destaque */
   position: relative;
   overflow: hidden;
+  /* Garante que conteúdo não ultrapasse os cantos arredondados */
 }
 
 .hero-content h2 {
@@ -58,6 +89,7 @@ body {
   color: #2d5016;
   margin-bottom: 12px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  /* Texto em verde escuro com sombra sutil para melhor legibilidade */
 }
 
 .hero-content p {
@@ -68,11 +100,14 @@ body {
   display: inline-block;
   padding: 8px 16px;
   border-radius: 20px;
+  /* Texto com fundo semi-transparente e bordas arredondadas */
 }
 
+/* ===== BANNER DE LOGIN ===== */
 .login-prompt {
   margin: 20px;
   background: linear-gradient(135deg, #e6d5ff 0%, #d5e6ff 100%);
+  /* Gradiente suave em tons pastéis */
   border: 2px solid #ff0080;
   border-radius: 12px;
   padding: 16px;
@@ -81,34 +116,42 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s;
+  /* Indica que é clicável e adiciona transição suave */
 }
 
 .login-prompt:hover {
   transform: scale(1.02);
+  /* Efeito de zoom sutil ao passar o mouse */
 }
 
+/* ===== TÍTULOS DE SEÇÃO ===== */
 .section-title {
   margin: 30px 20px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* Layout flexível para título e link "ver todos" lado a lado */
 }
 
 .section-title h3 {
   font-size: 20px;
   color: #ff0080;
   font-weight: 700;
+  /* Títulos das seções na cor temática rosa */
 }
 
 .section-title a {
   color: #6b9aff;
   text-decoration: none;
   font-size: 14px;
+  /* Links em azul claro sem sublinhado */
 }
 
+/* ===== GRID DE CUPONS ===== */
 .coupon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* Grid responsivo que cria colunas de no mínimo 280px */
   gap: 16px;
   padding: 0 20px;
   margin-bottom: 30px;
@@ -116,6 +159,7 @@ body {
 
 .coupon-card {
   background: linear-gradient(135deg, #d5b3ff 0%, #ff6ec7 100%);
+  /* Gradiente rosa/roxo para cartões de cupom */
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 6px 20px rgba(255, 0, 128, 0.25);
@@ -134,6 +178,7 @@ body {
   font-weight: 700;
   display: inline-block;
   margin-bottom: 12px;
+  /* Badge com cantos completamente arredondados (pill shape) */
 }
 
 .coupon-price {
@@ -141,16 +186,20 @@ body {
   font-weight: 900;
   margin: 12px 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  /* Preço em destaque com tamanho grande e sombra */
 }
 
 .coupon-description {
   font-size: 14px;
   opacity: 0.95;
+  /* Descrição com opacidade levemente reduzida */
 }
 
+/* ===== GRID DE PRODUTOS ===== */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  /* Grid mais compacto para produtos */
   gap: 16px;
   padding: 0 20px;
   margin-bottom: 30px;
@@ -164,11 +213,13 @@ body {
   text-align: center;
   transition: transform 0.2s;
   position: relative;
+  /* Cartões com fundo branco e sombra sutil */
 }
 
 .product-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  /* Efeito de levitação ao passar o mouse */
 }
 
 .cashback-badge {
@@ -181,18 +232,21 @@ body {
   border-radius: 8px;
   font-size: 11px;
   font-weight: 700;
+  /* Badge de cashback posicionada no canto superior esquerdo */
 }
 
 .product-image {
   width: 100%;
   height: 120px;
   background: linear-gradient(135deg, #ffd6e8 0%, #ffe6f0 100%);
+  /* Gradiente suave de fundo para a área da imagem */
   border-radius: 12px;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 48px;
+  /* Container para emojis/icons dos produtos */
 }
 
 .product-name {
@@ -200,6 +254,7 @@ body {
   font-weight: 600;
   color: #333;
   margin-bottom: 8px;
+  /* Nome do produto em negrito */
 }
 
 .product-price {
@@ -207,6 +262,7 @@ body {
   font-weight: 700;
   color: #ff0080;
   margin-bottom: 12px;
+  /* Preço em destaque na cor temática */
 }
 
 .add-to-cart-btn {
@@ -219,12 +275,15 @@ body {
   cursor: pointer;
   transition: transform 0.2s;
   width: 100%;
+  /* Botão que ocupa toda a largura do cartão */
 }
 
 .add-to-cart-btn:hover {
   transform: scale(1.05);
+  /* Efeito de zoom no botão ao passar o mouse */
 }
 
+/* ===== NAVEGAÇÃO INFERIOR FIXA ===== */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -235,6 +294,7 @@ body {
   justify-content: space-around;
   padding: 12px 0;
   box-shadow: 0 -4px 12px rgba(255, 0, 128, 0.3);
+  /* Navegação fixa na parte inferior com sombra para destaque */
 }
 
 .nav-item {
@@ -246,26 +306,32 @@ body {
   font-size: 12px;
   gap: 4px;
   transition: transform 0.2s;
+  /* Itens de navegação em coluna (ícone acima do texto) */
 }
 
 .nav-item:hover {
   transform: scale(1.1);
+  /* Efeito de zoom ao passar o mouse */
 }
 
 .nav-item.active {
   color: #ffeb3b;
+  /* Item ativo destacado em amarelo */
 }
 
 .nav-icon {
   font-size: 24px;
+  /* Tamanho dos ícones de navegação */
 }
 
+/* ===== FILTROS DE CATEGORIA ===== */
 .category-filter {
   display: flex;
   gap: 8px;
   padding: 0 20px;
   margin-bottom: 20px;
   overflow-x: auto;
+  /* Container para filtros com scroll horizontal se necessário */
 }
 
 .category-btn {
@@ -278,24 +344,29 @@ body {
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.2s;
+  /* Botões de categoria com estilo outline */
 }
 
 .category-btn.active {
   background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
   color: white;
+  /* Estado ativo com preenchimento gradiente */
 }
 
+/* ===== SEÇÃO DE PERFIL ===== */
 .profile-section {
   background: white;
   border-radius: 12px;
   padding: 20px;
   margin: 16px 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Container para informações do perfil */
 }
 
 .profile-section h3 {
   color: #ff0080;
   margin-bottom: 15px;
+  /* Título da seção de perfil */
 }
 
 .profile-item {
@@ -304,30 +375,31 @@ body {
   align-items: center;
   padding: 12px 0;
   border-bottom: 1px solid #f0f0f0;
+  /* Itens do perfil com separadores */
 }
 
 .profile-item:last-child {
   border-bottom: none;
+  /* Remove a borda do último item */
 }
 
+/* ===== MEDIA QUERIES PARA RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   .coupon-grid {
     grid-template-columns: 1fr;
+    /* Em mobile, cupons ficam em uma única coluna */
   }
  
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
+    /* Em mobile, produtos em 2 colunas */
   }
 }
+
+/* ===== ESTILOS ADICIONAIS DO HEADER ===== */
 .header {
     background-color: #ff69b4;
     padding: 10px 0; /* Mais reduzido */
     text-align: center;
-}.header {
-    background-color: #ff69b4;
-    padding: 12px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
+/* Nota: Existem múltiplas definições para .header - a última prevalece */
