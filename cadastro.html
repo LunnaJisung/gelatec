@@ -106,7 +106,7 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: 10px;
       transition: all 0.3s ease;
     }
 
@@ -116,16 +116,25 @@
       box-shadow: 0 4px 12px rgba(255, 0, 128, 0.3);
     }
 
-    .cadastro-btn:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
+    .forgot-password {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .forgot-password a {
+      color: #ff0080;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
     }
 
     .back-link {
       text-align: center;
-      margin-top: 25px;
+      margin-top: 20px;
     }
 
     .back-link a {
@@ -204,6 +213,49 @@
       display: none;
     }
 
+    /* Modal de recuperação de senha */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .modal-title {
+      color: #ff0080;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .close-modal {
+      background: #ff0080;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
     @media (max-width: 480px) {
       .cadastro-form {
         padding: 30px 20px;
@@ -219,7 +271,7 @@
 
   <header class="header">
     <h1>GelaTec</h1>
-    <p>Cadastro Seguro</p>
+    <p>Cadastro</p>
   </header>
 
   <div class="page-container">
@@ -256,6 +308,10 @@
         <button class="cadastro-btn" onclick="finalizarCadastro()" id="btn-finalizar">
           <i class="fas fa-user-plus"></i> Finalizar Cadastro
         </button>
+
+        <div class="forgot-password">
+          <a href="#" onclick="abrirRecuperacaoSenha()">Esqueci minha senha</a>
+        </div>
         
         <div class="back-link">
           <a href="p3.html">
@@ -263,6 +319,23 @@
           </a>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal de Recuperação de Senha -->
+  <div id="modalRecuperacao" class="modal">
+    <div class="modal-content">
+      <h3 class="modal-title">Recuperar Senha</h3>
+      <div class="form-group">
+        <label for="email-recuperacao">Digite seu e-mail</label>
+        <input type="email" id="email-recuperacao" class="form-control" placeholder="seu@email.com">
+      </div>
+      <button class="cadastro-btn" onclick="recuperarSenha()">
+        <i class="fas fa-key"></i> Enviar Link de Recuperação
+      </button>
+      <button class="close-modal" onclick="fecharModal()">
+        <i class="fas fa-times"></i> Fechar
+      </button>
     </div>
   </div>
 
@@ -284,16 +357,11 @@
   <script>
     // Função para mostrar mensagens de erro
     function showError(message) {
-      // Pega o elemento da mensagem de erro
       const errorDiv = document.getElementById('error-message');
-      // Pega o elemento do texto do erro
       const errorText = document.getElementById('error-text');
-      // Define o texto da mensagem de erro
       errorText.textContent = message;
-      // Mostra a div de erro
       errorDiv.style.display = 'block';
       
-      // Esconde a mensagem de erro após 5 segundos
       setTimeout(() => {
         errorDiv.style.display = 'none';
       }, 5000);
@@ -301,115 +369,138 @@
 
     // Função principal para finalizar o cadastro
     function finalizarCadastro() {
-      // Pega os valores dos campos e remove espaços em branco
       const nome = document.getElementById('cadastro-nome').value.trim();
       const email = document.getElementById('cadastro-email').value.trim();
       const senha = document.getElementById('cadastro-senha').value;
       
-      // Mostra no console para debug (pode remover depois)
       console.log('Tentando cadastrar:', { nome, email, senha: '***' });
       
-      // Valida se todos os campos foram preenchidos
       if (!nome || !email || !senha) {
         showError('Por favor, preencha todos os campos!');
-        return; // Para a execução se houver erro
+        return;
       }
 
-      // Valida o formato do email usando expressão regular
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         showError('Por favor, insira um e-mail válido!');
         return;
       }
 
-      // Valida se a senha tem pelo menos 6 caracteres
       if (senha.length < 6) {
         showError('A senha deve ter pelo menos 6 caracteres!');
         return;
       }
 
-      // Desabilita o botão para evitar múltiplos cliques
       const btn = document.getElementById('btn-finalizar');
       btn.disabled = true;
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
       
-      // Simula um processamento (em app real seria uma requisição API)
       setTimeout(() => {
         try {
-          // ========== SISTEMA SEGURO - OPÇÃO 2 ==========
-          
-          // Cria objeto com dados básicos e não sensíveis
+          // Salva dados básicos do usuário
           const userBasicInfo = {
-            nome: nome, // Salva o nome completo
-            // Mascara o email: mostra apenas 3 primeiros caracteres + *** + domínio
+            nome: nome,
             email: email.substring(0, 3) + '***@' + email.split('@')[1],
-            // Gera iniciais do nome (ex: "João Silva" → "JS")
             iniciais: nome.split(' ').map(n => n[0]).join('').toUpperCase(),
-            // Data do cadastro formatada
             dataCadastro: new Date().toLocaleString('pt-BR')
           };
           
-          // ========== SALVAMENTO SEGURO ==========
+          // Salva dados completos (apenas para recuperação de senha)
+          const userFullData = {
+            nome: nome,
+            email: email,
+            senha: senha, // Em app real, isso seria criptografado
+            dataCadastro: new Date().toLocaleString('pt-BR')
+          };
           
-          // Salva apenas informações básicas no localStorage (dados públicos)
           localStorage.setItem('userBasicInfo', JSON.stringify(userBasicInfo));
+          localStorage.setItem('userFullData', JSON.stringify(userFullData));
+          sessionStorage.setItem('userAuthenticated', 'true');
+          sessionStorage.setItem('userName', nome);
           
-          // Session storage para dados da sessão atual (expira ao fechar navegador)
-          sessionStorage.setItem('userAuthenticated', 'true'); // Marca como autenticado
-          sessionStorage.setItem('userName', nome); // Nome para uso imediato
-          
-          // ========== NUNCA SALVAR NO localStorage ==========
-          // ❌ NÃO salvar: senha, email completo, dados sensíveis
-          // ✅ SALVAR APENAS: nome, email mascarado, iniciais, data
-          
-          // Verifica se os dados foram salvos corretamente
           const savedData = localStorage.getItem('userBasicInfo');
           if (!savedData) {
-            throw new Error('Erro ao salvar dados de forma segura');
+            throw new Error('Erro ao salvar dados');
           }
           
-          // Log para debug (pode remover)
           console.log('Dados salvos com segurança:', userBasicInfo);
-          console.log('Session criada:', sessionStorage.getItem('userAuthenticated'));
           
-          // Mostra mensagem de sucesso
           const successMessage = document.getElementById('success-message');
           const errorMessage = document.getElementById('error-message');
           successMessage.style.display = 'block';
           errorMessage.style.display = 'none';
           
-          // Redireciona para a página de perfil após 2 segundos
           setTimeout(() => {
             window.location.href = 'p3.html';
           }, 2000);
           
         } catch (error) {
-          // Se ocorrer algum erro, mostra mensagem e reativa o botão
-          console.error('Erro no cadastro seguro:', error);
+          console.error('Erro no cadastro:', error);
           showError('Erro ao realizar cadastro. Tente novamente.');
           btn.disabled = false;
           btn.innerHTML = '<i class="fas fa-user-plus"></i> Finalizar Cadastro';
         }
-      }, 1500); // Tempo de simulação do processamento
+      }, 1500);
     }
 
-    // Adiciona interações nos inputs para melhor experiência do usuário
+    // ========== FUNÇÕES DE RECUPERAÇÃO DE SENHA ==========
+
+    // Abre o modal de recuperação de senha
+    function abrirRecuperacaoSenha() {
+      document.getElementById('modalRecuperacao').style.display = 'flex';
+    }
+
+    // Fecha o modal
+    function fecharModal() {
+      document.getElementById('modalRecuperacao').style.display = 'none';
+    }
+
+    // Função para recuperar senha
+    function recuperarSenha() {
+      const email = document.getElementById('email-recuperacao').value.trim();
+      
+      if (!email) {
+        alert('Por favor, digite seu e-mail!');
+        return;
+      }
+
+      // Verifica se o e-mail existe no cadastro
+      const userFullData = JSON.parse(localStorage.getItem('userFullData') || '{}');
+      
+      if (userFullData.email === email) {
+        // Em app real, aqui enviaria um e-mail de recuperação
+        alert('✅ Link de recuperação enviado para: ' + email + '\n\nEm um app real, você receberia um e-mail com instruções para redefinir sua senha.');
+        
+        // Mostra a senha atual (APENAS PARA DEMONSTRAÇÃO)
+        alert('🔐 Sua senha atual é: ' + userFullData.senha + '\n\n⚠️ Em um app real, NUNCA mostraríamos a senha! Enviaríamos um link seguro para redefinição.');
+        
+        fecharModal();
+      } else {
+        alert('❌ E-mail não encontrado!\nVerifique se digitou o e-mail corretamente.');
+      }
+    }
+
+    // Fecha modal clicando fora dele
+    window.onclick = function(event) {
+      const modal = document.getElementById('modalRecuperacao');
+      if (event.target === modal) {
+        fecharModal();
+      }
+    }
+
+    // Adiciona interações nos inputs
     document.querySelectorAll('.form-control').forEach(input => {
-      // Quando o input recebe foco, muda a borda para rosa
       input.addEventListener('focus', function() {
         this.style.borderColor = '#ff0080';
-        // Esconde mensagem de erro ao focar no campo
         document.getElementById('error-message').style.display = 'none';
       });
       
-      // Quando o input perde foco, volta a borda cinza se estiver vazio
       input.addEventListener('blur', function() {
         if (!this.value) {
           this.style.borderColor = '#e9ecef';
         }
       });
 
-      // Permite finalizar cadastro pressionando Enter em qualquer campo
       input.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           finalizarCadastro();
@@ -417,11 +508,10 @@
       });
     });
 
-    // Quando a página carrega, verifica se já existe cadastro
+    // Verifica se já existe cadastro
     document.addEventListener('DOMContentLoaded', function() {
       const userData = localStorage.getItem('userBasicInfo');
       if (userData) {
-        // Se já tem cadastro, redireciona para o perfil
         console.log('Usuário já cadastrado, redirecionando...');
         window.location.href = 'p3.html';
       }
