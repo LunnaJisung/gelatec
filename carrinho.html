@@ -1,53 +1,53 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrinho - GelaTec</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
+<!DOCTYPE html> <!-- Declaração do tipo de documento como HTML5 -->
+<html lang="pt-BR"> <!-- Elemento raiz do documento com idioma português brasileiro -->
+<head> <!-- Cabeçalho do documento com metadados -->
+  <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a viewport para responsividade em dispositivos móveis -->
+  <title>Carrinho - GelaTec</title> <!-- Título da página que aparece na aba do navegador -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Importa a biblioteca Font Awesome para ícones -->
+  <style> /* Início do CSS interno para estilização da página */
+    * { /* Reset global para todos os elementos */
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-sizing: border-box; /* Inclui padding e border no cálculo do width/height */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define a fonte padrão */
     }
 
-    body {
-      background: #f8f9fa;
-      min-height: 100vh;
+    body { /* Estilização do corpo do documento */
+      background: #f8f9fa; /* Cor de fundo cinza claro */
+      min-height: 100vh; /* Altura mínima de 100% da viewport */
       display: flex;
-      flex-direction: column;
+      flex-direction: column; /* Layout flexível em coluna */
     }
 
-    .header {
+    .header { /* Estilização do cabeçalho principal */
       background: white;
       padding: 20px;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-bottom: 3px solid #ff0080;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Sombra suave */
+      border-bottom: 3px solid #ff0080; /* Borda inferior rosa */
     }
 
-    .header h1 {
+    .header h1 { /* Estilo do título principal */
       color: #ff0080;
       font-size: 28px;
       margin-bottom: 5px;
     }
 
-    .header p {
+    .header p { /* Estilo do parágrafo do cabeçalho */
       color: #666;
       font-size: 16px;
     }
 
-    #cart-items {
-      flex: 1;
+    #cart-items { /* Container principal dos itens do carrinho */
+      flex: 1; /* Ocupa o espaço restante */
       padding: 20px;
       max-width: 600px;
       margin: 0 auto;
       width: 100%;
     }
 
-    .cart-item {
+    .cart-item { /* Estilização de cada item individual do carrinho */
       background: white;
       border-radius: 15px;
       padding: 20px;
@@ -57,15 +57,15 @@
       gap: 15px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       border: 2px solid #ff0080;
-      transition: all 0.3s ease;
+      transition: all 0.3s ease; /* Transição suave para hover */
     }
 
-    .cart-item:hover {
-      transform: translateY(-2px);
+    .cart-item:hover { /* Efeito ao passar o mouse sobre o item */
+      transform: translateY(-2px); /* Levanta ligeiramente o item */
       box-shadow: 0 4px 15px rgba(255, 0, 128, 0.2);
     }
 
-    .cart-item-emoji {
+    .cart-item-emoji { /* Container do emoji do produto */
       font-size: 40px;
       width: 60px;
       height: 60px;
@@ -77,31 +77,31 @@
       border: 2px solid #ff0080;
     }
 
-    .cart-item-details {
-      flex: 1;
+    .cart-item-details { /* Container dos detalhes do produto */
+      flex: 1; /* Ocupa o espaço disponível */
     }
 
-    .cart-item-name {
+    .cart-item-name { /* Nome do produto */
       font-size: 18px;
       font-weight: 600;
       color: #333;
       margin-bottom: 5px;
     }
 
-    .cart-item-price {
+    .cart-item-price { /* Preço unitário do produto */
       color: #ff0080;
       font-weight: 600;
       font-size: 16px;
       margin-bottom: 10px;
     }
 
-    .quantity-controls {
+    .quantity-controls { /* Container dos controles de quantidade */
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .quantity-btn {
+    .quantity-btn { /* Botões de aumentar/diminuir quantidade */
       background: #ff0080;
       color: white;
       border: none;
@@ -117,12 +117,12 @@
       transition: all 0.3s ease;
     }
 
-    .quantity-btn:hover {
+    .quantity-btn:hover { /* Efeito hover nos botões de quantidade */
       background: #e00070;
       transform: scale(1.1);
     }
 
-    .remove-btn {
+    .remove-btn { /* Botão para remover item do carrinho */
       background: #ff0080;
       color: white;
       border: none;
@@ -134,12 +134,12 @@
       transition: all 0.3s ease;
     }
 
-    .remove-btn:hover {
+    .remove-btn:hover { /* Efeito hover no botão remover */
       background: #e00070;
       transform: scale(1.05);
     }
 
-    .cart-total {
+    .cart-total { /* Seção do total do pedido */
       background: white;
       padding: 25px 20px;
       margin: 20px;
@@ -151,21 +151,21 @@
       border-right: 3px solid #ff0080;
     }
 
-    .cart-total h3 {
+    .cart-total h3 { /* Título da seção total */
       color: #ff0080;
       margin-bottom: 15px;
       font-size: 20px;
       font-weight: 700;
     }
 
-    .total-price {
+    .total-price { /* Preço total destacado */
       font-size: 32px;
       font-weight: 700;
       color: #ff0080;
       margin-bottom: 20px;
     }
 
-    .checkout-btn {
+    .checkout-btn { /* Botão para finalizar pedido */
       background: #ff0080;
       color: white;
       border: none;
@@ -180,30 +180,30 @@
       box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
     }
 
-    .checkout-btn:hover {
+    .checkout-btn:hover { /* Efeito hover no botão de finalizar */
       background: #e00070;
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(255, 0, 128, 0.4);
     }
 
-    .empty-cart {
+    .empty-cart { /* Mensagem quando carrinho está vazio */
       text-align: center;
       padding: 60px 20px;
       color: #666;
     }
 
-    .empty-cart-emoji {
+    .empty-cart-emoji { /* Emoji do carrinho vazio */
       font-size: 80px;
       margin-bottom: 20px;
     }
 
-    .empty-cart h2 {
+    .empty-cart h2 { /* Título do carrinho vazio */
       color: #ff0080;
       margin-bottom: 10px;
       font-size: 24px;
     }
 
-    .add-to-cart-btn {
+    .add-to-cart-btn { /* Botão para ir ao cardápio quando carrinho vazio */
       background: #ff0080;
       color: white;
       border: none;
@@ -216,12 +216,12 @@
       transition: all 0.3s ease;
     }
 
-    .add-to-cart-btn:hover {
+    .add-to-cart-btn:hover { /* Efeito hover no botão do cardápio */
       background: #e00070;
       transform: translateY(-2px);
     }
 
-    .bottom-nav {
+    .bottom-nav { /* Navegação inferior fixa */
       background: white;
       display: flex;
       justify-content: space-around;
@@ -230,7 +230,7 @@
       border-top: 1px solid #e9ecef;
     }
 
-    .nav-item {
+    .nav-item { /* Item individual da navegação */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -241,16 +241,16 @@
       position: relative;
     }
 
-    .nav-item:hover, .nav-item.active {
+    .nav-item:hover, .nav-item.active { /* Estados hover e ativo dos itens de navegação */
       color: #ff0080;
     }
 
-    .nav-icon {
+    .nav-icon { /* Ícone dos itens de navegação */
       font-size: 20px;
       margin-bottom: 4px;
     }
 
-    .cart-badge {
+    .cart-badge { /* Badge com contador de itens no carrinho */
       position: absolute;
       top: -5px;
       right: 10px;
@@ -267,14 +267,14 @@
       border: 2px solid white;
     }
 
-    .item-total {
+    .item-total { /* Subtotal de cada item */
       color: #ff0080;
       font-weight: 600;
       font-size: 14px;
       margin-top: 5px;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 480px) { /* Media query para dispositivos móveis pequenos */
       .cart-item {
         padding: 15px;
         flex-direction: column;
@@ -293,83 +293,407 @@
         gap: 8px;
       }
     }
-  </style>
+  </style> <!-- Fim do CSS -->
 </head>
-<body>
+<body> <!-- Início do corpo do documento -->
 
-  <header class="header">
-    <h1>Meu Carrinho</h1>
-    <p>Revise seus produtos</p>
+  <header class="header"> <!-- Cabeçalho da página -->
+    <h1>Meu Carrinho</h1> <!-- Título principal -->
+    <p>Revise seus produtos</p> <!-- Subtítulo -->
   </header>
 
-  <div id="cart-items">
-    <!-- Itens do carrinho serão carregados aqui -->
+  <div id="cart-items"> <!-- Container onde os itens do carrinho serão dinamicamente carregados -->
   </div>
 
-  <div class="cart-total">
-    <h3>Total do Pedido</h3>
-    <div class="total-price" id="total-price">R$ 0,00</div>
-    <button class="checkout-btn" onclick="checkout()">
-      <i class="fas fa-shopping-bag"></i> Finalizar Pedido
+  <div class="cart-total"> <!-- Seção do total do pedido -->
+    <h3>Total do Pedido</h3> <!-- Título da seção -->
+    <div class="total-price" id="total-price">R$ 0,00</div> <!-- Local onde o preço total será exibido -->
+    <button class="checkout-btn" onclick="checkout()"> <!-- Botão para finalizar compra -->
+<html lang="pt-BR"> <!-- Elemento raiz do documento com idioma português brasileiro -->
+<head> <!-- Cabeçalho do documento com metadados -->
+  <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a viewport para responsividade em dispositivos móveis -->
+  <title>Carrinho - GelaTec</title> <!-- Título da página que aparece na aba do navegador -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Importa a biblioteca Font Awesome para ícones -->
+  <style> /* Início do CSS interno para estilização da página */
+    * { /* Reset global para todos os elementos */
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box; /* Inclui padding e border no cálculo do width/height */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define a fonte padrão */
+    }
+
+    body { /* Estilização do corpo do documento */
+      background: #f8f9fa; /* Cor de fundo cinza claro */
+      min-height: 100vh; /* Altura mínima de 100% da viewport */
+      display: flex;
+      flex-direction: column; /* Layout flexível em coluna */
+    }
+
+    .header { /* Estilização do cabeçalho principal */
+      background: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Sombra suave */
+      border-bottom: 3px solid #ff0080; /* Borda inferior rosa */
+    }
+
+    .header h1 { /* Estilo do título principal */
+      color: #ff0080;
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .header p { /* Estilo do parágrafo do cabeçalho */
+      color: #666;
+      font-size: 16px;
+    }
+
+    #cart-items { /* Container principal dos itens do carrinho */
+      flex: 1; /* Ocupa o espaço restante */
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .cart-item { /* Estilização de cada item individual do carrinho */
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      border: 2px solid #ff0080;
+      transition: all 0.3s ease; /* Transição suave para hover */
+    }
+
+    .cart-item:hover { /* Efeito ao passar o mouse sobre o item */
+      transform: translateY(-2px); /* Levanta ligeiramente o item */
+      box-shadow: 0 4px 15px rgba(255, 0, 128, 0.2);
+    }
+
+    .cart-item-emoji { /* Container do emoji do produto */
+      font-size: 40px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff0f7;
+      border-radius: 12px;
+      border: 2px solid #ff0080;
+    }
+
+    .cart-item-details { /* Container dos detalhes do produto */
+      flex: 1; /* Ocupa o espaço disponível */
+    }
+
+    .cart-item-name { /* Nome do produto */
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price { /* Preço unitário do produto */
+      color: #ff0080;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .quantity-controls { /* Container dos controles de quantidade */
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quantity-btn { /* Botões de aumentar/diminuir quantidade */
+      background: #ff0080;
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .quantity-btn:hover { /* Efeito hover nos botões de quantidade */
+      background: #e00070;
+      transform: scale(1.1);
+    }
+
+    .remove-btn { /* Botão para remover item do carrinho */
+      background: #ff0080;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .remove-btn:hover { /* Efeito hover no botão remover */
+      background: #e00070;
+      transform: scale(1.05);
+    }
+
+    .cart-total { /* Seção do total do pedido */
+      background: white;
+      padding: 25px 20px;
+      margin: 20px;
+      border-radius: 15px;
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      border-top: 3px solid #ff0080;
+      border-left: 3px solid #ff0080;
+      border-right: 3px solid #ff0080;
+    }
+
+    .cart-total h3 { /* Título da seção total */
+      color: #ff0080;
+      margin-bottom: 15px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .total-price { /* Preço total destacado */
+      font-size: 32px;
+      font-weight: 700;
+      color: #ff0080;
+      margin-bottom: 20px;
+    }
+
+    .checkout-btn { /* Botão para finalizar pedido */
+      background: #ff0080;
+      color: white;
+      border: none;
+      padding: 18px 30px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
+    }
+
+    .checkout-btn:hover { /* Efeito hover no botão de finalizar */
+      background: #e00070;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 0, 128, 0.4);
+    }
+
+    .empty-cart { /* Mensagem quando carrinho está vazio */
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .empty-cart-emoji { /* Emoji do carrinho vazio */
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    .empty-cart h2 { /* Título do carrinho vazio */
+      color: #ff0080;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .add-to-cart-btn { /* Botão para ir ao cardápio quando carrinho vazio */
+      background: #ff0080;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .add-to-cart-btn:hover { /* Efeito hover no botão do cardápio */
+      background: #e00070;
+      transform: translateY(-2px);
+    }
+
+    .bottom-nav { /* Navegação inferior fixa */
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 0;
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+      border-top: 1px solid #e9ecef;
+    }
+
+    .nav-item { /* Item individual da navegação */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #666;
+      font-size: 12px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-item:hover, .nav-item.active { /* Estados hover e ativo dos itens de navegação */
+      color: #ff0080;
+    }
+
+    .nav-icon { /* Ícone dos itens de navegação */
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .cart-badge { /* Badge com contador de itens no carrinho */
+      position: absolute;
+      top: -5px;
+      right: 10px;
+      background: #ff0080;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      border: 2px solid white;
+    }
+
+    .item-total { /* Subtotal de cada item */
+      color: #ff0080;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    @media (max-width: 480px) { /* Media query para dispositivos móveis pequenos */
+      .cart-item {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .cart-item-emoji {
+        font-size: 35px;
+        width: 50px;
+        height: 50px;
+      }
+      
+      .quantity-controls {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+    }
+  </style> <!-- Fim do CSS -->
+</head>
+<body> <!-- Início do corpo do documento -->
+
+  <header class="header"> <!-- Cabeçalho da página -->
+    <h1>Meu Carrinho</h1> <!-- Título principal -->
+    <p>Revise seus produtos</p> <!-- Subtítulo -->
+  </header>
+
+  <div id="cart-items"> <!-- Container onde os itens do carrinho serão dinamicamente carregados -->
+  </div>
+
+  <div class="cart-total"> <!-- Seção do total do pedido -->
+    <h3>Total do Pedido</h3> <!-- Título da seção -->
+    <div class="total-price" id="total-price">R$ 0,00</div> <!-- Local onde o preço total será exibido -->
+    <button class="checkout-btn" onclick="checkout()"> <!-- Botão para finalizar compra -->
+      <i class="fas fa-shopping-bag"></i> Finalizar Pedido <!-- Ícone e texto do botão -->
     </button>
   </div>
 
-  <nav class="bottom-nav">
-    <a href="index.html" class="nav-item">
-      <span class="nav-icon">🏠</span>
-      <span>Início</span>
+  <nav class="bottom-nav"> <!-- Navegação inferior -->
+    <a href="index.html" class="nav-item"> <!-- Link para página inicial -->
+      <span class="nav-icon">🏠</span> <!-- Ícone da página inicial -->
+      <span>Início</span> <!-- Texto do link -->
     </a>
-    <a href="p2.html" class="nav-item">
-      <span class="nav-icon">📋</span>
-      <span>Cardápio</span>
+    <a href="p2.html" class="nav-item"> <!-- Link para cardápio -->
+      <span class="nav-icon">📋</span> <!-- Ícone do cardápio -->
+      <span>Cardápio</span> <!-- Texto do link -->
     </a>
-    <a href="p3.html" class="nav-item">
-      <span class="nav-icon">👤</span>
-      <span>Perfil</span>
+    <a href="p3.html" class="nav-item"> <!-- Link para perfil -->
+      <span class="nav-icon">👤</span> <!-- Ícone do perfil -->
+      <span>Perfil</span> <!-- Texto do link -->
     </a>
-    <a href="carrinho.html" class="nav-item active">
-      <span class="nav-icon">🛒</span>
-      <span>Carrinho</span>
-      <span class="cart-badge" id="cart-count">0</span>
+    <a href="carrinho.html" class="nav-item active"> <!-- Link ativo para carrinho -->
+      <span class="nav-icon">🛒</span> <!-- Ícone do carrinho -->
+      <span>Carrinho</span> <!-- Texto do link -->
+      <span class="cart-badge" id="cart-count">0</span> <!-- Badge com contador de itens -->
     </a>
   </nav>
 
-  <script>
-    // Funções para manipular o carrinho
-    function updateQuantity(index, change) {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart[index].quantity += change;
-        
+  <script> // Início do JavaScript para funcionalidades do carrinho
+
+    // Função para atualizar a quantidade de um item no carrinho
+    function updateQuantity(index, change) { // Obtém o carrinho do localStorage ou array vazio se não existir
+        const cart = JSON.parse(localStorage.getItem('cart')) || []; // Altera a quantidade do item específico
+        cart[index].quantity += change;  
+      
+      // Remove o item se a quantidade chegar a zero ou menos
         if (cart[index].quantity <= 0) {
             cart.splice(index, 1);
         }
         
-        localStorage.setItem('cart', JSON.stringify(cart));
-        loadCartItems();
+        // Salva o carrinho atualizado no localStorage
+        localStorage.setItem('cart', JSON.stringify(cart)); // Recarrega os itens na tela
+        loadCartItems(); // Atualiza o badge do carrinho
         updateCartBadge();
     }
 
-    function removeFromCart(index) {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // Função para remover um item do carrinho
+    function removeFromCart(index) { // Obtém o carrinho do localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || []; // Remove o item no índice especificado
         cart.splice(index, 1);
+        // Salva o carrinho atualizado
         localStorage.setItem('cart', JSON.stringify(cart));
+        // Recarrega a exibição
         loadCartItems();
         updateCartBadge();
     }
 
+    // Função para atualizar o contador do carrinho na badge
     function updateCartBadge() {
+        // Obtém o carrinho atual
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Calcula o total de itens somando todas as quantidades
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        // Atualiza o texto da badge
         document.getElementById('cart-count').textContent = totalItems;
     }
 
-    // Carregar itens do carrinho
+    // Função principal para carregar e exibir os itens do carrinho
     function loadCartItems() {
+        // Obtém o carrinho do localStorage
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Referência ao container dos itens
         const container = document.getElementById('cart-items');
+        // Referência ao elemento do preço total
         const totalPrice = document.getElementById('total-price');
         
+        // Verifica se o carrinho está vazio
         if (cart.length === 0) {
+            // Exibe mensagem de carrinho vazio
             container.innerHTML = `
                 <div class="empty-cart">
                     <div class="empty-cart-emoji">🛒</div>
@@ -380,17 +704,23 @@
                     </button>
                 </div>
             `;
+            // Zera o preço total
             totalPrice.textContent = 'R$ 0,00';
             return;
         }
         
+        // Inicializa variáveis para cálculo do total
         let total = 0;
         let itemsHTML = '';
         
+        // Itera sobre cada item do carrinho
         cart.forEach((item, index) => {
+            // Calcula subtotal do item
             const itemTotal = item.price * item.quantity;
+            // Adiciona ao total geral
             total += itemTotal;
             
+            // Gera HTML para o item atual
             itemsHTML += `
                 <div class="cart-item">
                     <div class="cart-item-emoji">${item.emoji}</div>
@@ -411,41 +741,252 @@
             `;
         });
         
+        // Insere todos os itens no container
         container.innerHTML = itemsHTML;
+        // Atualiza o preço total formatado
         totalPrice.textContent = `R$ ${total.toFixed(2)}`;
     }
     
+    // Função para finalizar o pedido (checkout)
     function checkout() {
+        // Obtém o carrinho atual
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Verifica se há itens no carrinho
         if (cart.length === 0) {
             alert('Carrinho vazio!');
             return;
         }
         
+        // Calcula o total do pedido
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         
-        // Verificar se usuário está logado
+        // Verifica se usuário está logado
         const userData = localStorage.getItem('userData');
         if (!userData) {
             alert('Para finalizar o pedido, faça login ou cadastre-se primeiro!');
+            // Redireciona para página de perfil/login
             window.location.href = 'p3.html';
             return;
         }
         
+        // Exibe mensagem de confirmação
         alert(`🎉 Pedido finalizado!\n💰 Total: R$ ${total.toFixed(2)}\n📦 Seus produtos chegarão em breve!\n\nObrigado pela compra!`);
         
-        // Limpar carrinho após compra
+        // Limpa o carrinho após compra
         localStorage.removeItem('cart');
+        // Recarrega a interface
         loadCartItems();
         updateCartBadge();
     }
     
-    // Carregar itens quando a página abrir
+    // Evento que executa quando o DOM está completamente carregado
     document.addEventListener('DOMContentLoaded', function() {
+        // Carrega os itens do carrinho
         loadCartItems();
+        // Atualiza o badge do carrinho
         updateCartBadge();
     });
   </script>
+  <!-- Fim do JavaScript -->
 
 </body>
+<!-- Fim do corpo do documento -->
 </html>
+<!-- Fim do documento HTML -->
+      <!-- Botão para finalizar compra -->
+      <i class="fas fa-shopping-bag"></i> Finalizar Pedido
+      <!-- Ícone e texto do botão -->
+    </button>
+  </div>
+
+  <nav class="bottom-nav">
+    <!-- Navegação inferior -->
+    <a href="index.html" class="nav-item">
+      <!-- Link para página inicial -->
+      <span class="nav-icon">🏠</span>
+      <!-- Ícone da página inicial -->
+      <span>Início</span>
+      <!-- Texto do link -->
+    </a>
+    <a href="p2.html" class="nav-item">
+      <!-- Link para cardápio -->
+      <span class="nav-icon">📋</span>
+      <!-- Ícone do cardápio -->
+      <span>Cardápio</span>
+      <!-- Texto do link -->
+    </a>
+    <a href="p3.html" class="nav-item">
+      <!-- Link para perfil -->
+      <span class="nav-icon">👤</span>
+      <!-- Ícone do perfil -->
+      <span>Perfil</span>
+      <!-- Texto do link -->
+    </a>
+    <a href="carrinho.html" class="nav-item active">
+      <!-- Link ativo para carrinho -->
+      <span class="nav-icon">🛒</span>
+      <!-- Ícone do carrinho -->
+      <span>Carrinho</span>
+      <!-- Texto do link -->
+      <span class="cart-badge" id="cart-count">0</span>
+      <!-- Badge com contador de itens -->
+    </a>
+  </nav>
+
+  <script>
+    // Início do JavaScript para funcionalidades do carrinho
+
+    // Função para atualizar a quantidade de um item no carrinho
+    function updateQuantity(index, change) {
+        // Obtém o carrinho do localStorage ou array vazio se não existir
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Altera a quantidade do item específico
+        cart[index].quantity += change;
+        
+        // Remove o item se a quantidade chegar a zero ou menos
+        if (cart[index].quantity <= 0) {
+            cart.splice(index, 1);
+        }
+        
+        // Salva o carrinho atualizado no localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        // Recarrega os itens na tela
+        loadCartItems();
+        // Atualiza o badge do carrinho
+        updateCartBadge();
+    }
+
+    // Função para remover um item do carrinho
+    function removeFromCart(index) {
+        // Obtém o carrinho do localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Remove o item no índice especificado
+        cart.splice(index, 1);
+        // Salva o carrinho atualizado
+        localStorage.setItem('cart', JSON.stringify(cart));
+        // Recarrega a exibição
+        loadCartItems();
+        updateCartBadge();
+    }
+
+    // Função para atualizar o contador do carrinho na badge
+    function updateCartBadge() {
+        // Obtém o carrinho atual
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Calcula o total de itens somando todas as quantidades
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        // Atualiza o texto da badge
+        document.getElementById('cart-count').textContent = totalItems;
+    }
+
+    // Função principal para carregar e exibir os itens do carrinho
+    function loadCartItems() {
+        // Obtém o carrinho do localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Referência ao container dos itens
+        const container = document.getElementById('cart-items');
+        // Referência ao elemento do preço total
+        const totalPrice = document.getElementById('total-price');
+        
+        // Verifica se o carrinho está vazio
+        if (cart.length === 0) {
+            // Exibe mensagem de carrinho vazio
+            container.innerHTML = `
+                <div class="empty-cart">
+                    <div class="empty-cart-emoji">🛒</div>
+                    <h2>Carrinho Vazio</h2>
+                    <p>Adicione produtos do cardápio ao carrinho</p>
+                    <button class="add-to-cart-btn" onclick="window.location.href='p2.html'">
+                        <i class="fas fa-utensils"></i> Ver Cardápio
+                    </button>
+                </div>
+            `;
+            // Zera o preço total
+            totalPrice.textContent = 'R$ 0,00';
+            return;
+        }
+        
+        // Inicializa variáveis para cálculo do total
+        let total = 0;
+        let itemsHTML = '';
+        
+        // Itera sobre cada item do carrinho
+        cart.forEach((item, index) => {
+            // Calcula subtotal do item
+            const itemTotal = item.price * item.quantity;
+            // Adiciona ao total geral
+            total += itemTotal;
+            
+            // Gera HTML para o item atual
+            itemsHTML += `
+                <div class="cart-item">
+                    <div class="cart-item-emoji">${item.emoji}</div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">R$ ${item.price.toFixed(2)} cada</div>
+                        <div class="item-total">Subtotal: R$ ${itemTotal.toFixed(2)}</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span style="font-weight: 600; margin: 0 10px; color: #ff0080;">${item.quantity} un</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            <button class="remove-btn" onclick="removeFromCart(${index})">
+                                <i class="fas fa-trash"></i> Remover
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        // Insere todos os itens no container
+        container.innerHTML = itemsHTML;
+        // Atualiza o preço total formatado
+        totalPrice.textContent = `R$ ${total.toFixed(2)}`;
+    }
+    
+    // Função para finalizar o pedido (checkout)
+    function checkout() {
+        // Obtém o carrinho atual
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Verifica se há itens no carrinho
+        if (cart.length === 0) {
+            alert('Carrinho vazio!');
+            return;
+        }
+        
+        // Calcula o total do pedido
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        // Verifica se usuário está logado
+        const userData = localStorage.getItem('userData');
+        if (!userData) {
+            alert('Para finalizar o pedido, faça login ou cadastre-se primeiro!');
+            // Redireciona para página de perfil/login
+            window.location.href = 'p3.html';
+            return;
+        }
+        
+        // Exibe mensagem de confirmação
+        alert(`🎉 Pedido finalizado!\n💰 Total: R$ ${total.toFixed(2)}\n📦 Seus produtos chegarão em breve!\n\nObrigado pela compra!`);
+        
+        // Limpa o carrinho após compra
+        localStorage.removeItem('cart');
+        // Recarrega a interface
+        loadCartItems();
+        updateCartBadge();
+    }
+    
+    // Evento que executa quando o DOM está completamente carregado
+    document.addEventListener('DOMContentLoaded', function() {
+        // Carrega os itens do carrinho
+        loadCartItems();
+        // Atualiza o badge do carrinho
+        updateCartBadge();
+    });
+  </script>
+  <!-- Fim do JavaScript -->
+
+</body>
+<!-- Fim do corpo do documento -->
+</html>
+<!-- Fim do documento HTML -->
