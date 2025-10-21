@@ -1,31 +1,48 @@
 <!DOCTYPE html>
+<!-- Declaração do tipo de documento como HTML5 -->
 <html lang="pt-BR">
+<!-- Elemento raiz do documento com idioma português brasileiro -->
 <head>
+  <!-- Cabeçalho do documento com metadados -->
   <meta charset="UTF-8">
+  <!-- Define a codificação de caracteres como UTF-8 para suportar acentos e caracteres especiais -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Configura a viewport para responsividade em dispositivos móveis -->
   <title>Carrinho - GelaTec</title>
+  <!-- Título da página que aparece na aba do navegador -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Importa a biblioteca Font Awesome para ícones -->
   <style>
+    /* ===== RESET E CONFIGURAÇÕES GLOBAIS ===== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      /* Reseta todas as margens e paddings e define box-sizing para border-box */
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* Define a fonte padrão para toda a página */
     }
 
+    /* ===== CONFIGURAÇÕES DO CORPO DA PÁGINA ===== */
     body {
       background: #f8f9fa;
+      /* Cor de fundo cinza claro */
       min-height: 100vh;
+      /* Garante que o body ocupe pelo menos 100% da altura da viewport */
       display: flex;
       flex-direction: column;
+      /* Layout flexível em coluna */
     }
 
+    /* ===== CABEÇALHO PRINCIPAL ===== */
     .header {
       background: white;
       padding: 20px;
       text-align: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      /* Sombra suave */
       border-bottom: 3px solid #ff0080;
+      /* Borda inferior na cor temática */
     }
 
     .header h1 {
@@ -39,14 +56,17 @@
       font-size: 16px;
     }
 
+    /* ===== CONTAINER DOS ITENS DO CARRINHO ===== */
     #cart-items {
       flex: 1;
+      /* Ocupa o espaço restante disponível */
       padding: 20px;
       max-width: 600px;
       margin: 0 auto;
       width: 100%;
     }
 
+    /* ===== CARTÃO DE ITEM INDIVIDUAL ===== */
     .cart-item {
       background: white;
       border-radius: 15px;
@@ -58,13 +78,16 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       border: 2px solid #ff0080;
       transition: all 0.3s ease;
+      /* Transição suave para efeitos hover */
     }
 
     .cart-item:hover {
       transform: translateY(-2px);
+      /* Efeito de levitação ao passar o mouse */
       box-shadow: 0 4px 15px rgba(255, 0, 128, 0.2);
     }
 
+    /* ===== EMOJI/ÍCONE DO PRODUTO ===== */
     .cart-item-emoji {
       font-size: 40px;
       width: 60px;
@@ -73,12 +96,15 @@
       align-items: center;
       justify-content: center;
       background: #fff0f7;
+      /* Fundo rosa claro */
       border-radius: 12px;
       border: 2px solid #ff0080;
     }
 
+    /* ===== DETALHES DO PRODUTO ===== */
     .cart-item-details {
       flex: 1;
+      /* Ocupa o espaço disponível restante */
     }
 
     .cart-item-name {
@@ -95,6 +121,7 @@
       margin-bottom: 10px;
     }
 
+    /* ===== CONTROLES DE QUANTIDADE ===== */
     .quantity-controls {
       display: flex;
       align-items: center;
@@ -120,8 +147,10 @@
     .quantity-btn:hover {
       background: #e00070;
       transform: scale(1.1);
+      /* Efeito de zoom ao passar o mouse */
     }
 
+    /* ===== BOTÃO DE REMOVER ===== */
     .remove-btn {
       background: #ff0080;
       color: white;
@@ -139,6 +168,7 @@
       transform: scale(1.05);
     }
 
+    /* ===== SEÇÃO DO TOTAL DO PEDIDO ===== */
     .cart-total {
       background: white;
       padding: 25px 20px;
@@ -165,6 +195,7 @@
       margin-bottom: 20px;
     }
 
+    /* ===== BOTÃO DE FINALIZAR COMPRA ===== */
     .checkout-btn {
       background: #ff0080;
       color: white;
@@ -186,6 +217,7 @@
       box-shadow: 0 6px 20px rgba(255, 0, 128, 0.4);
     }
 
+    /* ===== ESTADO DO CARRINHO VAZIO ===== */
     .empty-cart {
       text-align: center;
       padding: 60px 20px;
@@ -203,6 +235,7 @@
       font-size: 24px;
     }
 
+    /* ===== BOTÃO PARA IR AO CARDÁPIO ===== */
     .add-to-cart-btn {
       background: #ff0080;
       color: white;
@@ -221,6 +254,7 @@
       transform: translateY(-2px);
     }
 
+    /* ===== NAVEGAÇÃO INFERIOR FIXA ===== */
     .bottom-nav {
       background: white;
       display: flex;
@@ -250,6 +284,7 @@
       margin-bottom: 4px;
     }
 
+    /* ===== BADGE DO CARRINHO (CONTADOR) ===== */
     .cart-badge {
       position: absolute;
       top: -5px;
@@ -267,6 +302,7 @@
       border: 2px solid white;
     }
 
+    /* ===== SUBTOTAL DO ITEM ===== */
     .item-total {
       color: #ff0080;
       font-weight: 600;
@@ -274,6 +310,7 @@
       margin-top: 5px;
     }
 
+    /* ===== MEDIA QUERIES PARA MOBILE ===== */
     @media (max-width: 480px) {
       .cart-item {
         padding: 15px;
@@ -296,80 +333,122 @@
   </style>
 </head>
 <body>
+  <!-- Início do corpo do documento -->
 
   <header class="header">
+    <!-- Cabeçalho principal da página -->
     <h1>Meu Carrinho</h1>
+    <!-- Título da página -->
     <p>Revise seus produtos</p>
+    <!-- Subtítulo descritivo -->
   </header>
 
   <div id="cart-items">
-    <!-- Itens do carrinho serão carregados aqui -->
+    <!-- Container dinâmico onde os itens do carrinho serão carregados via JavaScript -->
   </div>
 
   <div class="cart-total">
+    <!-- Seção do total do pedido -->
     <h3>Total do Pedido</h3>
+    <!-- Título da seção -->
     <div class="total-price" id="total-price">R$ 0,00</div>
+    <!-- Local onde o preço total será exibido dinamicamente -->
     <button class="checkout-btn" onclick="checkout()">
+      <!-- Botão para finalizar a compra -->
       <i class="fas fa-shopping-bag"></i> Finalizar Pedido
+      <!-- Ícone e texto do botão -->
     </button>
   </div>
 
   <nav class="bottom-nav">
+    <!-- Barra de navegação inferior fixa -->
     <a href="index.html" class="nav-item">
+      <!-- Link para página inicial -->
       <span class="nav-icon">🏠</span>
+      <!-- Ícone da página inicial -->
       <span>Início</span>
+      <!-- Texto do link -->
     </a>
     <a href="p2.html" class="nav-item">
+      <!-- Link para cardápio -->
       <span class="nav-icon">📋</span>
+      <!-- Ícone do cardápio -->
       <span>Cardápio</span>
     </a>
     <a href="p3.html" class="nav-item">
+      <!-- Link para perfil -->
       <span class="nav-icon">👤</span>
+      <!-- Ícone do perfil -->
       <span>Perfil</span>
     </a>
     <a href="carrinho.html" class="nav-item active">
+      <!-- Link para carrinho (ativo) -->
       <span class="nav-icon">🛒</span>
+      <!-- Ícone do carrinho -->
       <span>Carrinho</span>
       <span class="cart-badge" id="cart-count">0</span>
+      <!-- Badge com contador de itens no carrinho -->
     </a>
   </nav>
 
   <script>
-    // Funções para manipular o carrinho
+    // ========== FUNÇÕES PARA MANIPULAR O CARRINHO ==========
+
+    // Função para atualizar a quantidade de um item no carrinho
     function updateQuantity(index, change) {
+        // Obtém o carrinho atual do localStorage ou array vazio se não existir
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Altera a quantidade do item específico (aumenta ou diminui)
         cart[index].quantity += change;
         
+        // Remove o item se a quantidade chegar a zero ou menos
         if (cart[index].quantity <= 0) {
             cart.splice(index, 1);
         }
         
+        // Salva o carrinho atualizado no localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
+        // Recarrega os itens na tela
         loadCartItems();
+        // Atualiza o badge do carrinho
         updateCartBadge();
     }
 
+    // Função para remover um item do carrinho completamente
     function removeFromCart(index) {
+        // Obtém o carrinho atual do localStorage
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Remove o item no índice especificado
         cart.splice(index, 1);
+        // Salva o carrinho atualizado
         localStorage.setItem('cart', JSON.stringify(cart));
+        // Recarrega a exibição
         loadCartItems();
         updateCartBadge();
     }
 
+    // Função para atualizar o contador do carrinho na badge
     function updateCartBadge() {
+        // Obtém o carrinho atual
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Calcula o total de itens somando todas as quantidades
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        // Atualiza o texto da badge
         document.getElementById('cart-count').textContent = totalItems;
     }
 
-    // Carregar itens do carrinho
+    // ========== CARREGAR ITENS DO CARRINHO ==========
     function loadCartItems() {
+        // Obtém o carrinho do localStorage
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Referência ao container dos itens
         const container = document.getElementById('cart-items');
+        // Referência ao elemento do preço total
         const totalPrice = document.getElementById('total-price');
         
+        // Verifica se o carrinho está vazio
         if (cart.length === 0) {
+            // Exibe mensagem de carrinho vazio
             container.innerHTML = `
                 <div class="empty-cart">
                     <div class="empty-cart-emoji">🛒</div>
@@ -380,17 +459,23 @@
                     </button>
                 </div>
             `;
+            // Zera o preço total
             totalPrice.textContent = 'R$ 0,00';
             return;
         }
         
+        // Inicializa variáveis para cálculo do total
         let total = 0;
         let itemsHTML = '';
         
+        // Itera sobre cada item do carrinho
         cart.forEach((item, index) => {
+            // Calcula subtotal do item (preço × quantidade)
             const itemTotal = item.price * item.quantity;
+            // Adiciona ao total geral
             total += itemTotal;
             
+            // Gera HTML para o item atual
             itemsHTML += `
                 <div class="cart-item">
                     <div class="cart-item-emoji">${item.emoji}</div>
@@ -411,41 +496,54 @@
             `;
         });
         
+        // Insere todos os itens no container
         container.innerHTML = itemsHTML;
+        // Atualiza o preço total formatado
         totalPrice.textContent = `R$ ${total.toFixed(2)}`;
     }
     
+    // ========== FUNÇÃO DE FINALIZAR COMPRA ==========
     function checkout() {
+        // Obtém o carrinho atual
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Verifica se há itens no carrinho
         if (cart.length === 0) {
             alert('Carrinho vazio!');
             return;
         }
         
+        // Calcula o total do pedido
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         
-        // Verificar se usuário está logado
+        // Verifica se usuário está logado
         const userData = localStorage.getItem('userData');
         if (!userData) {
             alert('Para finalizar o pedido, faça login ou cadastre-se primeiro!');
+            // Redireciona para página de perfil/login
             window.location.href = 'p3.html';
             return;
         }
         
+        // Exibe mensagem de confirmação com emojis
         alert(`🎉 Pedido finalizado!\n💰 Total: R$ ${total.toFixed(2)}\n📦 Seus produtos chegarão em breve!\n\nObrigado pela compra!`);
         
-        // Limpar carrinho após compra
+        // Limpa o carrinho após compra
         localStorage.removeItem('cart');
+        // Recarrega a interface
         loadCartItems();
         updateCartBadge();
     }
     
-    // Carregar itens quando a página abrir
+    // ========== CARREGAR ITENS QUANDO A PÁGINA ABRIR ==========
     document.addEventListener('DOMContentLoaded', function() {
+        // Executa quando o DOM está completamente carregado
         loadCartItems();
         updateCartBadge();
     });
   </script>
+  <!-- Fim do JavaScript -->
 
 </body>
+<!-- Fim do corpo do documento -->
 </html>
+<!-- Fim do documento HTML -->
