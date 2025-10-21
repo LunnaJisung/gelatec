@@ -249,86 +249,109 @@
         </div>
         
         <div class="products-grid">
-            <!-- PRODUTOS TRADICIONAIS -->
-            <div class="product-card" data-category="tradicionais">
-                <span class="cashback-badge">3% Cashback</span>
-                
-                <div class="product-image">
-                    <img src="<img src="morango.png" alt="morango" width="300" height="130">
-                </div>
-                
-                <div class="product-name">Geladinho de Morango</div>
-                <div class="product-price">R$ 2,50</div>
-                <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Morango', 2.50, '🍓')">Adicionar</button>
-            </div>
-
-            <div class="product-card" data-category="tradicionais">
-                <span class="cashback-badge">3% Cashback</span>
-                
-                <div class="product-image">
-                    <img src="maracuja.png" alt="Geladinho de Maracujá">
-                </div>
-                
-                <div class="product-name">Geladinho de Maracujá</div>
-                <div class="product-price">R$ 2,50</div>
-                <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Maracujá', 2.50, '🟡')">Adicionar</button>
-            </div>
-
-            <!-- PRODUTOS GOURMET -->
-            <div class="product-card" data-category="gourmet">
-                <span class="cashback-badge">5% Cashback</span>
-                
-                <div class="product-image">
-                    <img src="chocolate.png" alt="Gourmet Chocolate">
-                </div>
-                
-                <div class="product-name">Gourmet Chocolate</div>
-                <div class="product-price">R$ 4,00</div>
-                <button class="add-to-cart-btn" onclick="addToCart('Gourmet Chocolate', 4.00, '🍫')">Adicionar</button>
-            </div>
-            
-            <div class="product-card" data-category="gourmet">
-                <span class="cashback-badge">5% Cashback</span>
-                <div class="product-image">
-                    <img src="chocomara.jpeg" alt="Gourmet Maracujá com chocolate">
-                </div>
-                <div class="product-name">Gourmet Maracujá com chocolate</div>
-                <div class="product-price">R$ 4,00</div>
-                <button class="add-to-cart-btn" onclick="addToCart('Gourmet Maracujá com chocolate', 4.00, '🍫+🟡')">Adicionar</button>
-            </div>
-
-            <!-- KITS -->
-            <div class="product-card" data-category="kits">
-                <span class="cashback-badge">7% Cashback</span>
-                <div class="product-image">
-                    <img src="gela3.jpeg" alt="Kit completo com 3 geladinhos">
-                </div>
-                <div class="product-name">Kit completo com 3 geladinhos</div>
-                <div class="product-price">R$ 13,00</div>
-                <button class="add-to-cart-btn" onclick="addToCart('Kit completo com 3 geladinhos', 13.00, '🟡')">Adicionar</button>
-            </div>
-
-            <div class="product-card" data-category="kits">
-                <span class="cashback-badge">7% Cashback</span>
-                <div class="product-image">
-                    <img src="cax.png" alt="Leve 10 e pague 8">
-                </div>
-                <div class="product-name">Leve 10 e pague 8</div>
-                <div class="product-price">R$ 27,00</div>
-                <button class="add-to-cart-btn" onclick="addToCart('Leve 10 e pague 8', 27.00, '📦')">Adicionar</button>
-            </div>
-
-            <div class="product-card" data-category="kits">
-                <span class="cashback-badge">7% Cashback</span>
-                <div class="product-image">
-                    <img src="cax2.png" alt="5 gourmet e 5 tradicionais">
-                </div>
-                <div class="product-name">5 gourmet e 5 tradicionais</div>
-                <div class="product-price">R$ 30,00</div>
-                <button class="add-to-cart-btn" onclick="addToCart('5 gourmet e 5 tradicionais', 30.00, '💎')">Adicionar</button>
-            </div>
-        </div>
+          <!-- PRODUTOS TRADICIONAIS -->
+    <div class="product-card" data-category="tradicionais">
+      <!-- Cartão do produto com atributo de categoria para filtro -->
+      <span class="cashback-badge">3% Cashback</span>
+      <!-- Badge mostrando porcentagem de cashback -->
+    
+      <div class="product-image">
+        <!-- Container da imagem do produto -->
+        <img src="morango.png" alt="morango" width="300" height="130">
+        <!-- Imagem do produto geladinho de morango -->
+      </div>
+      
+      <div class="product-name">Geladinho de Morango</div>
+      <!-- Nome do produto -->
+      <div class="product-price">R$ 2,50</div>
+      <!-- Preço do produto -->
+      <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Morango', 2.50, '🍓')">Adicionar</button>
+      <!-- Botão para adicionar produto ao carrinho -->
     </div>
+
+    <div class="product-card" data-category="tradicionais">
+      <!-- Segundo produto tradicional -->
+      <span class="cashback-badge">3% Cashback</span>
+      
+      <div class="product-image">
+        <img src="maracuja.png" alt="maracuja" width="300" height="130">
+        <!-- Imagem do produto geladinho de maracujá -->
+      </div>
+      
+      <div class="product-name">Geladinho de Maracujá</div>
+      <div class="product-price">R$ 2,50</div>
+      <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Maracujá', 2.50, '🟡')">Adicionar</button>
+    </div>
+
+    <!-- PRODUTOS GOURMET -->
+    <div class="product-card" data-category="gourmet">
+      <!-- Primeiro produto gourmet -->
+      <span class="cashback-badge">5% Cashback</span>
+      <!-- Cashback maior para produtos gourmet -->
+      
+      <div class="product-image">
+        <img src="chocolate.png" alt="chocolate" width="300" height="130">
+        <!-- Imagem do produto gourmet chocolate -->
+      </div>
+      
+      <div class="product-name">Gourmet Chocolate</div>
+      <div class="product-price">R$ 4,00</div>
+      <!-- Preço mais alto para produto gourmet -->
+      <button class="add-to-cart-btn" onclick="addToCart('Gourmet Chocolate', 4.00, '🍫')">Adicionar</button>
+    </div>
+    
+    <div class="product-card" data-category="gourmet">
+      <!-- Segundo produto gourmet -->
+      <span class="cashback-badge">5% Cashback</span>
+      <div class="product-image">
+        <img src="chocomara.jpeg" alt="chocolate" width="300" height="130">
+        <!-- Imagem do produto gourmet maracujá com chocolate -->
+      </div>
+      <div class="product-name">Gourmet Maracujá com chocolate</div>
+      <div class="product-price">R$ 4,00</div>
+      <button class="add-to-cart-btn" onclick="addToCart('Gourmet Maracujá com chocolate', 4.00, '🍫+🟡 ')">Adicionar</button>
+    </div>
+
+    <!-- KITS -->
+    <div class="product-card" data-category="kits">
+      <!-- Primeiro kit -->
+      <span class="cashback-badge">7% Cashback</span>
+      <!-- Cashback maior para kits -->
+      <div class="product-image">
+        <img src="gela3.jpeg" alt="chocolate" width="300" height="130">
+        <!-- Imagem do kit com 3 geladinhos -->
+      </div>
+      <div class="product-name">Kit completo com 3 geladinhos</div>
+      <div class="product-price">R$ 13,00</div>
+      <!-- Preço do kit (valor agregado) -->
+      <button class="add-to-cart-btn" onclick="addToCart('Kit completo com 3 geladinhos', 13.00, '🟡')">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="kits">
+      <!-- Segundo kit -->
+      <span class="cashback-badge">7% Cashback</span>
+      <div class="product-image">
+        <img src="cax.png" alt="cax" width="300" height="130">
+        <!-- Imagem do kit "leve 10 e pague 8" -->
+      </div>
+      <div class="product-name">Leve 10 e pague 8</div>
+      <div class="product-price">R$ 27,00</div>
+      <button class="add-to-cart-btn" onclick="addToCart('Leve 10 e pague 8', 27.00, '📦')">Adicionar</button>
+    </div>
+
+    <div class="product-card" data-category="kits">
+      <!-- Terceiro kit -->
+      <span class="cashback-badge">7% Cashback</span>
+      <div class="product-image">
+        <img src="cax2.png" alt="cax2" width="300" height="130">
+        <!-- Imagem do kit com 5 gourmet e 5 tradicionais -->
+      </div>
+      <div class="product-name">5 gourmet e 5 tradicionais</div>
+      <div class="product-price">R$ 30,00</div>
+      <button class="add-to-cart-btn" onclick="addToCart('5 gourmet e 5 tradicionais', 30.00, '💎')">Adicionar</button>
+    </div>
+
+  </div>
 
     <script>
         // Função para adicionar ao carrinho (exemplo)
