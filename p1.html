@@ -261,6 +261,55 @@
             margin-left: 10px;
             font-size: 16px;
         }
+        
+        /* Modal para ações rápidas */
+        .action-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .action-modal-content {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .action-modal-icon {
+            font-size: 50px;
+            color: #4facfe;
+            margin-bottom: 15px;
+        }
+        
+        .action-modal h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .action-modal p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .close-action-modal {
+            background: #4facfe;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -316,6 +365,7 @@
         </div>
     </div>
     
+    <!-- Modal para editar perfil -->
     <div class="modal" id="edit-modal">
         <div class="modal-content">
             <h2><i class="fas fa-user-edit"></i> Editar Perfil</h2>
@@ -348,6 +398,83 @@
         </div>
     </div>
     
+    <!-- Modal para Pedidos -->
+    <div class="action-modal" id="orders-modal">
+        <div class="action-modal-content">
+            <div class="action-modal-icon">
+                <i class="fas fa-shopping-bag"></i>
+            </div>
+            <h3>Meus Pedidos</h3>
+            <p>Aqui você pode acompanhar todos os seus pedidos realizados.</p>
+            <div style="text-align: left; margin: 15px 0; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                <p><strong>Pedido #001</strong> - Status: Entregue</p>
+                <p><strong>Pedido #002</strong> - Status: Em transporte</p>
+                <p><strong>Pedido #003</strong> - Status: Processando</p>
+            </div>
+            <button class="close-action-modal" id="close-orders">Fechar</button>
+        </div>
+    </div>
+    
+    <!-- Modal para Caridade -->
+    <div class="action-modal" id="charity-modal">
+        <div class="action-modal-content">
+            <div class="action-modal-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h3>Minha Caridade</h3>
+            <p>Contribua com causas sociais e acompanhe seu histórico de doações.</p>
+            <div style="margin: 20px 0;">
+                <button class="action-btn" style="margin: 5px;">Doar R$ 10</button>
+                <button class="action-btn" style="margin: 5px;">Doar R$ 25</button>
+                <button class="action-btn" style="margin: 5px;">Doar R$ 50</button>
+            </div>
+            <button class="close-action-modal" id="close-charity">Fechar</button>
+        </div>
+    </div>
+    
+    <!-- Modal para Suporte -->
+    <div class="action-modal" id="support-modal">
+        <div class="action-modal-content">
+            <div class="action-modal-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h3>Central de Suporte</h3>
+            <p>Estamos aqui para ajudar! Entre em contato conosco.</p>
+            <div style="text-align: left; margin: 15px 0;">
+                <p><i class="fas fa-phone" style="color: #4facfe; margin-right: 10px;"></i> (11) 9999-9999</p>
+                <p><i class="fas fa-envelope" style="color: #4facfe; margin-right: 10px;"></i> suporte@empresa.com</p>
+                <p><i class="fas fa-clock" style="color: #4facfe; margin-right: 10px;"></i> Seg-Sex: 8h-18h</p>
+            </div>
+            <button class="close-action-modal" id="close-support">Fechar</button>
+        </div>
+    </div>
+    
+    <!-- Modal para Configurações -->
+    <div class="action-modal" id="settings-modal">
+        <div class="action-modal-content">
+            <div class="action-modal-icon">
+                <i class="fas fa-cog"></i>
+            </div>
+            <h3>Configurações</h3>
+            <p>Gerencie suas preferências e configurações de conta.</p>
+            <div style="text-align: left; margin: 15px 0;">
+                <div style="margin: 10px 0;">
+                    <input type="checkbox" id="notifications" checked>
+                    <label for="notifications">Receber notificações</label>
+                </div>
+                <div style="margin: 10px 0;">
+                    <input type="checkbox" id="newsletter">
+                    <label for="newsletter">Receber newsletter</label>
+                </div>
+                <div style="margin: 10px 0;">
+                    <input type="checkbox" id="privacidade" checked>
+                    <label for="privacidade">Modo privacidade</label>
+                </div>
+            </div>
+            <button class="close-action-modal" id="close-settings">Salvar e Fechar</button>
+        </div>
+    </div>
+    
     <input type="file" id="photo-upload" class="photo-upload" accept="image/*">
 
     <script>
@@ -366,6 +493,7 @@
             const saved = localStorage.getItem('userProfile');
             if (saved) {
                 userData = JSON.parse(saved);
+                console.log('Dados carregados:', userData);
             }
             updateDisplay();
         }
@@ -373,6 +501,7 @@
         // Salvar dados no navegador
         function saveUserData() {
             localStorage.setItem('userProfile', JSON.stringify(userData));
+            console.log('Dados salvos:', userData);
         }
 
         // Atualizar a tela com os dados atuais
@@ -408,6 +537,31 @@
             document.getElementById('edit-modal').style.display = 'none';
         }
 
+        // Abrir modais das ações rápidas
+        function openOrdersModal() {
+            document.getElementById('orders-modal').style.display = 'flex';
+        }
+        
+        function openCharityModal() {
+            document.getElementById('charity-modal').style.display = 'flex';
+        }
+        
+        function openSupportModal() {
+            document.getElementById('support-modal').style.display = 'flex';
+        }
+        
+        function openSettingsModal() {
+            document.getElementById('settings-modal').style.display = 'flex';
+        }
+
+        // Fechar modais das ações rápidas
+        function closeActionModals() {
+            document.getElementById('orders-modal').style.display = 'none';
+            document.getElementById('charity-modal').style.display = 'none';
+            document.getElementById('support-modal').style.display = 'none';
+            document.getElementById('settings-modal').style.display = 'none';
+        }
+
         // Processar upload de foto
         function handlePhotoUpload(event) {
             const file = event.target.files[0];
@@ -417,6 +571,7 @@
                     userData.profilePicture = e.target.result;
                     saveUserData();
                     updateDisplay();
+                    alert('Foto de perfil atualizada com sucesso!');
                 };
                 reader.readAsDataURL(file);
             }
@@ -484,30 +639,34 @@
             // Configurar botão de logout
             document.getElementById('logout-btn').addEventListener('click', logout);
             
-            // Configurar botões de ação rápida
-            document.getElementById('orders-btn').addEventListener('click', function() {
-                alert('Abrindo histórico de pedidos...');
-            });
+            // Configurar botões de ação rápida - AGORA FUNCIONANDO!
+            document.getElementById('orders-btn').addEventListener('click', openOrdersModal);
+            document.getElementById('charity-btn').addEventListener('click', openCharityModal);
+            document.getElementById('support-btn').addEventListener('click', openSupportModal);
+            document.getElementById('settings-btn').addEventListener('click', openSettingsModal);
             
-            document.getElementById('charity-btn').addEventListener('click', function() {
-                alert('Abrindo página de caridade...');
-            });
-            
-            document.getElementById('support-btn').addEventListener('click', function() {
-                alert('Abrindo central de suporte...');
-            });
-            
-            document.getElementById('settings-btn').addEventListener('click', function() {
-                alert('Abrindo configurações...');
-            });
+            // Configurar fechamento dos modais de ação
+            document.getElementById('close-orders').addEventListener('click', closeActionModals);
+            document.getElementById('close-charity').addEventListener('click', closeActionModals);
+            document.getElementById('close-support').addEventListener('click', closeActionModals);
+            document.getElementById('close-settings').addEventListener('click', closeActionModals);
         });
 
-        // Fechar modal clicando fora dele
+        // Fechar modais clicando fora deles
         window.addEventListener('click', function(event) {
-            const modal = document.getElementById('edit-modal');
-            if (event.target === modal) {
-                closeEditModal();
-            }
+            const modals = [
+                document.getElementById('edit-modal'),
+                document.getElementById('orders-modal'),
+                document.getElementById('charity-modal'),
+                document.getElementById('support-modal'),
+                document.getElementById('settings-modal')
+            ];
+            
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
