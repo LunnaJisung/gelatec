@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<!-- Declaração do tipo de documento como HTML5 -->
 <html lang="pt-BR">
-<!-- Elemento raiz do documento com idioma português brasileiro -->
 <head>
-  <!-- Cabeçalho do documento com metadados -->
   <meta charset="UTF-8">
-  <!-- Define a codificação de caracteres como UTF-8 para suportar acentos e caracteres especiais -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Configura a viewport para responsividade em dispositivos móveis -->
   <title>Perfil - GelaTec</title>
-  <!-- Título da página que aparece na aba do navegador -->
   <style>
-    /* ========== ESTILOS GERAIS ========== */
     * {
       margin: 0;
       padding: 0;
@@ -22,15 +15,14 @@
     body {
       background-color: #f5f5f5;
       color: #333;
-      line-height: 1.6;
-      padding-bottom: 80px; /* Espaço para a navegação inferior */
+      padding-bottom: 80px;
     }
 
     .hidden {
       display: none !important;
     }
 
-    /* ========== HEADER ========== */
+    /* HEADER */
     .header {
       background: linear-gradient(135deg, #ff0080, #ff6b9d);
       color: white;
@@ -51,6 +43,7 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
+      background: white;
     }
 
     .logo-container h1 {
@@ -58,7 +51,7 @@
       font-weight: bold;
     }
 
-    /* ========== CONTAINER PRINCIPAL ========== */
+    /* CONTAINER PRINCIPAL */
     .page-container {
       max-width: 600px;
       margin: 0 auto;
@@ -71,7 +64,7 @@
       color: #ff0080;
     }
 
-    /* ========== SEÇÃO DE LOGIN ========== */
+    /* SEÇÃO DE LOGIN */
     .login-form {
       background: white;
       padding: 25px;
@@ -97,7 +90,6 @@
       border: 2px solid #e0e0e0;
       border-radius: 8px;
       font-size: 16px;
-      transition: border-color 0.3s;
     }
 
     .form-control:focus {
@@ -115,12 +107,7 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s;
       margin-bottom: 15px;
-    }
-
-    .login-btn:hover {
-      transform: translateY(-2px);
     }
 
     .register-link {
@@ -134,7 +121,7 @@
       font-weight: 600;
     }
 
-    /* ========== SEÇÃO DE PERFIL ========== */
+    /* SEÇÃO DE PERFIL */
     .user-info {
       background: white;
       padding: 25px;
@@ -166,16 +153,18 @@
       margin-bottom: 20px;
     }
 
-    .page-content {
+    .profile-item {
       background: #f9f9f9;
       padding: 15px;
       border-radius: 10px;
+      margin-bottom: 16px;
       cursor: pointer;
-      transition: background-color 0.3s;
     }
 
-    .page-content:hover {
-      background: #f0f0f0;
+    .profile-item-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .logout-btn {
@@ -188,65 +177,24 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s;
       margin-top: 20px;
     }
 
-    .logout-btn:hover {
-      background: #ff0080;
-      color: white;
-    }
-
-    /* ========== NAVEGAÇÃO INFERIOR ========== */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: white;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-      border-top: 1px solid #e0e0e0;
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: #666;
-      font-size: 12px;
-      transition: color 0.3s;
-      position: relative;
-    }
-
-    .nav-item.active {
+    /* BOTÃO EDITAR */
+    .edit-profile-btn {
+      background: #f8f9fa;
       color: #ff0080;
+      border: 2px solid #ff0080;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 10px auto;
+      display: block;
     }
 
-    .nav-icon {
-      font-size: 20px;
-      margin-bottom: 2px;
-    }
-
-    .carrinho-contador {
-      position: absolute;
-      top: -5px;
-      right: 5px;
-      background: #ff0080;
-      color: white;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* ========== MODAL DE EDIÇÃO ========== */
+    /* MODAL */
     .modal {
       display: none;
       position: fixed;
@@ -266,7 +214,6 @@
       max-width: 500px;
       border-radius: 15px;
       padding: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
     .modal-title {
@@ -289,11 +236,6 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .modal-btn:hover {
-      transform: translateY(-2px);
     }
 
     .btn-primary {
@@ -307,7 +249,7 @@
       border: 2px solid #e0e0e0;
     }
 
-    /* ========== ALERTAS ========== */
+    /* ALERTAS */
     .alert {
       padding: 15px;
       border-radius: 8px;
@@ -327,136 +269,114 @@
       border: 1px solid #f5c6cb;
     }
 
-    /* ========== BOTÃO DE EDIÇÃO ========== */
-    .edit-profile-btn {
-      background: #f8f9fa;
-      color: #ff0080;
-      border: 2px solid #ff0080;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin: 10px auto;
-      display: block;
+    /* NAVEGAÇÃO INFERIOR */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     }
 
-    .edit-profile-btn:hover {
-      background: #ff0080;
-      color: white;
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #666;
+      font-size: 12px;
+    }
+
+    .nav-item.active {
+      color: #ff0080;
+    }
+
+    .nav-icon {
+      font-size: 20px;
+      margin-bottom: 2px;
     }
   </style>
 </head>
 <body>
-  <!-- Início do corpo do documento -->
-
   <header class="header">
-    <!-- Cabeçalho principal da página -->
     <div class="logo-container">
-      <!-- Container para a logo e nome da empresa -->
-      <img src="logo.png" alt="GelaTec Logo" class="logo-image">
-      <!-- Imagem da logo da empresa -->
+      <div class="logo-image"></div>
       <h1>GelaTec</h1>
-      <!-- Nome da empresa -->
     </div>
     <p>Meu Perfil</p>
-    <!-- Subtítulo indicando a seção atual -->
   </header>
 
   <div class="page-container">
-    <!-- Container principal do conteúdo da página -->
     <h1 class="page-title">Meu Perfil 👤</h1>
-    <!-- Título da página com emoji -->
 
-    <!-- ALERTAS -->
+    <!-- Área de alertas -->
     <div id="alertMessage" class="alert"></div>
 
-    <!-- SEÇÃO DE LOGIN (visível quando usuário não está logado) -->
+    <!-- SEÇÃO DE LOGIN -->
     <div id="login-section">
-      <!-- Container da seção de login -->
       <div class="login-form">
-        <!-- Formulário de login -->
         <h2 style="color: #ff0080; margin-bottom: 20px; text-align: center;">Faça seu Login</h2>
-        <!-- Título do formulário com estilo inline -->
 
         <div class="form-group">
-          <!-- Grupo do campo email -->
           <label for="email">E-mail</label>
-          <!-- Label do campo email -->
           <input type="email" id="email" class="form-control" placeholder="seu@email.com">
-          <!-- Campo de input para email -->
         </div>
         
         <div class="form-group">
-          <!-- Grupo do campo senha -->
           <label for="password">Senha</label>
           <input type="password" id="password" class="form-control" placeholder="Sua senha">
-          <!-- Campo de input para senha (tipo password oculta os caracteres) -->
         </div>
         
         <button class="login-btn" onclick="login()">Entrar</button>
-        <!-- Botão para submeter o login -->
 
         <div class="register-link">
-          <!-- Link para cadastro -->
           Não tem conta? <a href="#">Cadastre-se</a>
-          <!-- Texto e link para página de cadastro -->
         </div>
       </div>
     </div>
 
-    <!-- SEÇÃO DE PERFIL (visível quando usuário está logado) -->
+    <!-- SEÇÃO DE PERFIL -->
     <div id="profile-section" class="hidden">
-      <!-- Container da seção de perfil (inicialmente oculta) -->
       <div class="user-info">
-        <!-- Container das informações do usuário -->
         <div class="user-avatar">👤</div>
-        <!-- Avatar do usuário representado por emoji -->
         <h2 class="user-name" id="user-name">Maria Silva</h2>
-        <!-- Nome do usuário (valor padrão) -->
         <p class="user-email" id="user-email">maria.silva@email.com</p>
-        <!-- Email do usuário (será atualizado dinamicamente) -->
 
         <!-- Botão para editar perfil -->
         <button class="edit-profile-btn" onclick="openEditModal()">Editar Perfil</button>
 
-        <!-- ITEM: MEUS PEDIDOS -->
-        <div class="page-content" style="margin-bottom: 16px;">
-          <!-- Container do item "Meus Pedidos" -->
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <!-- Layout flex para título e ícone lado a lado -->
+        <!-- Itens do perfil -->
+        <div class="profile-item">
+          <div class="profile-item-content">
             <span style="font-weight: 600;">Meus Pedidos</span>
-            <!-- Título do item -->
             <span style="color: #ff0080;">›</span>
-            <!-- Ícone de seta para direita -->
           </div>
         </div>
 
-        <!-- ITEM: ENDEREÇOS -->
-        <div class="page-content" style="margin-bottom: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="profile-item">
+          <div class="profile-item-content">
             <span style="font-weight: 600;" id="user-address">Endereço: Não cadastrado</span>
             <span style="color: #ff0080;">›</span>
           </div>
         </div>
 
-        <!-- ITEM: CASHBACK -->
-        <div class="page-content" style="margin-bottom: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="profile-item">
+          <div class="profile-item-content">
             <span style="font-weight: 600;" id="user-cashback">Cashback: R$ 0,00</span>
-            <!-- Mostra o saldo de cashback do usuário -->
             <span style="color: #ff0080;">›</span>
           </div>
         </div>
 
-        <button class="logout-btn" onclick="logout()">Sair</button>
-        <!-- Botão para fazer logout -->
+        <button class="logout-btn" onclick="logout()">Sair da Conta</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL DE EDIÇÃO DE PERFIL -->
+  <!-- MODAL DE EDIÇÃO -->
   <div id="editProfileModal" class="modal">
     <div class="modal-content">
       <h2 class="modal-title">Editar Perfil</h2>
@@ -483,47 +403,34 @@
         
         <div class="modal-buttons">
           <button type="button" class="modal-btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
-          <button type="submit" class="modal-btn btn-primary">Salvar</button>
+          <button type="submit" class="modal-btn btn-primary">Salvar Alterações</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- NAVEGAÇÃO INFERIOR -->
+  <!-- NAVEGAÇÃO -->
   <nav class="bottom-nav">
-    <!-- Barra de navegação fixa na parte inferior -->
     <a href="index.html" class="nav-item">
-      <!-- Link para página inicial -->
       <span class="nav-icon">🏠</span>
-      <!-- Ícone da página inicial -->
       <span>Início</span>
-      <!-- Texto do link -->
     </a>
     <a href="p2.html" class="nav-item">
-      <!-- Link para cardápio -->
       <span class="nav-icon">📋</span>
-      <!-- Ícone do cardápio -->
       <span>Cardápio</span>
     </a>
     <a href="p3.html" class="nav-item active">
-      <!-- Link para perfil (ativo) -->
       <span class="nav-icon">👤</span>
-      <!-- Ícone do perfil -->
       <span>Perfil</span>
     </a>
     <a href="carrinho.html" class="nav-item">
-      <!-- Link para carrinho -->
       <span class="nav-icon">🛒</span>
-      <!-- Ícone do carrinho -->
       <span>Carrinho</span>
-      <span id="contador-carrinho" class="carrinho-contador" style="display: none;">0</span>
-      <!-- Contador de itens no carrinho (inicialmente oculto) -->
     </a>
   </nav>
 
   <script>
-    // ========== VARIÁVEIS GLOBAIS ==========
-    // Dados do usuário - carregados do localStorage ou inicializados com valores padrão
+    // Dados do usuário
     let userProfile = {
       name: "Maria Silva",
       email: "maria.silva@email.com",
@@ -532,37 +439,38 @@
       loggedIn: false
     };
 
-    // ========== FUNÇÃO PARA MOSTRAR ALERTAS ==========
+    // Mostrar alerta
     function showAlert(message, type) {
-      // Exibe uma mensagem de alerta na tela
       const alertElement = document.getElementById('alertMessage');
       alertElement.textContent = message;
       alertElement.className = `alert alert-${type}`;
       alertElement.style.display = 'block';
       
-      // Esconde o alerta após 5 segundos
       setTimeout(() => {
         alertElement.style.display = 'none';
-      }, 5000);
+      }, 4000);
     }
 
-    // ========== FUNÇÃO PARA CARREGAR PERFIL ==========
+    // Carregar perfil do localStorage
     function loadProfile() {
-      // Carrega os dados do perfil do localStorage
       const savedProfile = localStorage.getItem('userProfile');
       if (savedProfile) {
         userProfile = JSON.parse(savedProfile);
         updateProfileDisplay();
+        
+        // Se estava logado, mostrar perfil
+        if (userProfile.loggedIn) {
+          showProfileSection();
+        }
       }
     }
 
-    // ========== FUNÇÃO PARA ATUALIZAR A EXIBIÇÃO DO PERFIL ==========
+    // Atualizar exibição do perfil
     function updateProfileDisplay() {
-      // Atualiza os elementos da tela com os dados do perfil
       document.getElementById('user-name').textContent = userProfile.name;
       document.getElementById('user-email').textContent = userProfile.email;
       
-      // Atualiza o endereço ou mostra mensagem padrão se não houver endereço
+      // Endereço
       const addressElement = document.getElementById('user-address');
       if (userProfile.address && userProfile.address.trim() !== '') {
         addressElement.textContent = `Endereço: ${userProfile.address}`;
@@ -570,78 +478,60 @@
         addressElement.textContent = 'Endereço: Não cadastrado';
       }
       
-      // Atualiza o valor do cashback formatado em reais
+      // Cashback
       document.getElementById('user-cashback').textContent = 
         `Cashback: R$ ${userProfile.cashback.toFixed(2).replace('.', ',')}`;
     }
 
-    // ========== FUNÇÃO PARA SALVAR PERFIL ==========
+    // Salvar perfil no localStorage
     function saveProfile() {
-      // Salva os dados do perfil no localStorage
       localStorage.setItem('userProfile', JSON.stringify(userProfile));
     }
 
-    // ========== FUNÇÃO DE LOGIN ==========
+    // Login
     function login() {
-      // Função chamada quando usuário clica no botão "Entrar"
-      
-      // Obtém os valores dos campos de email e senha
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       
-      // Verifica se ambos os campos foram preenchidos
       if (email && password) {
-        // Atualiza o email no perfil
+        // Atualizar email no perfil
         userProfile.email = email;
         userProfile.loggedIn = true;
         
-        // Salva no localStorage
         saveProfile();
-        
-        // Atualiza a exibição
         updateProfileDisplay();
+        showProfileSection();
         
-        // Esconde a seção de login e mostra a de perfil
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('profile-section').classList.remove('hidden');
-        
-        // Mostra mensagem de sucesso
         showAlert('Login realizado com sucesso!', 'success');
       } else {
-        // Alerta se algum campo estiver vazio
         showAlert('Por favor, preencha todos os campos!', 'danger');
       }
     }
 
-    // ========== FUNÇÃO DE LOGOUT ==========
+    // Mostrar seção do perfil
+    function showProfileSection() {
+      document.getElementById('login-section').classList.add('hidden');
+      document.getElementById('profile-section').classList.remove('hidden');
+    }
+
+    // Logout
     function logout() {
-      // Função chamada quando usuário clica no botão "Sair"
-      
-      // Pergunta ao usuário se deseja realmente sair
       if (confirm('Tem certeza que deseja sair da conta?')) {
-        // Atualiza o estado de login
         userProfile.loggedIn = false;
+        saveProfile();
         
-        // Mostra a seção de login novamente
         document.getElementById('login-section').classList.remove('hidden');
-        // Esconde a seção de perfil
         document.getElementById('profile-section').classList.add('hidden');
-        // Limpa o campo de email
         document.getElementById('email').value = '';
-        // Limpa o campo de senha
         document.getElementById('password').value = '';
         
-        // Mostra mensagem de confirmação
         showAlert('Você saiu da conta.', 'success');
       }
     }
 
-    // ========== FUNÇÕES DO MODAL DE EDIÇÃO ==========
+    // Modal de edição
     function openEditModal() {
-      // Abre o modal de edição de perfil
       document.getElementById('editProfileModal').style.display = 'flex';
-      
-      // Preenche os campos do formulário com os dados atuais
       document.getElementById('editName').value = userProfile.name;
       document.getElementById('editEmail').value = userProfile.email;
       document.getElementById('editAddress').value = userProfile.address;
@@ -649,48 +539,30 @@
     }
 
     function closeEditModal() {
-      // Fecha o modal de edição de perfil
       document.getElementById('editProfileModal').style.display = 'none';
     }
 
-    // ========== EVENT LISTENERS ==========
+    // Event Listeners
     document.addEventListener('DOMContentLoaded', function() {
-      // Executa quando o DOM estiver completamente carregado
-      
-      // Carrega o perfil do localStorage
       loadProfile();
       
-      // Verifica se o usuário já está logado
-      if (userProfile.loggedIn) {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('profile-section').classList.remove('hidden');
-        updateProfileDisplay();
-      }
-      
-      // Configura o evento de submit do formulário de edição
+      // Formulário de edição
       document.getElementById('profileForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Impede o envio padrão do formulário
+        e.preventDefault();
         
-        // Atualiza os dados do perfil com os valores do formulário
         userProfile.name = document.getElementById('editName').value;
         userProfile.email = document.getElementById('editEmail').value;
         userProfile.address = document.getElementById('editAddress').value;
         userProfile.cashback = parseFloat(document.getElementById('editCashback').value) || 0;
         
-        // Salva as alterações
         saveProfile();
-        
-        // Atualiza a exibição
         updateProfileDisplay();
-        
-        // Fecha o modal
         closeEditModal();
         
-        // Mostra mensagem de sucesso
         showAlert('Perfil atualizado com sucesso!', 'success');
       });
       
-      // Fecha o modal ao clicar fora dele
+      // Fechar modal ao clicar fora
       window.addEventListener('click', function(e) {
         const modal = document.getElementById('editProfileModal');
         if (e.target === modal) {
@@ -699,9 +571,5 @@
       });
     });
   </script>
-  <!-- Fim do JavaScript -->
-
 </body>
-<!-- Fim do corpo do documento -->
 </html>
-<!-- Fim do documento HTML -->
