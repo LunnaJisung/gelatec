@@ -19,7 +19,7 @@ body {
   /* Espaço na parte inferior para acomodar a navegação fixa */
 }
 
-/* ===== CABEÇALHO PRINCIPAL ===== */
+/* /* ===== CABEÇALHO PRINCIPAL ===== * */
 .header {
   background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
   /* Gradiente diagonal em tons de rosa/vermelho */
