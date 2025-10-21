@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+<!-- Declaração do tipo de documento como HTML5 -->
 <html lang="pt-BR">
+<!-- Elemento raiz do documento com idioma português brasileiro -->
 <head>
+  <!-- Cabeçalho do documento com metadados -->
   <meta charset="UTF-8">
+  <!-- Define a codificação de caracteres como UTF-8 para suportar acentos e caracteres especiais -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Configura a viewport para responsividade em dispositivos móveis -->
   <title>Cardápio - GelaTec</title>
+  <!-- Título da página que aparece na aba do navegador -->
   <link rel="stylesheet" href="style.css">
+  <!-- Importa o arquivo CSS externo para estilização -->
   <style>
     /* Estilos para o badge do carrinho */
     .cart-badge {
@@ -29,94 +36,129 @@
   </style>
 </head>
 <body>
+  <!-- Início do corpo do documento -->
 
   <header class="header">
+    <!-- Cabeçalho principal da página -->
     <h1>Cardápio Completo</h1>
+    <!-- Título principal da página -->
     <p>Escolha seus produtos favoritos</p>
+    <!-- Subtítulo descritivo -->
   </header>
 
+  <!-- FILTROS DE CATEGORIA -->
   <div class="category-filter">
+    <!-- Container dos botões de filtro por categoria -->
     <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
+    <!-- Botão para mostrar todos os produtos (ativo por padrão) -->
     <button class="category-btn" onclick="filterCategory('tradicionais')">Tradicionais</button>
+    <!-- Botão para filtrar produtos tradicionais -->
     <button class="category-btn" onclick="filterCategory('gourmet')">Gourmet</button>
+    <!-- Botão para filtrar produtos gourmet -->
     <button class="category-btn" onclick="filterCategory('kits')">Kits</button>
+    <!-- Botão para filtrar kits -->
   </div>
 
+  <!-- GRID DE PRODUTOS -->
   <div class="product-grid" id="product-grid">
+    <!-- Container principal dos produtos usando CSS Grid -->
     
-    <!-- Produtos Tradicionais -->
+    <!-- PRODUTOS TRADICIONAIS -->
     <div class="product-card" data-category="tradicionais">
+      <!-- Cartão do produto com atributo de categoria para filtro -->
       <span class="cashback-badge">3% Cashback</span>
+      <!-- Badge mostrando porcentagem de cashback -->
     
       <div class="product-image">
-     <img src="morango.png" alt="morango" width="300" height="130">
-    </div>
+        <!-- Container da imagem do produto -->
+        <img src="morango.png" alt="morango" width="300" height="130">
+        <!-- Imagem do produto geladinho de morango -->
+      </div>
       
       <div class="product-name">Geladinho de Morango</div>
+      <!-- Nome do produto -->
       <div class="product-price">R$ 2,50</div>
+      <!-- Preço do produto -->
       <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Morango', 2.50, '🍓')">Adicionar</button>
+      <!-- Botão para adicionar produto ao carrinho -->
     </div>
 
     <div class="product-card" data-category="tradicionais">
+      <!-- Segundo produto tradicional -->
       <span class="cashback-badge">3% Cashback</span>
       
       <div class="product-image">
-       <img src="maracuja.png" alt="maracuja" width="300" height="130">
-    </div>
+        <img src="maracuja.png" alt="maracuja" width="300" height="130">
+        <!-- Imagem do produto geladinho de maracujá -->
+      </div>
       
       <div class="product-name">Geladinho de Maracujá</div>
       <div class="product-price">R$ 2,50</div>
       <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Maracujá', 2.50, '🟡')">Adicionar</button>
     </div>
 
-    <!-- Produtos Gourmet -->
+    <!-- PRODUTOS GOURMET -->
     <div class="product-card" data-category="gourmet">
+      <!-- Primeiro produto gourmet -->
       <span class="cashback-badge">5% Cashback</span>
+      <!-- Cashback maior para produtos gourmet -->
       
       <div class="product-image">
         <img src="chocolate.png" alt="chocolate" width="300" height="130">
+        <!-- Imagem do produto gourmet chocolate -->
       </div>
       
       <div class="product-name">Gourmet Chocolate</div>
       <div class="product-price">R$ 4,00</div>
+      <!-- Preço mais alto para produto gourmet -->
       <button class="add-to-cart-btn" onclick="addToCart('Gourmet Chocolate', 4.00, '🍫')">Adicionar</button>
     </div>
     
-   <div class="product-card" data-category="gourmet">
+    <div class="product-card" data-category="gourmet">
+      <!-- Segundo produto gourmet -->
       <span class="cashback-badge">5% Cashback</span>
       <div class="product-image">
         <img src="chocomara.jpeg" alt="chocolate" width="300" height="130">
+        <!-- Imagem do produto gourmet maracujá com chocolate -->
       </div>
       <div class="product-name">Gourmet Maracujá com chocolate</div>
       <div class="product-price">R$ 4,00</div>
       <button class="add-to-cart-btn" onclick="addToCart('Gourmet Maracujá com chocolate', 4.00, '🍫+🟡 ')">Adicionar</button>
     </div>
 
-    <!-- Kits -->
+    <!-- KITS -->
     <div class="product-card" data-category="kits">
+      <!-- Primeiro kit -->
       <span class="cashback-badge">7% Cashback</span>
+      <!-- Cashback maior para kits -->
       <div class="product-image">
-         <img src="gela3.jpeg" alt="chocolate" width="300" height="130">
+        <img src="gela3.jpeg" alt="chocolate" width="300" height="130">
+        <!-- Imagem do kit com 3 geladinhos -->
       </div>
       <div class="product-name">Kit completo com 3 geladinhos</div>
       <div class="product-price">R$ 13,00</div>
+      <!-- Preço do kit (valor agregado) -->
       <button class="add-to-cart-btn" onclick="addToCart('Kit completo com 3 geladinhos', 13.00, '🟡')">Adicionar</button>
     </div>
 
     <div class="product-card" data-category="kits">
+      <!-- Segundo kit -->
       <span class="cashback-badge">7% Cashback</span>
       <div class="product-image">
-         <img src="cax.png" alt="cax" width="300" height="130">
+        <img src="cax.png" alt="cax" width="300" height="130">
+        <!-- Imagem do kit "leve 10 e pague 8" -->
       </div>
       <div class="product-name">Leve 10 e pague 8</div>
       <div class="product-price">R$ 27,00</div>
-      <button class="add-to-cart-btn" onclick="addToCart('Leve 10 e pague 8', 27.00, '📦')">Adicionar</button>
+      <button class="addToCart-btn" onclick="addToCart('Leve 10 e pague 8', 27.00, '📦')">Adicionar</button>
     </div>
 
     <div class="product-card" data-category="kits">
+      <!-- Terceiro kit -->
       <span class="cashback-badge">7% Cashback</span>
       <div class="product-image">
-      <img src="cax2.png" alt="cax2" width="300" height="130">
+        <img src="cax2.png" alt="cax2" width="300" height="130">
+        <!-- Imagem do kit com 5 gourmet e 5 tradicionais -->
       </div>
       <div class="product-name">5 gourmet e 5 tradicionais</div>
       <div class="product-price">R$ 30,00</div>
@@ -125,32 +167,45 @@
 
   </div>
 
+  <!-- NAVEGAÇÃO INFERIOR -->
   <nav class="bottom-nav">
+    <!-- Barra de navegação fixa na parte inferior -->
     <a href="index.html" class="nav-item">
+      <!-- Link para página inicial -->
       <span class="nav-icon">🏠</span>
+      <!-- Ícone da página inicial -->
       <span>Início</span>
+      <!-- Texto do link -->
     </a>
     <a href="p2.html" class="nav-item active">
+      <!-- Link para cardápio (ativo) -->
       <span class="nav-icon">📋</span>
+      <!-- Ícone do cardápio -->
       <span>Cardápio</span>
     </a>
     <a href="p3.html" class="nav-item">
+      <!-- Link para perfil -->
       <span class="nav-icon">👤</span>
+      <!-- Ícone do perfil -->
       <span>Perfil</span>
     </a>
     <a href="carrinho.html" class="nav-item">
+      <!-- Link para carrinho -->
       <span class="nav-icon">🛒</span>
+      <!-- Ícone do carrinho -->
       <span>Carrinho</span>
       <span class="cart-badge" id="cart-count">0</span>
+      <!-- Badge com contador de itens no carrinho -->
     </a>
   </nav>
 
   <script>
-    // FUNÇÃO PARA ADICIONAR AO CARRINHO - CORRIGIDA
+    // ========== FUNÇÃO PARA ADICIONAR AO CARRINHO - CORRIGIDA ==========
     function addToCart(name, price, emoji) {
+        // Função chamada quando usuário clica em "Adicionar" em um produto
         console.log('Adicionando ao carrinho:', name, price, emoji);
         
-        // Pegar carrinho atual do localStorage
+        // Pegar carrinho atual do localStorage ou array vazio se não existir
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         
         // Verificar se item já existe no carrinho
@@ -175,19 +230,21 @@
         localStorage.setItem('cart', JSON.stringify(cart));
         console.log('Carrinho salvo:', cart);
         
-        // Feedback visual
+        // Feedback visual para o usuário
         alert(`✅ ${emoji} ${name} adicionado ao carrinho!`);
         
         // Atualizar badge do carrinho
         updateCartBadge();
     }
 
-    // ATUALIZAR BADGE DO CARRINHO
+    // ========== ATUALIZAR BADGE DO CARRINHO ==========
     function updateCartBadge() {
+        // Obtém o carrinho atual do localStorage
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Calcula o total de itens somando todas as quantidades
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         
-        // Atualizar badge
+        // Atualizar badge visual
         const badge = document.getElementById('cart-count');
         if (badge) {
             badge.textContent = totalItems;
@@ -196,7 +253,7 @@
         console.log('Badge atualizado:', totalItems, 'itens');
     }
 
-    // FILTRAR CATEGORIAS (função original)
+    // ========== FILTRAR CATEGORIAS ==========
     function filterCategory(category) {
       // Remove a classe active de todos os botões
       document.querySelectorAll('.category-btn').forEach(btn => {
@@ -206,13 +263,15 @@
       // Adiciona a classe active ao botão clicado
       event.target.classList.add('active');
       
-      // Filtra os produtos
+      // Filtra os produtos baseado na categoria selecionada
       const products = document.querySelectorAll('.product-card');
       
       products.forEach(product => {
         if (category === 'todos') {
+          // Se categoria for "todos", mostra todos os produtos
           product.style.display = 'block';
         } else {
+          // Mostra apenas produtos da categoria selecionada
           if (product.getAttribute('data-category') === category) {
             product.style.display = 'block';
           } else {
@@ -222,12 +281,16 @@
       });
     }
 
-    // ATUALIZAR BADGE QUANDO A PÁGINA CARREGAR
+    // ========== ATUALIZAR BADGE QUANDO A PÁGINA CARREGAR ==========
     document.addEventListener('DOMContentLoaded', function() {
+        // Executa quando a página termina de carregar
         updateCartBadge();
         console.log('Página carregada, badge atualizado');
     });
   </script>
+  <!-- Fim do JavaScript -->
 
 </body>
+<!-- Fim do corpo do documento -->
 </html>
+<!-- Fim do documento HTML -->
