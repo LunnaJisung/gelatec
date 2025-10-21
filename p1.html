@@ -1,575 +1,539 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil - GelaTec</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: #f5f5f5;
-      color: #333;
-      padding-bottom: 80px;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* HEADER */
-    .header {
-      background: linear-gradient(135deg, #ff0080, #ff6b9d);
-      color: white;
-      padding: 15px 20px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 5px;
-    }
-
-    .logo-image {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: white;
-    }
-
-    .logo-container h1 {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    /* CONTAINER PRINCIPAL */
-    .page-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #ff0080;
-    }
-
-    /* SEÇÃO DE LOGIN */
-    .login-form {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 600;
-      color: #555;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 12px 15px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    .form-control:focus {
-      border-color: #ff0080;
-      outline: none;
-    }
-
-    .login-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #ff0080, #ff6b9d);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 15px;
-    }
-
-    .register-link {
-      text-align: center;
-      color: #666;
-    }
-
-    .register-link a {
-      color: #ff0080;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    /* SEÇÃO DE PERFIL */
-    .user-info {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .user-avatar {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, #ff0080, #ff6b9d);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      margin: 0 auto 15px;
-    }
-
-    .user-name {
-      text-align: center;
-      margin-bottom: 5px;
-      color: #333;
-    }
-
-    .user-email {
-      text-align: center;
-      color: #666;
-      margin-bottom: 20px;
-    }
-
-    .profile-item {
-      background: #f9f9f9;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      cursor: pointer;
-    }
-
-    .profile-item-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logout-btn {
-      width: 100%;
-      background: #f8f9fa;
-      color: #ff0080;
-      border: 2px solid #ff0080;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    /* BOTÃO EDITAR */
-    .edit-profile-btn {
-      background: #f8f9fa;
-      color: #ff0080;
-      border: 2px solid #ff0080;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      margin: 10px auto;
-      display: block;
-    }
-
-    /* MODAL */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-content {
-      background: white;
-      width: 90%;
-      max-width: 500px;
-      border-radius: 15px;
-      padding: 25px;
-    }
-
-    .modal-title {
-      color: #ff0080;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .modal-buttons {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .modal-btn {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #ff0080, #ff6b9d);
-      color: white;
-    }
-
-    .btn-secondary {
-      background: #f8f9fa;
-      color: #666;
-      border: 2px solid #e0e0e0;
-    }
-
-    /* ALERTAS */
-    .alert {
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .alert-success {
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-
-    .alert-danger {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-    }
-
-    /* NAVEGAÇÃO INFERIOR */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: white;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: #666;
-      font-size: 12px;
-    }
-
-    .nav-item.active {
-      color: #ff0080;
-    }
-
-    .nav-icon {
-      font-size: 20px;
-      margin-bottom: 2px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <style>
+        /* Cores principais usadas no sistema */
+        :root {
+            --primary-color: #2c3e50;    /* Azul escuro para títulos */
+            --secondary-color: #3498db;   /* Azul para botões */
+            --light-color: #ecf0f1;       /* Cinza claro para fundos */
+            --danger-color: #e74c3c;      /* Vermelho para botão sair */
+        }
+        
+        /* Remove margens e padding padrão de todos elementos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;       /* Inclui padding no cálculo de largura */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Estilo do corpo da página */
+        body {
+            background-color: #f5f5f5;    /* Fundo cinza bem claro */
+            color: #333;                  /* Cor do texto principal */
+            line-height: 1.6;             /* Espaço entre linhas */
+        }
+        
+        /* Container que centraliza o conteúdo na página */
+        .container {
+            max-width: 800px;             /* Largura máxima do conteúdo */
+            margin: 0 auto;               /* Centraliza na página */
+            padding: 20px;                /* Espaço interno */
+        }
+        
+        /* Cartão principal do perfil */
+        .profile-card {
+            background-color: white;      /* Fundo branco */
+            border-radius: 10px;          /* Cantos arredondados */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+            padding: 25px;                /* Espaço interno */
+            margin-bottom: 20px;          /* Espaço abaixo do cartão */
+        }
+        
+        /* Cabeçalho com foto e informações básicas */
+        .profile-header {
+            display: flex;                /* Alinha foto e texto lado a lado */
+            align-items: center;          /* Centraliza verticalmente */
+            margin-bottom: 20px;          /* Espaço abaixo do cabeçalho */
+        }
+        
+        /* Estilo da foto de perfil */
+        .profile-picture {
+            width: 80px;                  /* Largura da foto */
+            height: 80px;                 /* Altura da foto */
+            border-radius: 50%;           /* Torna a foto redonda */
+            object-fit: cover;            /* Ajusta imagem para caber no espaço */
+            margin-right: 20px;           /* Espaço entre foto e texto */
+            border: 3px solid var(--secondary-color);  /* Borda azul */
+            cursor: pointer;              /* Mostra que é clicável */
+        }
+        
+        /* Área das informações do usuário */
+        .profile-info h1 {
+            font-size: 24px;              /* Tamanho do nome */
+            margin-bottom: 5px;           /* Espaço abaixo do nome */
+            cursor: pointer;              /* Mostra que é clicável */
+        }
+        
+        .profile-info p {
+            color: #666;                  /* Texto em cinza */
+            margin-bottom: 5px;           /* Espaço entre linhas */
+            cursor: pointer;              /* Mostra que é clicável */
+        }
+        
+        /* Seção do cashback */
+        .cashback-section {
+            background-color: var(--light-color);  /* Fundo cinza claro */
+            padding: 15px;                /* Espaço interno */
+            border-radius: 8px;           /* Cantos arredondados */
+            margin-bottom: 20px;          /* Espaço abaixo */
+        }
+        
+        .cashback-section h2 {
+            font-size: 18px;              /* Tamanho do título */
+            margin-bottom: 10px;          /* Espaço abaixo do título */
+        }
+        
+        .cashback-amount {
+            font-size: 24px;              /* Tamanho do valor */
+            font-weight: bold;            /* Texto em negrito */
+            color: var(--primary-color);  /* Cor azul escuro */
+        }
+        
+        /* Linha divisória */
+        hr {
+            border: none;                 /* Remove borda padrão */
+            height: 1px;                  /* Altura da linha */
+            background-color: #ddd;       /* Cor cinza */
+            margin: 20px 0;               /* Espaço acima e abaixo */
+        }
+        
+        /* Seção do endereço */
+        .address-section h2 {
+            font-size: 18px;              /* Tamanho do título */
+            margin-bottom: 10px;          /* Espaço abaixo do título */
+        }
+        
+        .address-text {
+            color: #666;                  /* Texto em cinza */
+            margin-bottom: 20px;          /* Espaço abaixo do endereço */
+            cursor: pointer;              /* Mostra que é clicável */
+        }
+        
+        /* Seção de ações rápidas */
+        .quick-actions h2 {
+            font-size: 18px;              /* Tamanho do título */
+            margin-bottom: 15px;          /* Espaço abaixo do título */
+        }
+        
+        /* Grade dos botões de ação */
+        .action-buttons {
+            display: grid;                /* Layout em grade */
+            grid-template-columns: 1fr 1fr;  /* Duas colunas iguais */
+            gap: 10px;                    /* Espaço entre botões */
+            margin-bottom: 20px;          /* Espaço abaixo dos botões */
+        }
+        
+        /* Estilo dos botões de ação */
+        .action-btn {
+            background-color: var(--secondary-color);  /* Cor azul */
+            color: white;                 /* Texto branco */
+            border: none;                 /* Remove borda padrão */
+            padding: 12px;                /* Espaço interno */
+            border-radius: 5px;           /* Cantos arredondados */
+            cursor: pointer;              /* Mostra que é clicável */
+            font-size: 16px;              /* Tamanho do texto */
+            transition: background-color 0.3s;  /* Transição suave de cor */
+        }
+        
+        /* Efeito quando passa mouse sobre botões */
+        .action-btn:hover {
+            background-color: #2980b9;    /* Azul mais escuro */
+        }
+        
+        /* Botão de sair */
+        .logout-btn {
+            background-color: var(--danger-color);  /* Cor vermelha */
+            color: white;                 /* Texto branco */
+            border: none;                 /* Remove borda padrão */
+            padding: 12px 20px;           /* Espaço interno */
+            border-radius: 5px;           /* Cantos arredondados */
+            cursor: pointer;              /* Mostra que é clicável */
+            font-size: 16px;              /* Tamanho do texto */
+            width: 100%;                  /* Largura total */
+            transition: background-color 0.3s;  /* Transição suave de cor */
+        }
+        
+        /* Efeito quando passa mouse sobre botão sair */
+        .logout-btn:hover {
+            background-color: #c0392b;    /* Vermelho mais escuro */
+        }
+        
+        /* Modal para editar perfil */
+        .modal {
+            display: none;                /* Começa escondido */
+            position: fixed;              /* Fica fixo na tela */
+            top: 0;                       /* Topo da tela */
+            left: 0;                      /* Esquerda da tela */
+            width: 100%;                  /* Largura total */
+            height: 100%;                 /* Altura total */
+            background-color: rgba(0, 0, 0, 0.5);  /* Fundo escuro transparente */
+            z-index: 1000;                /* Fica acima de tudo */
+            justify-content: center;      /* Centraliza horizontalmente */
+            align-items: center;          /* Centraliza verticalmente */
+        }
+        
+        /* Conteúdo do modal */
+        .modal-content {
+            background-color: white;      /* Fundo branco */
+            padding: 30px;                /* Espaço interno */
+            border-radius: 10px;          /* Cantos arredondados */
+            width: 90%;                   /* Largura do modal */
+            max-width: 500px;             /* Largura máxima */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Sombra */
+        }
+        
+        /* Título do modal */
+        .modal h2 {
+            margin-bottom: 20px;          /* Espaço abaixo do título */
+            color: var(--primary-color);  /* Cor azul escuro */
+        }
+        
+        /* Grupo de campos do formulário */
+        .form-group {
+            margin-bottom: 15px;          /* Espaço entre campos */
+        }
+        
+        /* Rótulo dos campos */
+        .form-group label {
+            display: block;               /* Ocupa linha inteira */
+            margin-bottom: 5px;           /* Espaço abaixo do rótulo */
+            font-weight: bold;            /* Texto em negrito */
+        }
+        
+        /* Campos de entrada */
+        .form-group input {
+            width: 100%;                  /* Largura total */
+            padding: 10px;                /* Espaço interno */
+            border: 1px solid #ddd;       /* Borda cinza */
+            border-radius: 5px;           /* Cantos arredondados */
+            font-size: 16px;              /* Tamanho do texto */
+        }
+        
+        /* Botões do modal */
+        .modal-buttons {
+            display: flex;                /* Alinha botões lado a lado */
+            justify-content: flex-end;    /* Alinha à direita */
+            gap: 10px;                    /* Espaço entre botões */
+            margin-top: 20px;             /* Espaço acima dos botões */
+        }
+        
+        /* Botão salvar */
+        .save-btn {
+            background-color: var(--secondary-color);  /* Cor azul */
+            color: white;                 /* Texto branco */
+            border: none;                 /* Remove borda padrão */
+            padding: 10px 20px;           /* Espaço interno */
+            border-radius: 5px;           /* Cantos arredondados */
+            cursor: pointer;              /* Mostra que é clicável */
+        }
+        
+        /* Botão cancelar */
+        .cancel-btn {
+            background-color: #95a5a6;    /* Cor cinza */
+            color: white;                 /* Texto branco */
+            border: none;                 /* Remove borda padrão */
+            padding: 10px 20px;           /* Espaço interno */
+            border-radius: 5px;           /* Cantos arredondados */
+            cursor: pointer;              /* Mostra que é clicável */
+        }
+        
+        /* Input de upload de foto (escondido) */
+        #photo-upload {
+            display: none;                /* Não mostra o input padrão */
+        }
+    </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo-container">
-      <div class="logo-image"></div>
-      <h1>GelaTec</h1>
+    <!-- Container principal que envolve todo conteúdo -->
+    <div class="container">
+        <!-- Cartão com informações do perfil -->
+        <div class="profile-card">
+            <!-- Cabeçalho com foto e informações -->
+            <div class="profile-header">
+                <!-- Foto de perfil do usuário -->
+                <img id="profile-picture" src="https://via.placeholder.com/80" alt="Foto de perfil" class="profile-picture">
+                <!-- Informações do usuário -->
+                <div class="profile-info">
+                    <!-- Nome do usuário (clicável para editar) -->
+                    <h1 id="user-name">Seu Nome</h1>
+                    <!-- Email do usuário (clicável para editar) -->
+                    <p id="user-email">seu.email@exemplo.com</p>
+                    <!-- Idade do usuário (clicável para editar) -->
+                    <p id="user-age">Sua idade</p>
+                </div>
+            </div>
+            
+            <!-- Seção do cashback -->
+            <div class="cashback-section">
+                <h2>Cashback</h2>
+                <!-- Valor do cashback -->
+                <div class="cashback-amount" id="cashback-amount">R$ 0</div>
+            </div>
+            
+            <!-- Linha divisória -->
+            <hr>
+            
+            <!-- Seção do endereço -->
+            <div class="address-section">
+                <h2>Meu Endereço</h2>
+                <!-- Endereço do usuário (clicável para editar) -->
+                <p class="address-text" id="user-address">Seu endereço</p>
+            </div>
+            
+            <!-- Seção de ações rápidas -->
+            <div class="quick-actions">
+                <h2>Ações Rápidas</h2>
+                <!-- Grade com botões de ação -->
+                <div class="action-buttons">
+                    <!-- Botão para ver pedidos -->
+                    <button class="action-btn" id="orders-btn">Pedidos</button>
+                    <!-- Botão para caridade -->
+                    <button class="action-btn" id="charity-btn">Minha Caridade</button>
+                    <!-- Botão para suporte -->
+                    <button class="action-btn" id="support-btn">Suporte</button>
+                    <!-- Botão para configurações -->
+                    <button class="action-btn" id="settings-btn">Configurações</button>
+                </div>
+            </div>
+            
+            <!-- Linha divisória -->
+            <hr>
+            
+            <!-- Botão para sair da conta -->
+            <button class="logout-btn" id="logout-btn">Sair da Conta</button>
+        </div>
     </div>
-    <p>Meu Perfil</p>
-  </header>
-
-  <div class="page-container">
-    <h1 class="page-title">Meu Perfil 👤</h1>
-
-    <!-- Área de alertas -->
-    <div id="alertMessage" class="alert"></div>
-
-    <!-- SEÇÃO DE LOGIN -->
-    <div id="login-section">
-      <div class="login-form">
-        <h2 style="color: #ff0080; margin-bottom: 20px; text-align: center;">Faça seu Login</h2>
-
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" class="form-control" placeholder="seu@email.com">
+    
+    <!-- Modal para editar informações do perfil -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <!-- Título do modal -->
+            <h2>Editar Perfil</h2>
+            <!-- Formulário de edição -->
+            <form id="edit-form">
+                <!-- Campo para editar nome -->
+                <div class="form-group">
+                    <label for="edit-name">Nome</label>
+                    <input type="text" id="edit-name" required>
+                </div>
+                <!-- Campo para editar email -->
+                <div class="form-group">
+                    <label for="edit-email">Email</label>
+                    <input type="email" id="edit-email" required>
+                </div>
+                <!-- Campo para editar idade -->
+                <div class="form-group">
+                    <label for="edit-age">Idade</label>
+                    <input type="text" id="edit-age">
+                </div>
+                <!-- Campo para editar endereço -->
+                <div class="form-group">
+                    <label for="edit-address">Endereço</label>
+                    <input type="text" id="edit-address">
+                </div>
+                <!-- Campo para editar cashback -->
+                <div class="form-group">
+                    <label for="edit-cashback">Cashback (R$)</label>
+                    <input type="number" id="edit-cashback" min="0" step="0.01">
+                </div>
+                <!-- Botões do modal -->
+                <div class="modal-buttons">
+                    <!-- Botão para cancelar edição -->
+                    <button type="button" class="cancel-btn" id="cancel-edit">Cancelar</button>
+                    <!-- Botão para salvar alterações -->
+                    <button type="submit" class="save-btn">Salvar</button>
+                </div>
+            </form>
         </div>
-        
-        <div class="form-group">
-          <label for="password">Senha</label>
-          <input type="password" id="password" class="form-control" placeholder="Sua senha">
-        </div>
-        
-        <button class="login-btn" onclick="login()">Entrar</button>
-
-        <div class="register-link">
-          Não tem conta? <a href="#">Cadastre-se</a>
-        </div>
-      </div>
     </div>
-
-    <!-- SEÇÃO DE PERFIL -->
-    <div id="profile-section" class="hidden">
-      <div class="user-info">
-        <div class="user-avatar">👤</div>
-        <h2 class="user-name" id="user-name">Maria Silva</h2>
-        <p class="user-email" id="user-email">maria.silva@email.com</p>
-
-        <!-- Botão para editar perfil -->
-        <button class="edit-profile-btn" onclick="openEditModal()">Editar Perfil</button>
-
-        <!-- Itens do perfil -->
-        <div class="profile-item">
-          <div class="profile-item-content">
-            <span style="font-weight: 600;">Meus Pedidos</span>
-            <span style="color: #ff0080;">›</span>
-          </div>
-        </div>
-
-        <div class="profile-item">
-          <div class="profile-item-content">
-            <span style="font-weight: 600;" id="user-address">Endereço: Não cadastrado</span>
-            <span style="color: #ff0080;">›</span>
-          </div>
-        </div>
-
-        <div class="profile-item">
-          <div class="profile-item-content">
-            <span style="font-weight: 600;" id="user-cashback">Cashback: R$ 0,00</span>
-            <span style="color: #ff0080;">›</span>
-          </div>
-        </div>
-
-        <button class="logout-btn" onclick="logout()">Sair da Conta</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL DE EDIÇÃO -->
-  <div id="editProfileModal" class="modal">
-    <div class="modal-content">
-      <h2 class="modal-title">Editar Perfil</h2>
-      <form id="profileForm">
-        <div class="form-group">
-          <label for="editName">Nome</label>
-          <input type="text" id="editName" class="form-control" required>
-        </div>
+    
+    <!-- Input escondido para upload de foto -->
+    <input type="file" id="photo-upload" accept="image/*">
+    
+    <script>
+        // Dados iniciais vazios para novo usuário
+        const defaultUserData = {
+            name: "Seu Nome",             // Nome padrão
+            email: "seu.email@exemplo.com", // Email padrão
+            age: "Sua idade",             // Idade padrão
+            address: "Seu endereço",      // Endereço padrão
+            cashback: 0,                  // Cashback inicial zero
+            profilePicture: "https://via.placeholder.com/80"  // Foto padrão
+        };
         
-        <div class="form-group">
-          <label for="editEmail">E-mail</label>
-          <input type="email" id="editEmail" class="form-control" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="editAddress">Endereço</label>
-          <input type="text" id="editAddress" class="form-control" placeholder="Digite seu endereço completo">
-        </div>
-        
-        <div class="form-group">
-          <label for="editCashback">Cashback (R$)</label>
-          <input type="number" id="editCashback" class="form-control" min="0" step="0.01" placeholder="0.00">
-        </div>
-        
-        <div class="modal-buttons">
-          <button type="button" class="modal-btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
-          <button type="submit" class="modal-btn btn-primary">Salvar Alterações</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- NAVEGAÇÃO -->
-  <nav class="bottom-nav">
-    <a href="index.html" class="nav-item">
-      <span class="nav-icon">🏠</span>
-      <span>Início</span>
-    </a>
-    <a href="p2.html" class="nav-item">
-      <span class="nav-icon">📋</span>
-      <span>Cardápio</span>
-    </a>
-    <a href="p3.html" class="nav-item active">
-      <span class="nav-icon">👤</span>
-      <span>Perfil</span>
-    </a>
-    <a href="carrinho.html" class="nav-item">
-      <span class="nav-icon">🛒</span>
-      <span>Carrinho</span>
-    </a>
-  </nav>
-
-  <script>
-    // Dados do usuário
-    let userProfile = {
-      name: "Maria Silva",
-      email: "maria.silva@email.com",
-      address: "",
-      cashback: 0,
-      loggedIn: false
-    };
-
-    // Mostrar alerta
-    function showAlert(message, type) {
-      const alertElement = document.getElementById('alertMessage');
-      alertElement.textContent = message;
-      alertElement.className = `alert alert-${type}`;
-      alertElement.style.display = 'block';
-      
-      setTimeout(() => {
-        alertElement.style.display = 'none';
-      }, 4000);
-    }
-
-    // Carregar perfil do localStorage
-    function loadProfile() {
-      const savedProfile = localStorage.getItem('userProfile');
-      if (savedProfile) {
-        userProfile = JSON.parse(savedProfile);
-        updateProfileDisplay();
-        
-        // Se estava logado, mostrar perfil
-        if (userProfile.loggedIn) {
-          showProfileSection();
+        // Função para carregar dados do usuário do navegador
+        function loadUserData() {
+            // Pega dados salvos no localStorage
+            const savedData = localStorage.getItem('userProfileData');
+            // Se existir dados salvos, usa eles, senão usa os dados padrão
+            return savedData ? JSON.parse(savedData) : defaultUserData;
         }
-      }
-    }
-
-    // Atualizar exibição do perfil
-    function updateProfileDisplay() {
-      document.getElementById('user-name').textContent = userProfile.name;
-      document.getElementById('user-email').textContent = userProfile.email;
-      
-      // Endereço
-      const addressElement = document.getElementById('user-address');
-      if (userProfile.address && userProfile.address.trim() !== '') {
-        addressElement.textContent = `Endereço: ${userProfile.address}`;
-      } else {
-        addressElement.textContent = 'Endereço: Não cadastrado';
-      }
-      
-      // Cashback
-      document.getElementById('user-cashback').textContent = 
-        `Cashback: R$ ${userProfile.cashback.toFixed(2).replace('.', ',')}`;
-    }
-
-    // Salvar perfil no localStorage
-    function saveProfile() {
-      localStorage.setItem('userProfile', JSON.stringify(userProfile));
-    }
-
-    // Login
-    function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      
-      if (email && password) {
-        // Atualizar email no perfil
-        userProfile.email = email;
-        userProfile.loggedIn = true;
         
-        saveProfile();
-        updateProfileDisplay();
-        showProfileSection();
-        
-        showAlert('Login realizado com sucesso!', 'success');
-      } else {
-        showAlert('Por favor, preencha todos os campos!', 'danger');
-      }
-    }
-
-    // Mostrar seção do perfil
-    function showProfileSection() {
-      document.getElementById('login-section').classList.add('hidden');
-      document.getElementById('profile-section').classList.remove('hidden');
-    }
-
-    // Logout
-    function logout() {
-      if (confirm('Tem certeza que deseja sair da conta?')) {
-        userProfile.loggedIn = false;
-        saveProfile();
-        
-        document.getElementById('login-section').classList.remove('hidden');
-        document.getElementById('profile-section').classList.add('hidden');
-        document.getElementById('email').value = '';
-        document.getElementById('password').value = '';
-        
-        showAlert('Você saiu da conta.', 'success');
-      }
-    }
-
-    // Modal de edição
-    function openEditModal() {
-      document.getElementById('editProfileModal').style.display = 'flex';
-      document.getElementById('editName').value = userProfile.name;
-      document.getElementById('editEmail').value = userProfile.email;
-      document.getElementById('editAddress').value = userProfile.address;
-      document.getElementById('editCashback').value = userProfile.cashback;
-    }
-
-    function closeEditModal() {
-      document.getElementById('editProfileModal').style.display = 'none';
-    }
-
-    // Event Listeners
-    document.addEventListener('DOMContentLoaded', function() {
-      loadProfile();
-      
-      // Formulário de edição
-      document.getElementById('profileForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        userProfile.name = document.getElementById('editName').value;
-        userProfile.email = document.getElementById('editEmail').value;
-        userProfile.address = document.getElementById('editAddress').value;
-        userProfile.cashback = parseFloat(document.getElementById('editCashback').value) || 0;
-        
-        saveProfile();
-        updateProfileDisplay();
-        closeEditModal();
-        
-        showAlert('Perfil atualizado com sucesso!', 'success');
-      });
-      
-      // Fechar modal ao clicar fora
-      window.addEventListener('click', function(e) {
-        const modal = document.getElementById('editProfileModal');
-        if (e.target === modal) {
-          closeEditModal();
+        // Função para salvar dados do usuário no navegador
+        function saveUserData(userData) {
+            // Converte objeto para texto e salva no localStorage
+            localStorage.setItem('userProfileData', JSON.stringify(userData));
         }
-      });
-    });
-  </script>
+        
+        // Função para atualizar o que aparece na tela
+        function updateDisplay(userData) {
+            // Atualiza nome na tela
+            document.getElementById('user-name').textContent = userData.name;
+            // Atualiza email na tela
+            document.getElementById('user-email').textContent = userData.email;
+            // Atualiza idade na tela
+            document.getElementById('user-age').textContent = userData.age;
+            // Atualiza endereço na tela
+            document.getElementById('user-address').textContent = userData.address;
+            // Atualiza cashback na tela
+            document.getElementById('cashback-amount').textContent = `R$ ${userData.cashback}`;
+            // Atualiza foto na tela
+            document.getElementById('profile-picture').src = userData.profilePicture;
+        }
+        
+        // Função para abrir a janela de edição
+        function openEditModal(userData) {
+            // Coloca os dados atuais nos campos do formulário
+            document.getElementById('edit-name').value = userData.name;
+            document.getElementById('edit-email').value = userData.email;
+            document.getElementById('edit-age').value = userData.age;
+            document.getElementById('edit-address').value = userData.address;
+            document.getElementById('edit-cashback').value = userData.cashback;
+            
+            // Mostra a janela de edição
+            document.getElementById('edit-modal').style.display = 'flex';
+        }
+        
+        // Função para fechar a janela de edição
+        function closeEditModal() {
+            // Esconde a janela de edição
+            document.getElementById('edit-modal').style.display = 'none';
+        }
+        
+        // Função para trocar a foto de perfil
+        function handlePhotoUpload(event) {
+            // Pega o arquivo de imagem que usuário selecionou
+            const file = event.target.files[0];
+            
+            // Verifica se usuário selecionou um arquivo
+            if (file) {
+                // Cria um leitor de arquivos
+                const reader = new FileReader();
+                
+                // O que acontece quando terminar de ler o arquivo
+                reader.onload = function(e) {
+                    // Carrega dados atuais do usuário
+                    const userData = loadUserData();
+                    // Troca a foto pelos dados da nova imagem
+                    userData.profilePicture = e.target.result;
+                    // Salva dados atualizados
+                    saveUserData(userData);
+                    // Atualiza a tela
+                    updateDisplay(userData);
+                };
+                
+                // Lê o arquivo de imagem
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // Função para sair da conta
+        function logout() {
+            // Remove dados do usuário do navegador
+            localStorage.removeItem('userProfileData');
+            // Mostra mensagem de saída
+            alert('Você saiu da conta. Suas informações foram removidas.');
+            // Recarrega a página para voltar ao estado inicial
+            location.reload();
+        }
+        
+        // Quando a página terminar de carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carrega dados do usuário
+            const userData = loadUserData();
+            // Atualiza a tela com os dados
+            updateDisplay(userData);
+            
+            // Quando clicar na foto de perfil
+            document.getElementById('profile-picture').addEventListener('click', function() {
+                // Abre seletor de arquivos para escolher nova foto
+                document.getElementById('photo-upload').click();
+            });
+            
+            // Quando usuário selecionar uma nova foto
+            document.getElementById('photo-upload').addEventListener('change', handlePhotoUpload);
+            
+            // Quando clicar no nome (abre edição)
+            document.getElementById('user-name').addEventListener('click', function() {
+                openEditModal(userData);
+            });
+            
+            // Quando clicar no email (abre edição)
+            document.getElementById('user-email').addEventListener('click', function() {
+                openEditModal(userData);
+            });
+            
+            // Quando clicar na idade (abre edição)
+            document.getElementById('user-age').addEventListener('click', function() {
+                openEditModal(userData);
+            });
+            
+            // Quando clicar no endereço (abre edição)
+            document.getElementById('user-address').addEventListener('click', function() {
+                openEditModal(userData);
+            });
+            
+            // Quando clicar no botão cancelar do modal
+            document.getElementById('cancel-edit').addEventListener('click', closeEditModal);
+            
+            // Quando enviar o formulário de edição
+            document.getElementById('edit-form').addEventListener('submit', function(e) {
+                // Impede o comportamento padrão do formulário
+                e.preventDefault();
+                
+                // Pega valores digitados nos campos
+                const updatedData = {
+                    name: document.getElementById('edit-name').value,
+                    email: document.getElementById('edit-email').value,
+                    age: document.getElementById('edit-age').value,
+                    address: document.getElementById('edit-address').value,
+                    cashback: parseFloat(document.getElementById('edit-cashback').value) || 0,
+                    profilePicture: userData.profilePicture  // Mantém a foto atual
+                };
+                
+                // Salva dados atualizados
+                saveUserData(updatedData);
+                // Atualiza a tela
+                updateDisplay(updatedData);
+                // Fecha janela de edição
+                closeEditModal();
+            });
+            
+            // Quando clicar no botão sair
+            document.getElementById('logout-btn').addEventListener('click', logout);
+            
+            // Ações dos botões rápidos (apenas exemplos)
+            document.getElementById('orders-btn').addEventListener('click', function() {
+                alert('Abrindo página de Pedidos...');
+            });
+            
+            document.getElementById('charity-btn').addEventListener('click', function() {
+                alert('Abrindo página de Caridade...');
+            });
+            
+            document.getElementById('support-btn').addEventListener('click', function() {
+                alert('Abrindo página de Suporte...');
+            });
+            
+            document.getElementById('settings-btn').addEventListener('click', function() {
+                alert('Abrindo página de Configurações...');
+            });
+        });
+    </script>
 </body>
 </html>
