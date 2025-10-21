@@ -12,6 +12,30 @@
   <!-- Título da página que aparece na aba do navegador -->
   <link rel="stylesheet" href="style.css">
   <!-- Importa o arquivo CSS externo para estilização -->
+  <style>
+    /* Estilos adicionais para posicionar as logos corretamente */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    .logo-left, .logo-right {
+      height: 60px; /* Ajuste conforme necessário */
+      width: auto;
+    }
+    .logo-left {
+      margin-right: auto;
+    }
+    .logo-right {
+      margin-left: auto;
+    }
+    .header h1 {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
 </head>
 <body>
   <!-- Início do corpo do documento -->
@@ -20,13 +44,13 @@
   <!-- Cabeçalho principal da página -->
   <div class="logo-container">
     <!-- Container para as logos da empresa -->
-    <!-- Mude class="Logo.png" para class="logo-img" -->
-    <img src="Logo.png" alt="GelaTec Logo" class="logo-img">
-    <!-- logo da empresa -->
-     <img src="logoset.png" alt="GelaTec Logo" class="logo-img">
+    <!-- Logo do lado esquerdo -->
+    <img src="Logo.png" alt="GelaTec Logo" class="logo-left">
+    <!-- Logo do lado direito -->
+    <img src="logoset.png" alt="GelaTec Logo" class="logo-right">
   </div>
-      <h1 style="font-size: 3rem;">Gelatec</h1>
-      <!-- Título principal da página com estilo inline -->
+  <h1 style="font-size: 3rem;">Gelatec</h1>
+  <!-- Título principal da página com estilo inline -->
   <p>Loja aberta - Entrega rápida</p>
   <!-- Subtítulo informativo -->
 </header>
@@ -50,7 +74,7 @@
 
   <div class="section-title">
     <!-- Container do título da seção de cupons -->
-    <h3>Combos Imperdíveis para consumir 🎫</h3>
+    <h3>Cupons para consumir 🎫</h3>
     <!-- Título da seção com emoji -->
     <a href="p2.html">Ver todos ›</a>
     <!-- Link para ver todos os cupons -->
