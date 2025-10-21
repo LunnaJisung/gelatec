@@ -1,374 +1,299 @@
 <!DOCTYPE html>
-<!-- Declaração do tipo de documento como HTML5 -->
 <html lang="pt-BR">
-<!-- Elemento raiz do documento com idioma português brasileiro -->
 <head>
-  <!-- Cabeçalho do documento com metadados -->
   <meta charset="UTF-8">
-  <!-- Define a codificação de caracteres como UTF-8 para suportar acentos e caracteres especiais -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Configura a viewport para responsividade em dispositivos móveis -->
   <title>Cardápio - GelaTec</title>
-  <!-- Título da página que aparece na aba do navegador -->
-  <link rel="stylesheet" href="style.css">
-  <!-- Importa o arquivo CSS externo para estilização -->
- <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        body {
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
+    body {
+      background-color: #f8f9fa;
+      padding: 0;
+      margin: 0;
+    }
 
-        /* Estilo da barra de navegação */
-        .navbar {
-            background: linear-gradient(135deg, #ff0080, #e91e63);
-            padding: 15px 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
-            margin-bottom: 30px;
-        }
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #ff0080, #e91e63);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-bottom: 0;
+      width: 100%;
+    }
 
-        .nav-list {
-            display: flex;
-            list-style: none;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
 
-        .nav-item {
-            position: relative;
-            margin: 0 10px;
-        }
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
 
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    /* FILTROS */
+    .category-filter {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+      background-color: white;
+      flex-wrap: wrap;
+    }
 
-        .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
+    .category-btn {
+      padding: 12px 25px;
+      background-color: white;
+      border: 2px solid #e91e63;
+      border-radius: 25px;
+      color: #e91e63;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
+    .category-btn:hover, .category-btn.active {
+      background-color: #e91e63;
+      color: white;
+    }
 
-        /* Estilos para o badge do carrinho */
-        .cart-badge {
-            background: #ffeb3b;
-            color: #e91e63;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            position: absolute;
-            top: -5px;
-            right: 10px;
-        }
+    /* GRID DE PRODUTOS */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      padding: 30px;
+      background-color: #ffebee;
+      min-height: calc(100vh - 300px);
+      width: 100%;
+    }
 
-        /* Conteúdo da página */
-        .content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+    .product-card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
 
-        h1 {
-            color: #e91e63;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
 
-        p {
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 15px;
-        }
+    .cashback-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #4caf50;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      z-index: 10;
+    }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .nav-list {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-item {
-                margin: 5px;
-            }
-            
-            .nav-link {
-                padding: 8px 15px;
-                font-size: 14px;
-            }
-        }
-    </style>
-</head>
+    .product-image {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      background-color: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-name {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #333;
+      flex-grow: 1;
+    }
+
+    .product-price {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #e91e63;
+      margin-bottom: 15px;
+    }
+
+    .add-to-cart-btn {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #c2185b;
+    }
+
+    /* NAVEGAÇÃO INFERIOR */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: white;
+      padding: 15px 0;
+      border-top: 2px solid #f0f0f0;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #666;
+      padding: 5px 15px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-item.active {
+      color: #e91e63;
+    }
+
+    .nav-item:hover {
+      background-color: #f8f9fa;
+    }
+
+    .nav-icon {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .nav-item span:last-child {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* BADGE DO CARRINHO */
+    .cart-badge {
+      background: #ff0080;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      position: absolute;
+      top: 0;
+      right: 5px;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        padding: 20px;
+        gap: 20px;
+      }
+      
+      .category-filter {
+        gap: 10px;
+        padding: 15px;
+      }
+      
+      .category-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+      }
+      
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .header p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Início do corpo do documento -->
-
   <header class="header">
-    <!-- Cabeçalho principal da página -->
     <h1>Cardápio Completo</h1>
-    <!-- Título principal da página -->
     <p>Escolha seus produtos favoritos</p>
-    <!-- Subtítulo descritivo -->
   </header>
 
   <!-- FILTROS DE CATEGORIA -->
   <div class="category-filter">
-    <!-- Container dos botões de filtro por categoria -->
     <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
-    <!-- Botão para mostrar todos os produtos (ativo por padrão) -->
     <button class="category-btn" onclick="filterCategory('tradicionais')">Tradicionais</button>
-    <!-- Botão para filtrar produtos tradicionais -->
     <button class="category-btn" onclick="filterCategory('gourmet')">Gourmet</button>
-    <!-- Botão para filtrar produtos gourmet -->
     <button class="category-btn" onclick="filterCategory('kits')">Kits</button>
-    <!-- Botão para filtrar kits -->
   </div>
 
   <!-- GRID DE PRODUTOS -->
   <div class="product-grid" id="product-grid">
-    <!-- Container principal dos produtos usando CSS Grid -->
-   <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geladinhos - Produtos</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            color: branco;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .product-card {
-            background-color: #ffebee; /* Cor rosa clara */
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .cashback-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #4caf50;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            z-index: 10;
-        }
-
-        .product-image {
-            width: 100%;
-            height: 180px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-
-        .product-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #333;
-            flex-grow: 1;
-        }
-
-        .product-price {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #e91e63;
-            margin-bottom: 15px;
-        }
-
-        .add-to-cart-btn {
-            background-color: #e91e63;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
-        }
-
-        .add-to-cart-btn:hover {
-            background-color: #c2185b;
-        }
-
-        /* Filtros */
-        .filter-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            background-color: white;
-            border: 2px solid #e91e63;
-            border-radius: 25px;
-            color: #e91e63;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background-color: #e91e63;
-            color: white;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .filter-buttons {
-                gap: 10px;
-            }
-            
-            .filter-btn {
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Nossos Geladinhos</h1>
-        
-        <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="tradicionais">Tradicionais</button>
-            <button class="filter-btn" data-filter="gourmet">Gourmet</button>
-            <button class="filter-btn" data-filter="kits">Kits</button>
-        </div>
-        
-        <div class="products-grid">
-          <!-- PRODUTOS TRADICIONAIS -->
+    <!-- PRODUTOS TRADICIONAIS -->
     <div class="product-card" data-category="tradicionais">
-      <!-- Cartão do produto com atributo de categoria para filtro -->
       <span class="cashback-badge">3% Cashback</span>
-      <!-- Badge mostrando porcentagem de cashback -->
-    
       <div class="product-image">
-        <!-- Container da imagem do produto -->
-        <img src="morango.png" alt="morango" width="300" height="130">
-        <!-- Imagem do produto geladinho de morango -->
+        <img src="morango.png" alt="morango">
       </div>
-      
       <div class="product-name">Geladinho de Morango</div>
-      <!-- Nome do produto -->
       <div class="product-price">R$ 2,50</div>
-      <!-- Preço do produto -->
       <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Morango', 2.50, '🍓')">Adicionar</button>
-      <!-- Botão para adicionar produto ao carrinho -->
     </div>
 
     <div class="product-card" data-category="tradicionais">
-      <!-- Segundo produto tradicional -->
       <span class="cashback-badge">3% Cashback</span>
-      
       <div class="product-image">
-        <img src="maracuja.png" alt="maracuja" width="300" height="130">
-        <!-- Imagem do produto geladinho de maracujá -->
+        <img src="maracuja.png" alt="maracuja">
       </div>
-      
       <div class="product-name">Geladinho de Maracujá</div>
       <div class="product-price">R$ 2,50</div>
       <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Maracujá', 2.50, '🟡')">Adicionar</button>
@@ -376,54 +301,40 @@
 
     <!-- PRODUTOS GOURMET -->
     <div class="product-card" data-category="gourmet">
-      <!-- Primeiro produto gourmet -->
       <span class="cashback-badge">5% Cashback</span>
-      <!-- Cashback maior para produtos gourmet -->
-      
       <div class="product-image">
-        <img src="chocolate.png" alt="chocolate" width="300" height="130">
-        <!-- Imagem do produto gourmet chocolate -->
+        <img src="chocolate.png" alt="chocolate">
       </div>
-      
       <div class="product-name">Gourmet Chocolate</div>
       <div class="product-price">R$ 4,00</div>
-      <!-- Preço mais alto para produto gourmet -->
       <button class="add-to-cart-btn" onclick="addToCart('Gourmet Chocolate', 4.00, '🍫')">Adicionar</button>
     </div>
     
     <div class="product-card" data-category="gourmet">
-      <!-- Segundo produto gourmet -->
       <span class="cashback-badge">5% Cashback</span>
       <div class="product-image">
-        <img src="chocomara.jpeg" alt="chocolate" width="300" height="130">
-        <!-- Imagem do produto gourmet maracujá com chocolate -->
+        <img src="chocomara.jpeg" alt="chocolate">
       </div>
       <div class="product-name">Gourmet Maracujá com chocolate</div>
       <div class="product-price">R$ 4,00</div>
-      <button class="add-to-cart-btn" onclick="addToCart('Gourmet Maracujá com chocolate', 4.00, '🍫+🟡 ')">Adicionar</button>
+      <button class="add-to-cart-btn" onclick="addToCart('Gourmet Maracujá com chocolate', 4.00, '🍫+🟡')">Adicionar</button>
     </div>
 
     <!-- KITS -->
     <div class="product-card" data-category="kits">
-      <!-- Primeiro kit -->
       <span class="cashback-badge">7% Cashback</span>
-      <!-- Cashback maior para kits -->
       <div class="product-image">
-        <img src="gela3.jpeg" alt="chocolate" width="300" height="130">
-        <!-- Imagem do kit com 3 geladinhos -->
+        <img src="gela3.jpeg" alt="chocolate">
       </div>
       <div class="product-name">Kit completo com 3 geladinhos</div>
       <div class="product-price">R$ 13,00</div>
-      <!-- Preço do kit (valor agregado) -->
       <button class="add-to-cart-btn" onclick="addToCart('Kit completo com 3 geladinhos', 13.00, '🟡')">Adicionar</button>
     </div>
 
     <div class="product-card" data-category="kits">
-      <!-- Segundo kit -->
       <span class="cashback-badge">7% Cashback</span>
       <div class="product-image">
-        <img src="cax.png" alt="cax" width="300" height="130">
-        <!-- Imagem do kit "leve 10 e pague 8" -->
+        <img src="cax.png" alt="cax">
       </div>
       <div class="product-name">Leve 10 e pague 8</div>
       <div class="product-price">R$ 27,00</div>
@@ -431,161 +342,87 @@
     </div>
 
     <div class="product-card" data-category="kits">
-      <!-- Terceiro kit -->
       <span class="cashback-badge">7% Cashback</span>
       <div class="product-image">
-        <img src="cax2.png" alt="cax2" width="300" height="130">
-        <!-- Imagem do kit com 5 gourmet e 5 tradicionais -->
+        <img src="cax2.png" alt="cax2">
       </div>
       <div class="product-name">5 gourmet e 5 tradicionais</div>
       <div class="product-price">R$ 30,00</div>
       <button class="add-to-cart-btn" onclick="addToCart('5 gourmet e 5 tradicionais', 30.00, '💎')">Adicionar</button>
     </div>
-
   </div>
-
-    <script>
-        // Função para adicionar ao carrinho (exemplo)
-        function addToCart(name, price, emoji) {
-            alert(`Adicionado ao carrinho: ${name} - R$ ${price.toFixed(2)} ${emoji}`);
-            // Aqui você implementaria a lógica real do carrinho
-        }
-
-        // Filtro de produtos
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const productCards = document.querySelectorAll('.product-card');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove a classe active de todos os botões
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    // Adiciona a classe active ao botão clicado
-                    this.classList.add('active');
-                    
-                    const filterValue = this.getAttribute('data-filter');
-                    
-                    productCards.forEach(card => {
-                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                            card.style.display = 'flex';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            });
-        });
-    </script>
-</body>
-</html>
 
   <!-- NAVEGAÇÃO INFERIOR -->
   <nav class="bottom-nav">
-    <!-- Barra de navegação fixa na parte inferior -->
     <a href="index.html" class="nav-item">
-      <!-- Link para página inicial -->
       <span class="nav-icon">🏠</span>
-      <!-- Ícone da página inicial -->
       <span>Início</span>
-      <!-- Texto do link -->
     </a>
     <a href="p2.html" class="nav-item active">
-      <!-- Link para cardápio (ativo) -->
       <span class="nav-icon">📋</span>
-      <!-- Ícone do cardápio -->
       <span>Cardápio</span>
     </a>
     <a href="p3.html" class="nav-item">
-      <!-- Link para perfil -->
       <span class="nav-icon">👤</span>
-      <!-- Ícone do perfil -->
       <span>Perfil</span>
     </a>
     <a href="carrinho.html" class="nav-item">
-      <!-- Link para carrinho -->
       <span class="nav-icon">🛒</span>
-      <!-- Ícone do carrinho -->
       <span>Carrinho</span>
       <span class="cart-badge" id="cart-count">0</span>
-      <!-- Badge com contador de itens no carrinho -->
     </a>
   </nav>
 
   <script>
-    // ========== FUNÇÃO PARA ADICIONAR AO CARRINHO - CORRIGIDA ==========
+    // ========== FUNÇÃO PARA ADICIONAR AO CARRINHO ==========
     function addToCart(name, price, emoji) {
-        // Função chamada quando usuário clica em "Adicionar" em um produto
-        console.log('Adicionando ao carrinho:', name, price, emoji);
-        
-        // Pegar carrinho atual do localStorage ou array vazio se não existir
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         
-        // Verificar se item já existe no carrinho
         const existingItemIndex = cart.findIndex(item => item.name === name);
         
         if (existingItemIndex !== -1) {
-            // Se já existe, aumenta a quantidade
             cart[existingItemIndex].quantity += 1;
-            console.log('Item existente, quantidade aumentada para:', cart[existingItemIndex].quantity);
         } else {
-            // Se não existe, adiciona novo item
             cart.push({
                 name: name,
                 price: price,
                 emoji: emoji,
                 quantity: 1
             });
-            console.log('Novo item adicionado');
         }
         
-        // Salvar no localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
-        console.log('Carrinho salvo:', cart);
-        
-        // Feedback visual para o usuário
         alert(`✅ ${emoji} ${name} adicionado ao carrinho!`);
-        
-        // Atualizar badge do carrinho
         updateCartBadge();
     }
 
     // ========== ATUALIZAR BADGE DO CARRINHO ==========
     function updateCartBadge() {
-        // Obtém o carrinho atual do localStorage
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        // Calcula o total de itens somando todas as quantidades
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         
-        // Atualizar badge visual
         const badge = document.getElementById('cart-count');
         if (badge) {
             badge.textContent = totalItems;
         }
-        
-        console.log('Badge atualizado:', totalItems, 'itens');
     }
 
     // ========== FILTRAR CATEGORIAS ==========
     function filterCategory(category) {
-      // Remove a classe active de todos os botões
       document.querySelectorAll('.category-btn').forEach(btn => {
         btn.classList.remove('active');
       });
       
-      // Adiciona a classe active ao botão clicado
       event.target.classList.add('active');
       
-      // Filtra os produtos baseado na categoria selecionada
       const products = document.querySelectorAll('.product-card');
       
       products.forEach(product => {
         if (category === 'todos') {
-          // Se categoria for "todos", mostra todos os produtos
-          product.style.display = 'block';
+          product.style.display = 'flex';
         } else {
-          // Mostra apenas produtos da categoria selecionada
           if (product.getAttribute('data-category') === category) {
-            product.style.display = 'block';
+            product.style.display = 'flex';
           } else {
             product.style.display = 'none';
           }
@@ -595,14 +432,8 @@
 
     // ========== ATUALIZAR BADGE QUANDO A PÁGINA CARREGAR ==========
     document.addEventListener('DOMContentLoaded', function() {
-        // Executa quando a página termina de carregar
         updateCartBadge();
-        console.log('Página carregada, badge atualizado');
     });
   </script>
-  <!-- Fim do JavaScript -->
-
 </body>
-<!-- Fim do corpo do documento -->
 </html>
-<!-- Fim do documento HTML -->
