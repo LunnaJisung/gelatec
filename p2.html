@@ -62,110 +62,308 @@
   <!-- GRID DE PRODUTOS -->
   <div class="product-grid" id="product-grid">
     <!-- Container principal dos produtos usando CSS Grid -->
-    
-    <!-- PRODUTOS TRADICIONAIS -->
-    <div class="product-card" data-category="tradicionais">
-      <!-- Cartão do produto com atributo de categoria para filtro -->
-      <span class="cashback-badge">3% Cashback</span>
-      <!-- Badge mostrando porcentagem de cashback -->
-    
-      <div class="product-image">
-        <!-- Container da imagem do produto -->
-        <img src="morango.png" alt="morango" width="300" height="130">
-        <!-- Imagem do produto geladinho de morango -->
-      </div>
-      
-      <div class="product-name">Geladinho de Morango</div>
-      <!-- Nome do produto -->
-      <div class="product-price">R$ 2,50</div>
-      <!-- Preço do produto -->
-      <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Morango', 2.50, '🍓')">Adicionar</button>
-      <!-- Botão para adicionar produto ao carrinho -->
+   <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geladinhos - Produtos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background-color: #ffebee; /* Cor rosa clara */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .cashback-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4caf50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #333;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #c2185b;
+        }
+
+        /* Filtros */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: white;
+            border: 2px solid #e91e63;
+            border-radius: 25px;
+            color: #e91e63;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #e91e63;
+            color: white;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .filter-buttons {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nossos Geladinhos</h1>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="tradicionais">Tradicionais</button>
+            <button class="filter-btn" data-filter="gourmet">Gourmet</button>
+            <button class="filter-btn" data-filter="kits">Kits</button>
+        </div>
+        
+        <div class="products-grid">
+            <!-- PRODUTOS TRADICIONAIS -->
+            <div class="product-card" data-category="tradicionais">
+                <span class="cashback-badge">3% Cashback</span>
+                
+                <div class="product-image">
+                    <img src="<img src="morango.png" alt="morango" width="300" height="130">
+                </div>
+                
+                <div class="product-name">Geladinho de Morango</div>
+                <div class="product-price">R$ 2,50</div>
+                <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Morango', 2.50, '🍓')">Adicionar</button>
+            </div>
+
+            <div class="product-card" data-category="tradicionais">
+                <span class="cashback-badge">3% Cashback</span>
+                
+                <div class="product-image">
+                    <img src="maracuja.png" alt="Geladinho de Maracujá">
+                </div>
+                
+                <div class="product-name">Geladinho de Maracujá</div>
+                <div class="product-price">R$ 2,50</div>
+                <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Maracujá', 2.50, '🟡')">Adicionar</button>
+            </div>
+
+            <!-- PRODUTOS GOURMET -->
+            <div class="product-card" data-category="gourmet">
+                <span class="cashback-badge">5% Cashback</span>
+                
+                <div class="product-image">
+                    <img src="chocolate.png" alt="Gourmet Chocolate">
+                </div>
+                
+                <div class="product-name">Gourmet Chocolate</div>
+                <div class="product-price">R$ 4,00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('Gourmet Chocolate', 4.00, '🍫')">Adicionar</button>
+            </div>
+            
+            <div class="product-card" data-category="gourmet">
+                <span class="cashback-badge">5% Cashback</span>
+                <div class="product-image">
+                    <img src="chocomara.jpeg" alt="Gourmet Maracujá com chocolate">
+                </div>
+                <div class="product-name">Gourmet Maracujá com chocolate</div>
+                <div class="product-price">R$ 4,00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('Gourmet Maracujá com chocolate', 4.00, '🍫+🟡')">Adicionar</button>
+            </div>
+
+            <!-- KITS -->
+            <div class="product-card" data-category="kits">
+                <span class="cashback-badge">7% Cashback</span>
+                <div class="product-image">
+                    <img src="gela3.jpeg" alt="Kit completo com 3 geladinhos">
+                </div>
+                <div class="product-name">Kit completo com 3 geladinhos</div>
+                <div class="product-price">R$ 13,00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('Kit completo com 3 geladinhos', 13.00, '🟡')">Adicionar</button>
+            </div>
+
+            <div class="product-card" data-category="kits">
+                <span class="cashback-badge">7% Cashback</span>
+                <div class="product-image">
+                    <img src="cax.png" alt="Leve 10 e pague 8">
+                </div>
+                <div class="product-name">Leve 10 e pague 8</div>
+                <div class="product-price">R$ 27,00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('Leve 10 e pague 8', 27.00, '📦')">Adicionar</button>
+            </div>
+
+            <div class="product-card" data-category="kits">
+                <span class="cashback-badge">7% Cashback</span>
+                <div class="product-image">
+                    <img src="cax2.png" alt="5 gourmet e 5 tradicionais">
+                </div>
+                <div class="product-name">5 gourmet e 5 tradicionais</div>
+                <div class="product-price">R$ 30,00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('5 gourmet e 5 tradicionais', 30.00, '💎')">Adicionar</button>
+            </div>
+        </div>
     </div>
 
-    <div class="product-card" data-category="tradicionais">
-      <!-- Segundo produto tradicional -->
-      <span class="cashback-badge">3% Cashback</span>
-      
-      <div class="product-image">
-        <img src="maracuja.png" alt="maracuja" width="300" height="130">
-        <!-- Imagem do produto geladinho de maracujá -->
-      </div>
-      
-      <div class="product-name">Geladinho de Maracujá</div>
-      <div class="product-price">R$ 2,50</div>
-      <button class="add-to-cart-btn" onclick="addToCart('Geladinho de Maracujá', 2.50, '🟡')">Adicionar</button>
-    </div>
+    <script>
+        // Função para adicionar ao carrinho (exemplo)
+        function addToCart(name, price, emoji) {
+            alert(`Adicionado ao carrinho: ${name} - R$ ${price.toFixed(2)} ${emoji}`);
+            // Aqui você implementaria a lógica real do carrinho
+        }
 
-    <!-- PRODUTOS GOURMET -->
-    <div class="product-card" data-category="gourmet">
-      <!-- Primeiro produto gourmet -->
-      <span class="cashback-badge">5% Cashback</span>
-      <!-- Cashback maior para produtos gourmet -->
-      
-      <div class="product-image">
-        <img src="chocolate.png" alt="chocolate" width="300" height="130">
-        <!-- Imagem do produto gourmet chocolate -->
-      </div>
-      
-      <div class="product-name">Gourmet Chocolate</div>
-      <div class="product-price">R$ 4,00</div>
-      <!-- Preço mais alto para produto gourmet -->
-      <button class="add-to-cart-btn" onclick="addToCart('Gourmet Chocolate', 4.00, '🍫')">Adicionar</button>
-    </div>
-    
-    <div class="product-card" data-category="gourmet">
-      <!-- Segundo produto gourmet -->
-      <span class="cashback-badge">5% Cashback</span>
-      <div class="product-image">
-        <img src="chocomara.jpeg" alt="chocolate" width="300" height="130">
-        <!-- Imagem do produto gourmet maracujá com chocolate -->
-      </div>
-      <div class="product-name">Gourmet Maracujá com chocolate</div>
-      <div class="product-price">R$ 4,00</div>
-      <button class="add-to-cart-btn" onclick="addToCart('Gourmet Maracujá com chocolate', 4.00, '🍫+🟡 ')">Adicionar</button>
-    </div>
-
-    <!-- KITS -->
-    <div class="product-card" data-category="kits">
-      <!-- Primeiro kit -->
-      <span class="cashback-badge">7% Cashback</span>
-      <!-- Cashback maior para kits -->
-      <div class="product-image">
-        <img src="gela3.jpeg" alt="chocolate" width="300" height="130">
-        <!-- Imagem do kit com 3 geladinhos -->
-      </div>
-      <div class="product-name">Kit completo com 3 geladinhos</div>
-      <div class="product-price">R$ 13,00</div>
-      <!-- Preço do kit (valor agregado) -->
-      <button class="add-to-cart-btn" onclick="addToCart('Kit completo com 3 geladinhos', 13.00, '🟡')">Adicionar</button>
-    </div>
-
-    <div class="product-card" data-category="kits">
-      <!-- Segundo kit -->
-      <span class="cashback-badge">7% Cashback</span>
-      <div class="product-image">
-        <img src="cax.png" alt="cax" width="300" height="130">
-        <!-- Imagem do kit "leve 10 e pague 8" -->
-      </div>
-      <div class="product-name">Leve 10 e pague 8</div>
-      <div class="product-price">R$ 27,00</div>
-      <button class="add-to-cart-btn" onclick="addToCart('Leve 10 e pague 8', 27.00, '📦')">Adicionar</button>
-    </div>
-
-    <div class="product-card" data-category="kits">
-      <!-- Terceiro kit -->
-      <span class="cashback-badge">7% Cashback</span>
-      <div class="product-image">
-        <img src="cax2.png" alt="cax2" width="300" height="130">
-        <!-- Imagem do kit com 5 gourmet e 5 tradicionais -->
-      </div>
-      <div class="product-name">5 gourmet e 5 tradicionais</div>
-      <div class="product-price">R$ 30,00</div>
-      <button class="add-to-cart-btn" onclick="addToCart('5 gourmet e 5 tradicionais', 30.00, '💎')">Adicionar</button>
-    </div>
-
-  </div>
+        // Filtro de produtos
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove a classe active de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Adiciona a classe active ao botão clicado
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    productCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
 
   <!-- NAVEGAÇÃO INFERIOR -->
   <nav class="bottom-nav">
