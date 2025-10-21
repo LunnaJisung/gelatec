@@ -1,17 +1,27 @@
 <!DOCTYPE html>
+<!-- Declaração do tipo de documento como HTML5 -->
 <html lang="pt-BR">
+<!-- Elemento raiz do documento com idioma português brasileiro -->
 <head>
+  <!-- Cabeçalho do documento com metadados -->
   <meta charset="UTF-8">
+  <!-- Define a codificação de caracteres como UTF-8 para suportar acentos e caracteres especiais -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Configura a viewport para responsividade em dispositivos móveis -->
   <title>Login - GelaTec</title>
+  <!-- Título da página que aparece na aba do navegador -->
   <link rel="stylesheet" href="style.css">
+  <!-- Importa o arquivo CSS externo para estilização -->
   <style>
+    /* ===== ESTILOS DO HERÓI (BANNER SUPERIOR) ===== */
     .login-hero {
       background: linear-gradient(135deg, #ff0080 0%, #ff8ec7 100%);
+      /* Gradiente diagonal em tons de rosa */
       color: white;
       padding: 40px 20px;
       text-align: center;
       border-radius: 0 0 30px 30px;
+      /* Bordas arredondadas apenas na parte inferior */
       margin-bottom: 30px;
     }
 
@@ -24,12 +34,15 @@
     .login-hero p {
       font-size: 16px;
       opacity: 0.9;
+      /* Texto com opacidade levemente reduzida para contraste */
     }
 
+    /* ===== CONTAINER PRINCIPAL DO LOGIN ===== */
     .login-container {
       max-width: 400px;
       margin: 0 auto;
       padding: 0 20px;
+      /* Centraliza o container com largura máxima */
     }
 
     .login-card {
@@ -37,9 +50,12 @@
       border-radius: 20px;
       padding: 30px;
       box-shadow: 0 10px 30px rgba(255, 0, 128, 0.1);
+      /* Sombra suave com cor temática */
       border: 1px solid #ffe6f0;
+      /* Borda sutil */
     }
 
+    /* ===== CABEÇALHO DO FORMULÁRIO DE LOGIN ===== */
     .login-header {
       text-align: center;
       margin-bottom: 30px;
@@ -48,6 +64,7 @@
     .login-icon {
       font-size: 60px;
       margin-bottom: 15px;
+      /* Ícone grande para destaque visual */
     }
 
     .login-title {
@@ -62,6 +79,7 @@
       font-size: 14px;
     }
 
+    /* ===== ESTILOS DOS FORMULÁRIOS ===== */
     .form-group {
       margin-bottom: 20px;
       position: relative;
@@ -83,6 +101,7 @@
       font-size: 16px;
       transition: all 0.3s ease;
       background: #fafafa;
+      /* Fundo levemente cinza */
     }
 
     .form-input:focus {
@@ -90,8 +109,10 @@
       background: white;
       box-shadow: 0 0 0 3px rgba(255, 0, 128, 0.1);
       outline: none;
+      /* Efeito de foco com sombra e borda colorida */
     }
 
+    /* ===== BOTÃO DE LOGIN ===== */
     .login-btn {
       width: 100%;
       background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
@@ -109,8 +130,10 @@
     .login-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(255, 0, 128, 0.3);
+      /* Efeito de levitação ao passar o mouse */
     }
 
+    /* ===== DIVISÓRIA ENTRE SEÇÕES ===== */
     .login-divider {
       text-align: center;
       margin: 25px 0;
@@ -125,6 +148,7 @@
       right: 0;
       height: 1px;
       background: #f0f0f0;
+      /* Linha divisória */
     }
 
     .login-divider span {
@@ -132,8 +156,10 @@
       padding: 0 15px;
       color: #666;
       font-size: 14px;
+      /* Texto sobre a linha divisória */
     }
 
+    /* ===== LOGIN COM REDES SOCIAIS ===== */
     .social-login {
       display: flex;
       gap: 15px;
@@ -156,6 +182,7 @@
       transform: translateY(-1px);
     }
 
+    /* ===== LINK PARA CADASTRO ===== */
     .register-link {
       text-align: center;
       margin-top: 25px;
@@ -189,6 +216,7 @@
       transform: translateY(-2px);
     }
 
+    /* ===== ESQUECI A SENHA ===== */
     .forgot-password {
       text-align: center;
       margin-top: 15px;
@@ -201,6 +229,7 @@
       font-weight: 600;
     }
 
+    /* ===== GRADE DE CARACTERÍSTICAS ===== */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -226,23 +255,26 @@
       font-weight: 600;
     }
 
-    /* Animações */
+    /* ===== ANIMAÇÕES ===== */
     @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(20px);
+        /* Começa 20px abaixo e invisível */
       }
       to {
         opacity: 1;
         transform: translateY(0);
+        /* Termina na posição normal e visível */
       }
     }
 
     .login-card {
       animation: fadeInUp 0.6s ease;
+      /* Aplica animação de entrada */
     }
 
-    /* Perfil quando logado */
+    /* ===== ESTILOS DO PERFIL QUANDO LOGADO ===== */
     .profile-card {
       background: white;
       border-radius: 20px;
@@ -264,6 +296,7 @@
       justify-content: center;
       font-size: 40px;
       color: white;
+      /* Avatar circular grande para o perfil */
     }
 
     .user-info {
@@ -283,6 +316,7 @@
       font-size: 16px;
     }
 
+    /* ===== ESTATÍSTICAS DO USUÁRIO ===== */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -312,33 +346,47 @@
   </style>
 </head>
 <body>
+  <!-- Início do corpo do documento -->
 
   <div id="perfil-container">
-    <!-- Conteúdo será carregado via JavaScript -->
+    <!-- Container dinâmico onde o conteúdo será carregado via JavaScript -->
+    <!-- Pode conter formulário de login OU perfil do usuário -->
   </div>
 
+  <!-- NAVEGAÇÃO INFERIOR -->
   <nav class="bottom-nav">
+    <!-- Barra de navegação fixa na parte inferior -->
     <a href="index.html" class="nav-item">
+      <!-- Link para página inicial -->
       <span class="nav-icon">🏠</span>
+      <!-- Ícone da página inicial -->
       <span>Início</span>
+      <!-- Texto do link -->
     </a>
     <a href="p2.html" class="nav-item">
+      <!-- Link para cardápio -->
       <span class="nav-icon">📋</span>
+      <!-- Ícone do cardápio -->
       <span>Cardápio</span>
     </a>
     <a href="p3.html" class="nav-item active">
+      <!-- Link para perfil (ativo) -->
       <span class="nav-icon">👤</span>
+      <!-- Ícone do perfil -->
       <span>Perfil</span>
     </a>
     <a href="carrinho.html" class="nav-item">
+      <!-- Link para carrinho -->
       <span class="nav-icon">🛒</span>
+      <!-- Ícone do carrinho -->
       <span>Carrinho</span>
     </a>
   </nav>
 
   <script>
-    // Verificar se o usuário está logado
+    // ========== VERIFICAR SE O USUÁRIO ESTÁ LOGADO ==========
     function checkLogin() {
+      // Função principal que decide se mostra login ou perfil
       const userData = localStorage.getItem('userData');
       const container = document.getElementById('perfil-container');
       
@@ -346,7 +394,7 @@
         const user = JSON.parse(userData);
         
         if (user.logado) {
-          // Usuário logado - mostrar perfil bonito
+          // ===== USUÁRIO LOGADO - MOSTRAR PERFIL BONITO =====
           container.innerHTML = `
             <div class="login-hero">
               <h1>Bem-vindo de volta! 👋</h1>
@@ -414,7 +462,7 @@
         }
       }
       
-      // Usuário não logado - mostrar formulário de login bonito
+      // ===== USUÁRIO NÃO LOGADO - MOSTRAR FORMULÁRIO DE LOGIN BONITO =====
       container.innerHTML = `
         <div class="login-hero">
           <h1>Bem-vindo! 🎉</h1>
@@ -430,14 +478,17 @@
             </div>
 
             <form onsubmit="login(); return false;">
+              <!-- Formulário que chama login() ao ser submetido -->
               <div class="form-group">
                 <label class="form-label">E-mail</label>
                 <input type="email" id="login-email" class="form-input" placeholder="seu@email.com" required>
+                <!-- Campo de email obrigatório -->
               </div>
 
               <div class="form-group">
                 <label class="form-label">Senha</label>
                 <input type="password" id="login-senha" class="form-input" placeholder="Sua senha" required>
+                <!-- Campo de senha obrigatório -->
               </div>
 
               <button type="submit" class="login-btn">
@@ -447,15 +498,16 @@
 
             <div class="forgot-password">
               <a href="#">Esqueci minha senha</a>
+              <!-- Link para recuperação de senha -->
             </div>
 
             <div class="login-divider">
               <span>ou entre com</span>
+              <!-- Divisória visual -->
             </div>
 
-      
-
             <div class="features-grid">
+              <!-- Grade de características da plataforma -->
               <div class="feature-item">
                 <div class="feature-icon">🚚</div>
                 <div class="feature-text">Entrega Grátis</div>
@@ -475,27 +527,32 @@
               <a href="cadastro.html" class="register-btn">
                 Criar Conta Gratuita
               </a>
+              <!-- Link para página de cadastro -->
             </div>
           </div>
         </div>
       `;
     }
 
+    // ========== FUNÇÃO DE LOGIN ==========
     function login() {
+      // Função chamada quando usuário submete o formulário de login
       const email = document.getElementById('login-email').value;
       const senha = document.getElementById('login-senha').value;
       
+      // Validação básica de campos obrigatórios
       if (!email || !senha) {
         alert('Por favor, preencha todos os campos!');
         return;
       }
       
-      // Verificar se o usuário existe
+      // Verificar se o usuário existe no localStorage
       const userData = localStorage.getItem('userData');
       
       if (userData) {
         const user = JSON.parse(userData);
         
+        // Verificar credenciais
         if (user.email === email && user.senha === senha) {
           // Atualizar status de login
           user.logado = true;
@@ -503,31 +560,41 @@
           
           alert('Login realizado com sucesso!');
           window.location.reload();
+          // Recarrega a página para mostrar o perfil
         } else {
           alert('E-mail ou senha incorretos!');
         }
       } else {
         alert('Nenhuma conta encontrada. Por favor, cadastre-se.');
         window.location.href = 'cadastro.html';
+        // Redireciona para página de cadastro se não houver usuários
       }
     }
 
+    // ========== FUNÇÃO DE LOGOUT ==========
     function logout() {
+      // Função chamada quando usuário clica em "Sair da Conta"
       const userData = localStorage.getItem('userData');
       
       if (userData) {
         const user = JSON.parse(userData);
         user.logado = false;
         localStorage.setItem('userData', JSON.stringify(user));
+        // Atualiza o status de login para false
       }
       
       alert('Você saiu da conta!');
       window.location.reload();
+      // Recarrega a página para mostrar o formulário de login
     }
 
-    // Carregar perfil quando a página abrir
+    // ========== CARREGAR PERFIL QUANDO A PÁGINA ABRIR ==========
     document.addEventListener('DOMContentLoaded', checkLogin);
+    // Executa checkLogin() quando o DOM estiver completamente carregado
   </script>
+  <!-- Fim do JavaScript -->
 
 </body>
+<!-- Fim do corpo do documento -->
 </html>
+<!-- Fim do documento HTML -->
