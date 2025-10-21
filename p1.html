@@ -310,6 +310,32 @@
             cursor: pointer;
             font-weight: 600;
         }
+        
+        /* Indicador de ação selecionada */
+        .action-selected {
+            background: #4facfe !important;
+            color: white !important;
+        }
+        
+        /* Estilo para histórico de doações */
+        .donation-history {
+            max-height: 150px;
+            overflow-y: auto;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: left;
+        }
+        
+        .donation-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .donation-item:last-child {
+            border-bottom: none;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -321,9 +347,9 @@
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="profile-info">
-                    <h1 id="user-name">Seu Nome <i class="fas fa-edit edit-icon"></i></h1>
-                    <p id="user-email">seu.email@exemplo.com <i class="fas fa-edit edit-icon"></i></p>
-                    <p id="user-age">Sua idade <i class="fas fa-edit edit-icon"></i></p>
+                    <h1 id="user-name">  <i class="fas fa-edit edit-icon"></i></h1>
+                    <p id="user-email">  <i class="fas fa-edit edit-icon"></i></p>
+                    <p id="user-age">undefined anos <i class="fas fa-edit edit-icon"></i></p>
                 </div>
             </div>
             
@@ -335,22 +361,22 @@
                 
                 <div class="info-section">
                     <h2><i class="fas fa-home"></i> Meu Endereço</h2>
-                    <div class="info-value" id="user-address">Seu endereço completo <i class="fas fa-edit edit-icon"></i></div>
+                    <div class="info-value" id="user-address">undefined <i class="fas fa-edit edit-icon"></i></div>
                 </div>
                 
                 <h2 style="margin: 25px 0 15px; color: #333;"><i class="fas fa-bolt"></i> Ações Rápidas</h2>
                 <div class="actions-grid">
                     <button class="action-btn" id="orders-btn">
                         <i class="fas fa-shopping-bag"></i>
-                        Pedidos
+                        Meus Pedidos
                     </button>
                     <button class="action-btn" id="charity-btn">
                         <i class="fas fa-heart"></i>
-                        Caridade
+                        Minha Caridade
                     </button>
-                    <button class="action-btn" id="support-btn">
-                        <i class="fas fa-headset"></i>
-                        Suporte
+                    <button class="action-btn" id="coupons-btn">
+                        <i class="fas fa-ticket-alt"></i>
+                        Cupons
                     </button>
                     <button class="action-btn" id="settings-btn">
                         <i class="fas fa-cog"></i>
@@ -424,28 +450,41 @@
             <h3>Minha Caridade</h3>
             <p>Contribua com causas sociais e acompanhe seu histórico de doações.</p>
             <div style="margin: 20px 0;">
-                <button class="action-btn" style="margin: 5px;">Doar R$ 10</button>
-                <button class="action-btn" style="margin: 5px;">Doar R$ 25</button>
-                <button class="action-btn" style="margin: 5px;">Doar R$ 50</button>
+                <button class="action-btn donate-btn" data-amount="10">Doar R$ 10</button>
+                <button class="action-btn donate-btn" data-amount="25">Doar R$ 25</button>
+                <button class="action-btn donate-btn" data-amount="50">Doar R$ 50</button>
+            </div>
+            <div class="donation-history" id="donation-history">
+                <h4>Histórico de Doações</h4>
+                <div id="donation-list">
+                    <!-- Histórico será preenchido dinamicamente -->
+                </div>
             </div>
             <button class="close-action-modal" id="close-charity">Fechar</button>
         </div>
     </div>
     
-    <!-- Modal para Suporte -->
-    <div class="action-modal" id="support-modal">
+    <!-- Modal para Cupons -->
+    <div class="action-modal" id="coupons-modal">
         <div class="action-modal-content">
             <div class="action-modal-icon">
-                <i class="fas fa-headset"></i>
+                <i class="fas fa-ticket-alt"></i>
             </div>
-            <h3>Central de Suporte</h3>
-            <p>Estamos aqui para ajudar! Entre em contato conosco.</p>
+            <h3>Meus Cupons</h3>
+            <p>Aqui estão seus cupons disponíveis.</p>
             <div style="text-align: left; margin: 15px 0;">
-                <p><i class="fas fa-phone" style="color: #4facfe; margin-right: 10px;"></i> (11) 9999-9999</p>
-                <p><i class="fas fa-envelope" style="color: #4facfe; margin-right: 10px;"></i> suporte@empresa.com</p>
-                <p><i class="fas fa-clock" style="color: #4facfe; margin-right: 10px;"></i> Seg-Sex: 8h-18h</p>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                    <p><strong>Cupom: DESCONTO10</strong></p>
+                    <p>10% de desconto em qualquer compra</p>
+                    <p style="color: #28a745; font-weight: bold;">Válido até: 30/12/2023</p>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                    <p><strong>Cupom: FRETEGRATIS</strong></p>
+                    <p>Frete grátis em compras acima de R$ 50</p>
+                    <p style="color: #28a745; font-weight: bold;">Válido até: 15/01/2024</p>
+                </div>
             </div>
-            <button class="close-action-modal" id="close-support">Fechar</button>
+            <button class="close-action-modal" id="close-coupons">Fechar</button>
         </div>
     </div>
     
@@ -480,12 +519,13 @@
     <script>
         // Dados iniciais do usuário
         let userData = {
-            name: "Seu Nome",
-            email: "seu.email@exemplo.com",
-            age: "Sua idade",
-            address: "Seu endereço completo",
+            name: "Nicoły",
+            email: "nicoły.amelmo.souza@escola.pz.gov.br",
+            age: "undefined anos",
+            address: "undefined",
             cashback: 0,
-            profilePicture: null
+            profilePicture: null,
+            donations: []
         };
 
         // Carregar dados salvos quando a página abre
@@ -520,6 +560,30 @@
                 profilePic.style.backgroundSize = 'cover';
                 profilePic.style.backgroundPosition = 'center';
             }
+            
+            // Atualizar histórico de doações
+            updateDonationHistory();
+        }
+
+        // Atualizar histórico de doações
+        function updateDonationHistory() {
+            const donationList = document.getElementById('donation-list');
+            if (donationList) {
+                donationList.innerHTML = '';
+                
+                if (userData.donations.length === 0) {
+                    donationList.innerHTML = '<p>Nenhuma doação realizada ainda.</p>';
+                } else {
+                    userData.donations.forEach(donation => {
+                        const donationItem = document.createElement('div');
+                        donationItem.className = 'donation-item';
+                        donationItem.innerHTML = `
+                            <p><strong>R$ ${donation.amount.toFixed(2)}</strong> - ${donation.date}</p>
+                        `;
+                        donationList.appendChild(donationItem);
+                    });
+                }
+            }
         }
 
         // Abrir modal de edição
@@ -546,8 +610,8 @@
             document.getElementById('charity-modal').style.display = 'flex';
         }
         
-        function openSupportModal() {
-            document.getElementById('support-modal').style.display = 'flex';
+        function openCouponsModal() {
+            document.getElementById('coupons-modal').style.display = 'flex';
         }
         
         function openSettingsModal() {
@@ -558,7 +622,7 @@
         function closeActionModals() {
             document.getElementById('orders-modal').style.display = 'none';
             document.getElementById('charity-modal').style.display = 'none';
-            document.getElementById('support-modal').style.display = 'none';
+            document.getElementById('coupons-modal').style.display = 'none';
             document.getElementById('settings-modal').style.display = 'none';
         }
 
@@ -577,17 +641,43 @@
             }
         }
 
+        // Processar doação
+        function processDonation(amount) {
+            if (userData.cashback >= amount) {
+                userData.cashback -= amount;
+                
+                // Adicionar doação ao histórico
+                const donationDate = new Date().toLocaleDateString('pt-BR');
+                userData.donations.unshift({
+                    amount: amount,
+                    date: donationDate
+                });
+                
+                // Limitar histórico a 5 doações
+                if (userData.donations.length > 5) {
+                    userData.donations = userData.donations.slice(0, 5);
+                }
+                
+                saveUserData();
+                updateDisplay();
+                alert(`Doação de R$ ${amount.toFixed(2)} realizada com sucesso!`);
+            } else {
+                alert('Saldo de cashback insuficiente para realizar esta doação.');
+            }
+        }
+
         // Fazer logout
         function logout() {
             if (confirm('Tem certeza que deseja sair da conta?')) {
                 localStorage.removeItem('userProfile');
                 userData = {
-                    name: "Seu Nome",
-                    email: "seu.email@exemplo.com",
-                    age: "Sua idade",
-                    address: "Seu endereço completo",
+                    name: " ",
+                    email: " ",
+                    age: "undefined anos",
+                    address: "undefined",
                     cashback: 0,
-                    profilePicture: null
+                    profilePicture: null,
+                    donations: []
                 };
                 updateDisplay();
                 alert('Você saiu da conta. As informações foram resetadas.');
@@ -639,17 +729,25 @@
             // Configurar botão de logout
             document.getElementById('logout-btn').addEventListener('click', logout);
             
-            // Configurar botões de ação rápida - AGORA FUNCIONANDO!
+            // Configurar botões de ação rápida - CORRIGIDO!
             document.getElementById('orders-btn').addEventListener('click', openOrdersModal);
             document.getElementById('charity-btn').addEventListener('click', openCharityModal);
-            document.getElementById('support-btn').addEventListener('click', openSupportModal);
+            document.getElementById('coupons-btn').addEventListener('click', openCouponsModal);
             document.getElementById('settings-btn').addEventListener('click', openSettingsModal);
             
             // Configurar fechamento dos modais de ação
             document.getElementById('close-orders').addEventListener('click', closeActionModals);
             document.getElementById('close-charity').addEventListener('click', closeActionModals);
-            document.getElementById('close-support').addEventListener('click', closeActionModals);
+            document.getElementById('close-coupons').addEventListener('click', closeActionModals);
             document.getElementById('close-settings').addEventListener('click', closeActionModals);
+            
+            // Configurar botões de doação
+            document.querySelectorAll('.donate-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const amount = parseFloat(this.getAttribute('data-amount'));
+                    processDonation(amount);
+                });
+            });
         });
 
         // Fechar modais clicando fora deles
@@ -658,7 +756,7 @@
                 document.getElementById('edit-modal'),
                 document.getElementById('orders-modal'),
                 document.getElementById('charity-modal'),
-                document.getElementById('support-modal'),
+                document.getElementById('coupons-modal'),
                 document.getElementById('settings-modal')
             ];
             
