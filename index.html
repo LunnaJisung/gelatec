@@ -12,22 +12,37 @@
   <!-- Título da página que aparece na aba do navegador -->
   <link rel="stylesheet" href="style.css">
   <!-- Importa o arquivo CSS externo para estilização -->
+  <style>
+    .header {
+      position: relative;
+      text-align: center;
+    }
+    .logo-left {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      height: 50px;
+    }
+    .logo-right {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      height: 50px;
+    }
+  </style>
 </head>
 <body>
   <!-- Início do corpo do documento -->
 
 <header class="header">
   <!-- Cabeçalho principal da página -->
-  <div class="logo-container">
-    <!-- Container para as logos da empresa -->
-    <!-- Logo do lado esquerdo -->
-    <img src="Logo.png" alt="GelaTec Logo" class="logo-img" style="float: left; margin-right: 10px;">
-    <!-- Logo do lado direito -->
-    <img src="logoset.png" alt="GelaTec Logo" class="logo-img" style="float: right; margin-left: 30px;">
-    <div style="clear: both;"></div>
-  </div>
-      <h1 style="font-size: 3rem;">Gelatec</h1>
-      <!-- Título principal da página com estilo inline -->
+  <!-- Logo do lado esquerdo -->
+  <img src="Logo.png" alt="GelaTec Logo" class="logo-left">
+  <!-- Logo do lado direito -->
+  <img src="logoset.png" alt="GelaTec Logo" class="logo-right">
+  
+  <h1 style="font-size: 3rem;">Gelatec</h1>
+  <!-- Título principal da página com estilo inline -->
   <p>Loja aberta - Entrega rápida</p>
   <!-- Subtítulo informativo -->
 </header>
