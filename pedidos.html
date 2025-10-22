@@ -1,26 +1,523 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Meus Pedidos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Pedidos - GelaTec</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .pedido { border: 1px solid #ff0080; padding: 15px; margin: 10px 0; border-radius: 8px; }
-        .status { color: #ff0080; font-weight: bold; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            padding-bottom: 70px;
+        }
+        
+        /* HEADER - IGUAL AO CARDÁPIO */
+        .header {
+            background: linear-gradient(135deg, #ff0080, #e91e63);
+            color: white;
+            padding: 15px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* LOGOS NO HEADER */
+        .logo-left,
+        .logo-right {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .orders-section {
+            margin-top: 20px;
+        }
+        
+        .order-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e91e63;
+            transition: transform 0.3s ease;
+        }
+        
+        .order-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .order-id {
+            font-weight: bold;
+            color: #e91e63;
+            font-size: 1.2rem;
+        }
+        
+        .order-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .order-items {
+            margin-bottom: 15px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+        }
+        
+        .item-name {
+            color: #333;
+        }
+        
+        .item-price {
+            color: #666;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        
+        .total-label {
+            color: #333;
+        }
+        
+        .total-value {
+            color: #e91e63;
+        }
+        
+        .order-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-preparing {
+            background: #cce7ff;
+            color: #004085;
+        }
+        
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .empty-orders {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        
+        .empty-orders i {
+            font-size: 3rem;
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+        
+        .empty-orders p {
+            margin-bottom: 20px;
+        }
+        
+        .new-order-btn {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .new-order-btn:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+        
+        /* NAVEGAÇÃO INFERIOR */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: white;
+            padding: 8px 0;
+            border-top: 1px solid #d81b60;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            padding: 5px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: #e91e63;
+        }
+
+        .nav-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .nav-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-item span:last-child {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* BADGE DO CARRINHO */
+        .cart-badge {
+            background: #ff0080;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            right: 5px;
+        }
+        
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 35px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h2 style="color: #ff0080;">📋 Meus Pedidos</h2>
-    
-    <div class="pedido">
-        <strong>Pedido #001</strong><br>
-        Valor: R$ 25,50<br>
-        <span class="status">Status: Entregue</span>
+    <!-- HEADER COM LOGOS -->
+    <header class="header">
+        <!-- Logo do lado esquerdo -->
+        <img src="Logo.png" alt="GelaTec Logo" class="logo-left">
+        
+        <!-- Título central -->
+        <div class="header-content">
+            <h1>Meus Pedidos</h1>
+            <p>Acompanhe seus pedidos</p>
+        </div>
+        
+        <!-- Logo do lado direito -->
+        <img src="logoset.png" alt="GelaTec Logo" class="logo-right">
+    </header>
+
+    <div class="container">
+        <div class="orders-section" id="orders-section">
+            <!-- Os pedidos serão carregados dinamicamente aqui -->
+        </div>
     </div>
     
-    <div class="pedido">
-        <strong>Pedido #002</strong><br>
-        Valor: R$ 18,00<br>
-        <span class="status">Status: Em preparo</span>
-    </div>
+    <!-- NAVEGAÇÃO INFERIOR -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Início</span>
+        </a>
+        <a href="p2.html" class="nav-item">
+            <span class="nav-icon">📋</span>
+            <span>Cardápio</span>
+        </a>
+        <a href="p3.html" class="nav-item active">
+            <span class="nav-icon">👤</span>
+            <span>Perfil</span>
+        </a>
+        <a href="carrinho.html" class="nav-item">
+            <span class="nav-icon">🛒</span>
+            <span>Carrinho</span>
+            <span class="cart-badge" id="cart-count">0</span>
+        </a>
+    </nav>
+
+    <script>
+        // Dados dos pedidos
+        let userOrders = [];
+
+        // Carregar pedidos salvos quando a página abre
+        function loadOrders() {
+            const saved = localStorage.getItem('userOrders');
+            if (saved) {
+                userOrders = JSON.parse(saved);
+                console.log('Pedidos carregados:', userOrders);
+            }
+            displayOrders();
+        }
+
+        // Salvar pedidos
+        function saveOrders() {
+            localStorage.setItem('userOrders', JSON.stringify(userOrders));
+            console.log('Pedidos salvos:', userOrders);
+        }
+
+        // Adicionar um novo pedido automaticamente (simulação)
+        function addNewOrder() {
+            // Gerar ID único para o pedido
+            const orderId = 'P' + String(userOrders.length + 1).padStart(3, '0');
+            
+            // Gerar data atual
+            const now = new Date();
+            const orderDate = now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+            
+            // Simular itens do carrinho (na prática, viria do carrinho real)
+            const cartItems = [
+                { name: 'Geladinho de Morango', price: 2.50, quantity: 2 },
+                { name: 'Gourmet Chocolate', price: 4.00, quantity: 1 }
+            ];
+            
+            // Calcular total
+            const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Status aleatório (para demonstração)
+            const statuses = ['pending', 'preparing', 'delivered'];
+            const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+            
+            // Criar novo pedido
+            const newOrder = {
+                id: orderId,
+                date: orderDate,
+                items: cartItems,
+                total: total,
+                status: randomStatus
+            };
+            
+            // Adicionar aos pedidos
+            userOrders.unshift(newOrder); // Adiciona no início do array
+            
+            // Salvar pedidos
+            saveOrders();
+            
+            // Atualizar exibição
+            displayOrders();
+            
+            // Limpar carrinho (opcional)
+            // localStorage.removeItem('cart');
+            // updateCartBadge();
+            
+            console.log('Novo pedido adicionado:', newOrder);
+        }
+
+        // Exibir pedidos na tela
+        function displayOrders() {
+            const ordersSection = document.getElementById('orders-section');
+            
+            if (userOrders.length === 0) {
+                ordersSection.innerHTML = `
+                    <div class="empty-orders">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>Nenhum pedido encontrado</h3>
+                        <p>Você ainda não fez nenhum pedido.</p>
+                        <button class="new-order-btn" onclick="addNewOrder()">
+                            <i class="fas fa-plus"></i> Fazer Primeiro Pedido
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            let ordersHTML = '';
+            
+            userOrders.forEach(order => {
+                let statusText = '';
+                let statusClass = '';
+                
+                switch(order.status) {
+                    case 'pending':
+                        statusText = 'Pendente';
+                        statusClass = 'status-pending';
+                        break;
+                    case 'preparing':
+                        statusText = 'Em Preparo';
+                        statusClass = 'status-preparing';
+                        break;
+                    case 'delivered':
+                        statusText = 'Entregue';
+                        statusClass = 'status-delivered';
+                        break;
+                    case 'cancelled':
+                        statusText = 'Cancelado';
+                        statusClass = 'status-cancelled';
+                        break;
+                }
+                
+                let itemsHTML = '';
+                order.items.forEach(item => {
+                    itemsHTML += `
+                        <div class="order-item">
+                            <span class="item-name">${item.quantity}x ${item.name}</span>
+                            <span class="item-price">R$ ${(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
+                    `;
+                });
+                
+                ordersHTML += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-id">${order.id}</div>
+                            <div class="order-date">${order.date}</div>
+                        </div>
+                        <div class="order-items">
+                            ${itemsHTML}
+                        </div>
+                        <div class="order-total">
+                            <span class="total-label">Total</span>
+                            <span class="total-value">R$ ${order.total.toFixed(2)}</span>
+                        </div>
+                        <div class="order-status">
+                            <span class="status-badge ${statusClass}">
+                                <i class="fas ${order.status === 'delivered' ? 'fa-check-circle' : order.status === 'preparing' ? 'fa-utensils' : 'fa-clock'}"></i>
+                                ${statusText}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            ordersSection.innerHTML = ordersHTML;
+        }
+
+        // Atualizar badge do carrinho
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = totalItems;
+            }
+        }
+
+        // Quando a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar pedidos salvos
+            loadOrders();
+            
+            // Atualizar badge do carrinho
+            updateCartBadge();
+            
+            // Simular um novo pedido automaticamente (para demonstração)
+            // Na prática, isso seria acionado quando o usuário finaliza uma compra
+            // setTimeout(addNewOrder, 1000);
+        });
+    </script>
 </body>
 </html>
