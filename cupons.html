@@ -1,20 +1,715 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Meus Cupons</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Cupons - GelaTec</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .cupom { border: 2px dashed #ff0080; padding: 15px; margin: 10px 0; border-radius: 8px; }
-        .codigo { font-weight: bold; color: #ff0080; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            padding-bottom: 70px;
+        }
+        
+        /* HEADER - IGUAL AO CARDÁPIO */
+        .header {
+            background: linear-gradient(135deg, #ff0080, #e91e63);
+            color: white;
+            padding: 15px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* LOGOS NO HEADER */
+        .logo-left,
+        .logo-right {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .coupons-section {
+            margin-top: 20px;
+        }
+        
+        .coupon-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e91e63;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coupon-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .coupon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .coupon-code {
+            font-weight: bold;
+            color: #e91e63;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            background: #ffebee;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        .coupon-discount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e91e63;
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .coupon-description {
+            color: #666;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .coupon-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .coupon-expiry {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .coupon-status {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-used {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-expired {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .use-coupon-btn {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .use-coupon-btn:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+        
+        .use-coupon-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .empty-coupons {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        
+        .empty-coupons i {
+            font-size: 3rem;
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+        
+        .empty-coupons p {
+            margin-bottom: 20px;
+        }
+        
+        .add-coupon-btn {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .add-coupon-btn:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+        
+        .coupon-ribbon {
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: #e91e63;
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Modal para adicionar cupom */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #e91e63;
+            outline: none;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        
+        .save-btn, .cancel-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .save-btn {
+            background: #e91e63;
+            color: white;
+        }
+        
+        .save-btn:hover {
+            background: #c2185b;
+        }
+        
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .cancel-btn:hover {
+            background: #5a6268;
+        }
+        
+        /* NAVEGAÇÃO INFERIOR */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: white;
+            padding: 8px 0;
+            border-top: 1px solid #d81b60;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            padding: 5px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: #e91e63;
+        }
+
+        .nav-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .nav-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-item span:last-child {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* BADGE DO CARRINHO */
+        .cart-badge {
+            background: #ff0080;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            right: 5px;
+        }
+        
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 35px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h2 style="color: #ff0080;">🎁 Meus Cupons</h2>
-    
-    <div class="cupom">
-        <div class="codigo">CUPOM10</div>
-        <div>10% de desconto</div>
-        <div>Válido por 7 dias</div>
+    <!-- HEADER COM LOGOS -->
+    <header class="header">
+        <!-- Logo do lado esquerdo -->
+        <img src="Logo.png" alt="GelaTec Logo" class="logo-left">
+        
+        <!-- Título central -->
+        <div class="header-content">
+            <h1>Meus Cupons</h1>
+            <p>Economize com descontos especiais</p>
+        </div>
+        
+        <!-- Logo do lado direito -->
+        <img src="logoset.png" alt="GelaTec Logo" class="logo-right">
+    </header>
+
+    <div class="container">
+        <div class="coupons-section" id="coupons-section">
+            <!-- Os cupons serão carregados dinamicamente aqui -->
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="add-coupon-btn" id="add-coupon-btn">
+                <i class="fas fa-plus"></i> Adicionar Cupom
+            </button>
+        </div>
     </div>
+    
+    <!-- Modal para adicionar cupom -->
+    <div class="modal" id="add-coupon-modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-ticket-alt"></i> Adicionar Cupom</h2>
+            <form id="add-coupon-form">
+                <div class="form-group">
+                    <label for="coupon-code">Código do Cupom</label>
+                    <input type="text" id="coupon-code" placeholder="Digite o código" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coupon-discount">Desconto (%)</label>
+                    <input type="number" id="coupon-discount" min="1" max="100" placeholder="10" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coupon-description">Descrição</label>
+                    <input type="text" id="coupon-description" placeholder="Ex: 10% de desconto" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coupon-expiry">Validade (dias)</label>
+                    <input type="number" id="coupon-expiry" min="1" placeholder="7" required>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-btn" id="cancel-add-coupon">Cancelar</button>
+                    <button type="submit" class="save-btn">Adicionar Cupom</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- NAVEGAÇÃO INFERIOR -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Início</span>
+        </a>
+        <a href="p2.html" class="nav-item">
+            <span class="nav-icon">📋</span>
+            <span>Cardápio</span>
+        </a>
+        <a href="p3.html" class="nav-item active">
+            <span class="nav-icon">👤</span>
+            <span>Perfil</span>
+        </a>
+        <a href="carrinho.html" class="nav-item">
+            <span class="nav-icon">🛒</span>
+            <span>Carrinho</span>
+            <span class="cart-badge" id="cart-count">0</span>
+        </a>
+    </nav>
+
+    <script>
+        // Dados dos cupons
+        let userCoupons = [];
+
+        // Carregar cupons salvos quando a página abre
+        function loadCoupons() {
+            const saved = localStorage.getItem('userCoupons');
+            if (saved) {
+                userCoupons = JSON.parse(saved);
+                console.log('Cupons carregados:', userCoupons);
+            }
+            displayCoupons();
+        }
+
+        // Salvar cupons
+        function saveCoupons() {
+            localStorage.setItem('userCoupons', JSON.stringify(userCoupons));
+            console.log('Cupons salvos:', userCoupons);
+        }
+
+        // Adicionar um novo cupom
+        function addCoupon(code, discount, description, expiryDays) {
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + expiryDays);
+            
+            const newCoupon = {
+                id: generateId(),
+                code: code.toUpperCase(),
+                discount: discount,
+                description: description,
+                created: new Date().toLocaleDateString('pt-BR'),
+                expiry: expiryDate.toLocaleDateString('pt-BR'),
+                expiryDate: expiryDate,
+                status: 'active',
+                used: false
+            };
+            
+            userCoupons.unshift(newCoupon);
+            saveCoupons();
+            displayCoupons();
+            
+            console.log('Novo cupom adicionado:', newCoupon);
+            return newCoupon;
+        }
+
+        // Usar um cupom
+        function useCoupon(couponId) {
+            const couponIndex = userCoupons.findIndex(coupon => coupon.id === couponId);
+            
+            if (couponIndex !== -1) {
+                userCoupons[couponIndex].status = 'used';
+                userCoupons[couponIndex].used = true;
+                userCoupons[couponIndex].usedDate = new Date().toLocaleDateString('pt-BR');
+                
+                saveCoupons();
+                displayCoupons();
+                
+                console.log('Cupom usado:', userCoupons[couponIndex]);
+                return userCoupons[couponIndex];
+            }
+            return null;
+        }
+
+        // Verificar validade dos cupons
+        function checkCouponValidity() {
+            const now = new Date();
+            let updated = false;
+            
+            userCoupons.forEach(coupon => {
+                if (coupon.status === 'active' && new Date(coupon.expiryDate) < now) {
+                    coupon.status = 'expired';
+                    updated = true;
+                }
+            });
+            
+            if (updated) {
+                saveCoupons();
+                displayCoupons();
+            }
+        }
+
+        // Gerar ID único
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        // Exibir cupons na tela
+        function displayCoupons() {
+            const couponsSection = document.getElementById('coupons-section');
+            
+            // Verificar validade primeiro
+            checkCouponValidity();
+            
+            if (userCoupons.length === 0) {
+                couponsSection.innerHTML = `
+                    <div class="empty-coupons">
+                        <i class="fas fa-ticket-alt"></i>
+                        <h3>Nenhum cupom disponível</h3>
+                        <p>Adicione cupons para economizar em seus pedidos</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let couponsHTML = '';
+            
+            userCoupons.forEach(coupon => {
+                let statusText = '';
+                let statusClass = '';
+                let isExpired = false;
+                
+                switch(coupon.status) {
+                    case 'active':
+                        statusText = 'Ativo';
+                        statusClass = 'status-active';
+                        break;
+                    case 'used':
+                        statusText = 'Usado';
+                        statusClass = 'status-used';
+                        break;
+                    case 'expired':
+                        statusText = 'Expirado';
+                        statusClass = 'status-expired';
+                        isExpired = true;
+                        break;
+                }
+                
+                couponsHTML += `
+                    <div class="coupon-card">
+                        ${coupon.status === 'active' ? '<div class="coupon-ribbon">NOVO</div>' : ''}
+                        
+                        <div class="coupon-header">
+                            <div class="coupon-code">${coupon.code}</div>
+                            <div class="coupon-status ${statusClass}">${statusText}</div>
+                        </div>
+                        
+                        <div class="coupon-discount">${coupon.discount}% OFF</div>
+                        
+                        <div class="coupon-description">${coupon.description}</div>
+                        
+                        <div class="coupon-details">
+                            <div class="coupon-expiry">
+                                <i class="far fa-calendar"></i>
+                                Válido até ${coupon.expiry}
+                            </div>
+                        </div>
+                        
+                        <button class="use-coupon-btn" 
+                                onclick="useCoupon('${coupon.id}')" 
+                                ${coupon.status !== 'active' ? 'disabled' : ''}>
+                            <i class="fas fa-shopping-cart"></i>
+                            ${coupon.status === 'active' ? 'Usar Cupom' : 
+                              coupon.status === 'used' ? 'Já Utilizado' : 'Expirado'}
+                        </button>
+                    </div>
+                `;
+            });
+            
+            couponsSection.innerHTML = couponsHTML;
+        }
+
+        // Atualizar badge do carrinho
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = totalItems;
+            }
+        }
+
+        // Quando a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar cupons salvos
+            loadCoupons();
+            
+            // Atualizar badge do carrinho
+            updateCartBadge();
+            
+            // Configurar botão adicionar cupom
+            document.getElementById('add-coupon-btn').addEventListener('click', function() {
+                document.getElementById('add-coupon-modal').style.display = 'flex';
+            });
+            
+            // Configurar botão cancelar
+            document.getElementById('cancel-add-coupon').addEventListener('click', function() {
+                document.getElementById('add-coupon-modal').style.display = 'none';
+                document.getElementById('add-coupon-form').reset();
+            });
+            
+            // Configurar envio do formulário
+            document.getElementById('add-coupon-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const code = document.getElementById('coupon-code').value;
+                const discount = parseInt(document.getElementById('coupon-discount').value);
+                const description = document.getElementById('coupon-description').value;
+                const expiryDays = parseInt(document.getElementById('coupon-expiry').value);
+                
+                // Verificar se o código já existe
+                if (userCoupons.some(coupon => coupon.code === code.toUpperCase())) {
+                    alert('Este código de cupom já existe!');
+                    return;
+                }
+                
+                // Adicionar cupom
+                addCoupon(code, discount, description, expiryDays);
+                
+                // Fechar modal e limpar formulário
+                document.getElementById('add-coupon-modal').style.display = 'none';
+                document.getElementById('add-coupon-form').reset();
+                
+                alert('Cupom adicionado com sucesso!');
+            });
+            
+            // Adicionar cupons de exemplo se estiver vazio (apenas para demonstração)
+            if (userCoupons.length === 0) {
+                addCoupon('GELATEC10', 10, '10% de desconto em qualquer pedido', 30);
+                addCoupon('PRIMEIRACOMPRA', 15, '15% de desconto na primeira compra', 15);
+                addCoupon('VERAO2024', 20, '20% de desconto especial de verão', 60);
+            }
+        });
+    </script>
 </body>
 </html>
