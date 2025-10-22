@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cardápio - GelaTec</title>
-  <h1>Cardápio - GelaTec</h1>>
   <style>
     * {
       margin: 0;
@@ -19,24 +18,40 @@
       margin: 0;
     }
 
-    /* HEADER */
+    /* NOVO HEADER - IGUAL À IMAGEM */
     .header {
       background: linear-gradient(135deg, #ff0080, #e91e63);
       color: white;
-      text-align: center;
-      padding: 30px 20px;
-      margin-bottom: 0;
+      padding: 15px 20px;
       width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .header-content {
+      text-align: center;
+      flex: 1;
     }
 
     .header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      font-weight: bold;
     }
 
     .header p {
-      font-size: 1.2rem;
+      font-size: 1rem;
       opacity: 0.9;
+    }
+
+    /* LOGOS NO HEADER */
+    .logo-left,
+    .logo-right {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
     }
 
     /* FILTROS */
@@ -243,7 +258,12 @@
       }
       
       .header h1 {
-        font-size: 2rem;
+        font-size: 1.6rem;
+      }
+      
+      .logo-left,
+      .logo-right {
+        height: 40px;
       }
     }
 
@@ -253,17 +273,42 @@
         padding: 15px;
       }
       
+      .header {
+        padding: 12px 15px;
+      }
+      
       .header h1 {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
       }
       
       .header p {
-        font-size: 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .logo-left,
+      .logo-right {
+        height: 35px;
       }
     }
   </style>
 </head>
 <body>
+
+  <!-- NOVO HEADER COM LOGOS -->
+  <header class="header">
+    <!-- Logo do lado esquerdo -->
+    <img src="Logo.png" alt="GelaTec Logo" class="logo-left">
+    
+    <!-- Título central -->
+    <div class="header-content">
+      <h1>Cardápio Completo</h1>
+      <p>Escolha seus produtos favoritos</p>
+    </div>
+    
+    <!-- Logo do lado direito -->
+    <img src="logoset.png" alt="GelaTec Logo" class="logo-right">
+  </header>
+
   <!-- FILTROS DE CATEGORIA -->
   <div class="category-filter">
     <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
