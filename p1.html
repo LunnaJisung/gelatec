@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Perfil Pessoal</title>
+    <title>Meu Perfil - GelaTec</title>
     <style>
         /* Reset e configurações básicas */
         * {
@@ -14,28 +14,65 @@
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #f8f9fa;
             min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* HEADER - IGUAL AO CARDÁPIO */
+        .header {
+            background: linear-gradient(135deg, #ff0080, #e91e63);
+            color: white;
+            padding: 15px 20px;
+            width: 100%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            position: relative;
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* LOGOS NO HEADER */
+        .logo-left,
+        .logo-right {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
         }
         
         .container {
             width: 100%;
             max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
         .profile-card {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            margin-top: 20px;
         }
         
         .profile-header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #ff0080, #e91e63);
             padding: 30px;
             text-align: center;
             color: white;
@@ -50,12 +87,12 @@
             object-fit: cover;
             margin: 0 auto 15px;
             cursor: pointer;
-            background: #e0e0e0;
+            background: rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 40px;
-            color: #888;
+            color: white;
         }
         
         .profile-info h1 {
@@ -88,7 +125,7 @@
         
         .info-section h2 i {
             margin-right: 10px;
-            color: #4facfe;
+            color: #e91e63;
         }
         
         .info-value {
@@ -102,15 +139,18 @@
         }
         
         .info-value:hover {
-            background: #e9ecef;
+            background: #ffebee;
+            border-color: #e91e63;
         }
         
         .cashback-value {
             font-size: 28px;
             font-weight: bold;
-            color: #28a745;
+            color: #e91e63;
             text-align: center;
             padding: 15px;
+            background: #ffebee;
+            border-radius: 10px;
         }
         
         .actions-grid {
@@ -122,7 +162,7 @@
         
         .action-btn {
             background: #f8f9fa;
-            border: none;
+            border: 2px solid #f8f9fa;
             padding: 15px;
             border-radius: 10px;
             cursor: pointer;
@@ -136,9 +176,10 @@
         }
         
         .action-btn:hover {
-            background: #4facfe;
+            background: #e91e63;
             color: white;
             transform: translateY(-3px);
+            border-color: #e91e63;
         }
         
         .action-btn i {
@@ -148,7 +189,7 @@
         
         .logout-btn {
             width: 100%;
-            background: #e74c3c;
+            background: #e91e63;
             color: white;
             border: none;
             padding: 15px;
@@ -161,7 +202,7 @@
         }
         
         .logout-btn:hover {
-            background: #c0392b;
+            background: #c2185b;
             transform: translateY(-3px);
         }
         
@@ -214,7 +255,7 @@
         }
         
         .form-group input:focus {
-            border-color: #4facfe;
+            border-color: #e91e63;
             outline: none;
         }
         
@@ -235,12 +276,12 @@
         }
         
         .save-btn {
-            background: #4facfe;
+            background: #e91e63;
             color: white;
         }
         
         .save-btn:hover {
-            background: #3a9df8;
+            background: #c2185b;
         }
         
         .cancel-btn {
@@ -257,7 +298,7 @@
         }
         
         .edit-icon {
-            color: #4facfe;
+            color: #e91e63;
             margin-left: 10px;
             font-size: 16px;
         }
@@ -287,7 +328,7 @@
         
         .action-modal-icon {
             font-size: 50px;
-            color: #4facfe;
+            color: #e91e63;
             margin-bottom: 15px;
         }
         
@@ -302,7 +343,7 @@
         }
         
         .close-action-modal {
-            background: #4facfe;
+            background: #e91e63;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -310,10 +351,122 @@
             cursor: pointer;
             font-weight: 600;
         }
+        
+        /* NAVEGAÇÃO INFERIOR */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: white;
+            padding: 8px 0;
+            border-top: 1px solid #d81b60;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            padding: 5px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: #e91e63;
+        }
+
+        .nav-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .nav-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-item span:last-child {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* BADGE DO CARRINHO */
+        .cart-badge {
+            background: #ff0080;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            right: 5px;
+        }
+        
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 35px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- HEADER COM LOGOS -->
+    <header class="header">
+        <!-- Logo do lado esquerdo -->
+        <img src="Logo.png" alt="GelaTec Logo" class="logo-left">
+        
+        <!-- Título central -->
+        <div class="header-content">
+            <h1>Meu Perfil</h1>
+            <p>Gerencie sua conta GelaTec</p>
+        </div>
+        
+        <!-- Logo do lado direito -->
+        <img src="logoset.png" alt="GelaTec Logo" class="logo-right">
+    </header>
+
     <div class="container">
         <div class="profile-card">
             <div class="profile-header">
@@ -329,7 +482,7 @@
             
             <div class="profile-content">
                 <div class="info-section">
-                    <h2><i class="fas fa-wallet"></i> Cashback</h2>
+                    <h2><i class="fas fa-wallet"></i> Cashback GelaTec</h2>
                     <div class="info-value cashback-value" id="cashback-amount">R$ 0,00</div>
                 </div>
                 
@@ -364,6 +517,27 @@
             </div>
         </div>
     </div>
+    
+    <!-- NAVEGAÇÃO INFERIOR -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Início</span>
+        </a>
+        <a href="p2.html" class="nav-item">
+            <span class="nav-icon">📋</span>
+            <span>Cardápio</span>
+        </a>
+        <a href="p3.html" class="nav-item active">
+            <span class="nav-icon">👤</span>
+            <span>Perfil</span>
+        </a>
+        <a href="carrinho.html" class="nav-item">
+            <span class="nav-icon">🛒</span>
+            <span>Carrinho</span>
+            <span class="cart-badge" id="cart-count">0</span>
+        </a>
+    </nav>
     
     <!-- Modal para editar perfil -->
     <div class="modal" id="edit-modal">
@@ -441,9 +615,9 @@
             <h3>Central de Suporte</h3>
             <p>Estamos aqui para ajudar! Entre em contato conosco.</p>
             <div style="text-align: left; margin: 15px 0;">
-                <p><i class="fas fa-phone" style="color: #4facfe; margin-right: 10px;"></i> (11) 9999-9999</p>
-                <p><i class="fas fa-envelope" style="color: #4facfe; margin-right: 10px;"></i> suporte@empresa.com</p>
-                <p><i class="fas fa-clock" style="color: #4facfe; margin-right: 10px;"></i> Seg-Sex: 8h-18h</p>
+                <p><i class="fas fa-phone" style="color: #e91e63; margin-right: 10px;"></i> (11) 9999-9999</p>
+                <p><i class="fas fa-envelope" style="color: #e91e63; margin-right: 10px;"></i> suporte@gelatec.com</p>
+                <p><i class="fas fa-clock" style="color: #e91e63; margin-right: 10px;"></i> Seg-Sex: 8h-18h</p>
             </div>
             <button class="close-action-modal" id="close-support">Fechar</button>
         </div>
@@ -594,10 +768,24 @@
             }
         }
 
+        // Atualizar badge do carrinho
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = totalItems;
+            }
+        }
+
         // Quando a página carrega
         document.addEventListener('DOMContentLoaded', function() {
             // Carregar dados salvos
             loadUserData();
+            
+            // Atualizar badge do carrinho
+            updateCartBadge();
             
             // Configurar clique na foto para upload
             document.getElementById('profile-picture').addEventListener('click', function() {
@@ -639,7 +827,7 @@
             // Configurar botão de logout
             document.getElementById('logout-btn').addEventListener('click', logout);
             
-            // Configurar botões de ação rápida - AGORA FUNCIONANDO!
+            // Configurar botões de ação rápida
             document.getElementById('orders-btn').addEventListener('click', openOrdersModal);
             document.getElementById('charity-btn').addEventListener('click', openCharityModal);
             document.getElementById('support-btn').addEventListener('click', openSupportModal);
