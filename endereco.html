@@ -1,27 +1,502 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Meu Endereço</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Endereço - GelaTec</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .container { max-width: 500px; margin: 0 auto; }
-        input, textarea { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ff0080; border-radius: 5px; }
-        button { background: #ff0080; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* HEADER - IGUAL AO CARDÁPIO */
+        .header {
+            background: linear-gradient(135deg, #ff0080, #e91e63);
+            color: white;
+            padding: 15px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* LOGOS NO HEADER */
+        .logo-left,
+        .logo-right {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .address-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 20px;
+            padding: 25px;
+        }
+        
+        .address-card h2 {
+            color: #e91e63;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #e91e63;
+            outline: none;
+        }
+        
+        .save-btn {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .save-btn:hover {
+            background: #c2185b;
+            transform: translateY(-3px);
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 15px;
+            width: 100%;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        
+        .saved-address {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid #e91e63;
+        }
+        
+        .saved-address h3 {
+            color: #e91e63;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .saved-address p {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .edit-btn {
+            background: transparent;
+            color: #e91e63;
+            border: 1px solid #e91e63;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .edit-btn:hover {
+            background: #e91e63;
+            color: white;
+        }
+        
+        /* NAVEGAÇÃO INFERIOR */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: white;
+            padding: 8px 0;
+            border-top: 1px solid #d81b60;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            padding: 5px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: #e91e63;
+        }
+
+        .nav-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .nav-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-item span:last-child {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* BADGE DO CARRINHO */
+        .cart-badge {
+            background: #ff0080;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            right: 5px;
+        }
+        
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 35px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- HEADER COM LOGOS -->
+    <header class="header">
+        <!-- Logo do lado esquerdo -->
+        <img src="Logo.png" alt="GelaTec Logo" class="logo-left">
+        
+        <!-- Título central -->
+        <div class="header-content">
+            <h1>Meu Endereço</h1>
+            <p>Cadastre ou edite seu endereço</p>
+        </div>
+        
+        <!-- Logo do lado direito -->
+        <img src="logoset.png" alt="GelaTec Logo" class="logo-right">
+    </header>
+
     <div class="container">
-        <h2 style="color: #ff0080;">🏠 Meu Endereço</h2>
-        <form>
-            <input type="text" placeholder="Rua" required>
-            <input type="text" placeholder="Número" required>
-            <input type="text" placeholder="Complemento">
-            <input type="text" placeholder="Bairro" required>
-            <input type="text" placeholder="Cidade" required>
-            <input type="text" placeholder="Estado" required>
-            <input type="text" placeholder="CEP" required>
-            <button type="submit">Salvar Endereço</button>
-        </form>
+        <div class="address-card">
+            <h2><i class="fas fa-home"></i> Cadastrar Endereço</h2>
+            
+            <!-- Formulário de endereço -->
+            <form id="address-form">
+                <div class="form-group">
+                    <label for="rua">Rua</label>
+                    <input type="text" id="rua" placeholder="Digite o nome da rua" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="numero">Número</label>
+                    <input type="text" id="numero" placeholder="Digite o número" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="complemento">Complemento</label>
+                    <input type="text" id="complemento" placeholder="Apartamento, bloco, etc.">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" id="bairro" placeholder="Digite o bairro" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" id="cidade" placeholder="Digite a cidade" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <input type="text" id="estado" placeholder="Digite o estado" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" placeholder="Digite o CEP" required>
+                </div>
+                
+                <button type="submit" class="save-btn">
+                    <i class="fas fa-save"></i> Salvar Endereço
+                </button>
+            </form>
+            
+            <!-- Endereço salvo (aparece após salvar) -->
+            <div class="saved-address" id="saved-address" style="display: none;">
+                <h3><i class="fas fa-check-circle"></i> Endereço Salvo</h3>
+                <p id="display-rua"></p>
+                <p id="display-numero"></p>
+                <p id="display-complemento"></p>
+                <p id="display-bairro"></p>
+                <p id="display-cidade"></p>
+                <p id="display-estado"></p>
+                <p id="display-cep"></p>
+                <button class="edit-btn" id="edit-address">
+                    <i class="fas fa-edit"></i> Editar Endereço
+                </button>
+            </div>
+            
+            <button class="back-btn" id="back-btn">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+        </div>
     </div>
+    
+    <!-- NAVEGAÇÃO INFERIOR -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Início</span>
+        </a>
+        <a href="p2.html" class="nav-item">
+            <span class="nav-icon">📋</span>
+            <span>Cardápio</span>
+        </a>
+        <a href="p3.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span>Perfil</span>
+        </a>
+        <a href="carrinho.html" class="nav-item">
+            <span class="nav-icon">🛒</span>
+            <span>Carrinho</span>
+            <span class="cart-badge" id="cart-count">0</span>
+        </a>
+    </nav>
+
+    <script>
+        // Dados do endereço
+        let userAddress = {
+            rua: "",
+            numero: "",
+            complemento: "",
+            bairro: "",
+            cidade: "",
+            estado: "",
+            cep: ""
+        };
+
+        // Carregar endereço salvo quando a página abre
+        function loadAddress() {
+            const saved = localStorage.getItem('userAddress');
+            if (saved) {
+                userAddress = JSON.parse(saved);
+                console.log('Endereço carregado:', userAddress);
+                displaySavedAddress();
+            }
+        }
+
+        // Salvar endereço
+        function saveAddress() {
+            localStorage.setItem('userAddress', JSON.stringify(userAddress));
+            console.log('Endereço salvo:', userAddress);
+        }
+
+        // Mostrar endereço salvo
+        function displaySavedAddress() {
+            if (userAddress.rua) {
+                document.getElementById('display-rua').textContent = `Rua: ${userAddress.rua}`;
+                document.getElementById('display-numero').textContent = `Número: ${userAddress.numero}`;
+                document.getElementById('display-complemento').textContent = userAddress.complemento ? `Complemento: ${userAddress.complemento}` : '';
+                document.getElementById('display-bairro').textContent = `Bairro: ${userAddress.bairro}`;
+                document.getElementById('display-cidade').textContent = `Cidade: ${userAddress.cidade}`;
+                document.getElementById('display-estado').textContent = `Estado: ${userAddress.estado}`;
+                document.getElementById('display-cep').textContent = `CEP: ${userAddress.cep}`;
+                
+                document.getElementById('saved-address').style.display = 'block';
+                document.getElementById('address-form').style.display = 'none';
+            }
+        }
+
+        // Voltar para a página anterior
+        function goBack() {
+            window.history.back();
+        }
+
+        // Quando a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar endereço salvo
+            loadAddress();
+            
+            // Atualizar badge do carrinho
+            updateCartBadge();
+            
+            // Configurar envio do formulário
+            document.getElementById('address-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Coletar dados do formulário
+                userAddress.rua = document.getElementById('rua').value;
+                userAddress.numero = document.getElementById('numero').value;
+                userAddress.complemento = document.getElementById('complemento').value;
+                userAddress.bairro = document.getElementById('bairro').value;
+                userAddress.cidade = document.getElementById('cidade').value;
+                userAddress.estado = document.getElementById('estado').value;
+                userAddress.cep = document.getElementById('cep').value;
+                
+                // Salvar endereço
+                saveAddress();
+                
+                // Mostrar endereço salvo
+                displaySavedAddress();
+                
+                // Mostrar mensagem de sucesso
+                alert('Endereço salvo com sucesso!');
+                
+                // Voltar automaticamente após 1 segundo
+                setTimeout(function() {
+                    goBack();
+                }, 1000);
+            });
+            
+            // Configurar botão de editar endereço
+            document.getElementById('edit-address').addEventListener('click', function() {
+                document.getElementById('saved-address').style.display = 'none';
+                document.getElementById('address-form').style.display = 'block';
+                
+                // Preencher formulário com dados existentes
+                document.getElementById('rua').value = userAddress.rua;
+                document.getElementById('numero').value = userAddress.numero;
+                document.getElementById('complemento').value = userAddress.complemento;
+                document.getElementById('bairro').value = userAddress.bairro;
+                document.getElementById('cidade').value = userAddress.cidade;
+                document.getElementById('estado').value = userAddress.estado;
+                document.getElementById('cep').value = userAddress.cep;
+            });
+            
+            // Configurar botão voltar
+            document.getElementById('back-btn').addEventListener('click', goBack);
+        });
+
+        // Atualizar badge do carrinho
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = totalItems;
+            }
+        }
+    </script>
 </body>
 </html>
