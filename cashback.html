@@ -1,21 +1,576 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Meu Cashback</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Cashback - GelaTec</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .saldo { font-size: 24px; color: #ff0080; font-weight: bold; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            padding-bottom: 70px;
+        }
+        
+        /* HEADER - IGUAL AO CARDÁPIO */
+        .header {
+            background: linear-gradient(135deg, #ff0080, #e91e63);
+            color: white;
+            padding: 15px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* LOGOS NO HEADER */
+        .logo-left,
+        .logo-right {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .cashback-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .balance-section {
+            background: linear-gradient(135deg, #ff0080, #e91e63);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .balance-label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .balance-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .balance-info {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .actions-section {
+            padding: 25px;
+        }
+        
+        .action-btn {
+            background: #f8f9fa;
+            border: 2px solid #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .action-btn:hover {
+            background: #e91e63;
+            color: white;
+            transform: translateY(-3px);
+            border-color: #e91e63;
+        }
+        
+        .action-btn i {
+            font-size: 24px;
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .history-section {
+            padding: 0 25px 25px;
+        }
+        
+        .history-title {
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .history-title i {
+            margin-right: 10px;
+            color: #e91e63;
+        }
+        
+        .history-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+        
+        .history-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        
+        .history-info {
+            flex: 1;
+        }
+        
+        .history-description {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .history-date {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .history-amount {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .amount-positive {
+            color: #28a745;
+        }
+        
+        .amount-negative {
+            color: #e91e63;
+        }
+        
+        .empty-history {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
+        
+        .empty-history i {
+            font-size: 3rem;
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+        
+        /* NAVEGAÇÃO INFERIOR */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: white;
+            padding: 8px 0;
+            border-top: 1px solid #d81b60;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            padding: 5px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: #e91e63;
+        }
+
+        .nav-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .nav-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-item span:last-child {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* BADGE DO CARRINHO */
+        .cart-badge {
+            background: #ff0080;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            right: 5px;
+        }
+        
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 40px;
+            }
+            
+            .balance-amount {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .logo-left,
+            .logo-right {
+                height: 35px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .balance-amount {
+                font-size: 2rem;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h2 style="color: #ff0080;">💰 Meu Cashback</h2>
+    <!-- HEADER COM LOGOS -->
+    <header class="header">
+        <!-- Logo do lado esquerdo -->
+        <img src="Logo.png" alt="GelaTec Logo" class="logo-left">
+        
+        <!-- Título central -->
+        <div class="header-content">
+            <h1>Meu Cashback</h1>
+            <p>Economize com seus pedidos</p>
+        </div>
+        
+        <!-- Logo do lado direito -->
+        <img src="logoset.png" alt="GelaTec Logo" class="logo-right">
+    </header>
+
+    <div class="container">
+        <div class="cashback-card">
+            <div class="balance-section">
+                <div class="balance-label">Saldo Disponível</div>
+                <div class="balance-amount" id="balance-amount">R$ 0,00</div>
+                <div class="balance-info">Use em seus próximos pedidos</div>
+            </div>
+            
+            <div class="actions-section">
+                <button class="action-btn" id="use-cashback-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <div>
+                        <div style="font-weight: bold;">Usar Cashback</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">Aplicar em próximo pedido</div>
+                    </div>
+                </button>
+                
+                <button class="action-btn" id="transfer-btn">
+                    <i class="fas fa-exchange-alt"></i>
+                    <div>
+                        <div style="font-weight: bold;">Transferir</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">Para conta bancária</div>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="history-section">
+                <h3 class="history-title">
+                    <i class="fas fa-history"></i>
+                    Histórico de Cashback
+                </h3>
+                
+                <div class="history-list" id="history-list">
+                    <!-- Histórico será carregado dinamicamente aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <div class="saldo">Saldo Disponível: R$ 5,00</div>
-    
-    <h3>Histórico:</h3>
-    <ul>
-        <li>+ R$ 2,00 - Pedido #001</li>
-        <li>+ R$ 3,00 - Pedido #002</li>
-    </ul>
+    <!-- NAVEGAÇÃO INFERIOR -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Início</span>
+        </a>
+        <a href="p2.html" class="nav-item">
+            <span class="nav-icon">📋</span>
+            <span>Cardápio</span>
+        </a>
+        <a href="p3.html" class="nav-item active">
+            <span class="nav-icon">👤</span>
+            <span>Perfil</span>
+        </a>
+        <a href="carrinho.html" class="nav-item">
+            <span class="nav-icon">🛒</span>
+            <span>Carrinho</span>
+            <span class="cart-badge" id="cart-count">0</span>
+        </a>
+    </nav>
+
+    <script>
+        // Dados do cashback
+        let cashbackData = {
+            balance: 0,
+            history: []
+        };
+
+        // Carregar cashback salvo quando a página abre
+        function loadCashback() {
+            const saved = localStorage.getItem('cashbackData');
+            if (saved) {
+                cashbackData = JSON.parse(saved);
+                console.log('Cashback carregado:', cashbackData);
+            }
+            updateDisplay();
+        }
+
+        // Salvar cashback
+        function saveCashback() {
+            localStorage.setItem('cashbackData', JSON.stringify(cashbackData));
+            console.log('Cashback salvo:', cashbackData);
+        }
+
+        // Adicionar cashback (chamado quando um pedido é feito)
+        function addCashback(amount, description, orderId = null) {
+            const transaction = {
+                id: generateId(),
+                amount: amount,
+                description: description,
+                date: new Date().toLocaleDateString('pt-BR'),
+                time: new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'}),
+                type: 'credit',
+                orderId: orderId
+            };
+            
+            cashbackData.balance += amount;
+            cashbackData.history.unshift(transaction);
+            
+            saveCashback();
+            updateDisplay();
+            
+            console.log(`Cashback adicionado: R$ ${amount.toFixed(2)} - ${description}`);
+        }
+
+        // Usar cashback
+        function useCashback(amount, description) {
+            if (amount > cashbackData.balance) {
+                alert('Saldo de cashback insuficiente!');
+                return false;
+            }
+            
+            const transaction = {
+                id: generateId(),
+                amount: -amount,
+                description: description,
+                date: new Date().toLocaleDateString('pt-BR'),
+                time: new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'}),
+                type: 'debit'
+            };
+            
+            cashbackData.balance -= amount;
+            cashbackData.history.unshift(transaction);
+            
+            saveCashback();
+            updateDisplay();
+            
+            console.log(`Cashback usado: R$ ${amount.toFixed(2)} - ${description}`);
+            return true;
+        }
+
+        // Gerar ID único
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        // Atualizar exibição
+        function updateDisplay() {
+            // Atualizar saldo
+            document.getElementById('balance-amount').textContent = `R$ ${cashbackData.balance.toFixed(2)}`;
+            
+            // Atualizar histórico
+            const historyList = document.getElementById('history-list');
+            
+            if (cashbackData.history.length === 0) {
+                historyList.innerHTML = `
+                    <div class="empty-history">
+                        <i class="fas fa-receipt"></i>
+                        <h3>Nenhuma transação</h3>
+                        <p>Seu histórico de cashback aparecerá aqui</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let historyHTML = '';
+            
+            cashbackData.history.forEach(transaction => {
+                const amountClass = transaction.amount > 0 ? 'amount-positive' : 'amount-negative';
+                const amountSign = transaction.amount > 0 ? '+' : '';
+                const icon = transaction.amount > 0 ? 'fa-plus-circle' : 'fa-minus-circle';
+                
+                historyHTML += `
+                    <div class="history-item">
+                        <div class="history-info">
+                            <div class="history-description">${transaction.description}</div>
+                            <div class="history-date">${transaction.date} às ${transaction.time}</div>
+                        </div>
+                        <div class="history-amount ${amountClass}">
+                            <i class="fas ${icon}"></i>
+                            ${amountSign}R$ ${Math.abs(transaction.amount).toFixed(2)}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            historyList.innerHTML = historyHTML;
+        }
+
+        // Simular adição de cashback (para demonstração)
+        function simulateCashback() {
+            const descriptions = [
+                'Cashback - Pedido #001',
+                'Cashback - Pedido #002', 
+                'Cashback - Pedido #003',
+                'Promoção Especial',
+                'Cashback Aniversário'
+            ];
+            
+            const randomDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
+            const randomAmount = Math.random() * 10 + 1; // Entre R$ 1 e R$ 11
+            
+            addCashback(randomAmount, randomDescription);
+        }
+
+        // Atualizar badge do carrinho
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = totalItems;
+            }
+        }
+
+        // Quando a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar cashback salvo
+            loadCashback();
+            
+            // Atualizar badge do carrinho
+            updateCartBadge();
+            
+            // Configurar botões de ação
+            document.getElementById('use-cashback-btn').addEventListener('click', function() {
+                if (cashbackData.balance === 0) {
+                    alert('Você não possui saldo de cashback para usar.');
+                    return;
+                }
+                
+                const amount = parseFloat(prompt(`Quanto cashback deseja usar? (Saldo disponível: R$ ${cashbackData.balance.toFixed(2)})`, cashbackData.balance.toFixed(2)));
+                
+                if (amount && amount > 0) {
+                    if (useCashback(amount, 'Uso em pedido')) {
+                        alert(`Cashback de R$ ${amount.toFixed(2)} aplicado com sucesso!`);
+                    }
+                }
+            });
+            
+            document.getElementById('transfer-btn').addEventListener('click', function() {
+                alert('Funcionalidade de transferência em desenvolvimento!');
+            });
+            
+            // Adicionar cashback de exemplo se estiver vazio (apenas para demonstração)
+            if (cashbackData.history.length === 0) {
+                addCashback(5.00, 'Cashback - Pedido #001');
+                addCashback(3.50, 'Cashback - Pedido #002');
+                addCashback(2.00, 'Promoção de Boas-Vindas');
+            }
+        });
+    </script>
 </body>
 </html>
